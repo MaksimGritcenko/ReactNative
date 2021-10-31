@@ -4,9 +4,11 @@ import {
 } from 'redux';
 
 import AdminReducer from './Admin/Admin.reducer';
+import UserReducer from "./User/User.reducer";
 
 const reducers = {
-  AdminReducer
+  AdminReducer,
+  UserReducer
 };
 
 export const store = createStore(
