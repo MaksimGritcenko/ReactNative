@@ -5,10 +5,12 @@ import {
 
 import AdminReducer from './Admin/Admin.reducer';
 import UserReducer from "./User/User.reducer";
+import ChatModalReducer from "./ChatModal/ChatModal.reducer";
 
 const reducers = {
   AdminReducer,
-  UserReducer
+  UserReducer,
+  ChatModalReducer
 };
 
 export const store = createStore(

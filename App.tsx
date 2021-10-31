@@ -4,12 +4,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 // @ts-ignore
 import store from 'store';
 // @ts-ignore
-import DashboardComponent from "components/Dashboard/Dashboard.component";
+import DashboardComponent from "components/Dashboard";
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import InitialStack from "./src/components/InitialStack/InitialStack.component";
 import { INITIAL_STACK, DASHBOARD } from './App.config';
-
 import useCachedResources from './src/hooks/useCachedResources';
 
 export default function App() {

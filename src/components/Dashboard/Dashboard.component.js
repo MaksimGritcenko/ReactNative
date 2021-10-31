@@ -1,33 +1,58 @@
-import React, { useState } from "react";
-import { BottomNavigation } from 'react-native-paper';
-import { View } from "react-native";
-import ChatComponent from "../../routes/Chat/Chat.component";
+import React, {useEffect} from "react";
+
+import {Button, Pressable, Text, View} from "react-native";
 import HomeComponent from "../../routes/Home";
-import { routes } from "../../utils/BottomNavigation/routes";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import SettingsComponent from "../SideDrawer/Settings/Settings.component";
+import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
+import {NavigationContainer} from "@react-navigation/native";
+import ChatComponent from "../SideDrawer/Chat/Chat.component";
 
-export const DashboardComponent = (props) => {
-    const [index, setIndex] = useState(0);
 
-    function HomeRoute() {
-        const { navigation } = props;
-        return <HomeComponent  navigation={ navigation } />
+const SideDrawer = createDrawerNavigator();
+
+export const DashboardComponent = () => {
+
+    function getNavMap() {
+        return [
+            {
+                id: 1,
+                name: "Dashboard",
+                component: HomeComponent
+            },
+            {
+                id: 2,
+                name: "Settings",
+                component: SettingsComponent
+            },
+            {
+                id: 3,
+                name: "ChatHistory",
+                component: ChatHistoryComponent
+            },
+            {
+                id: 4,
+                name: 'Chat',
+                component: ChatComponent
+            }
+        ];
     }
 
-    const renderScene = BottomNavigation.SceneMap({
-        home: HomeRoute,
-        chat: ChatComponent,
-    }, );
+    function renderScreens() {
+        return getNavMap().map(({ id, name, component }) => <SideDrawer.Screen
+            name={ name }
+            component={ component }
+            key={ id }
+        />);
+    }
 
     return (
         <View style={{ height: '100%'}}>
-            <BottomNavigation
-                { ...props }
-                navigationState={{ index, routes }}
-                onIndexChange={ setIndex }
-                renderScene={ renderScene }
-                style={{ width: '100%' }}
-                barStyle={{ backgroundColor: '#202a3d' }}
-            />
+            <NavigationContainer independent={true}>
+                <SideDrawer.Navigator>
+                    { renderScreens() }
+                </SideDrawer.Navigator>
+            </NavigationContainer>
         </View>
     )
 }
