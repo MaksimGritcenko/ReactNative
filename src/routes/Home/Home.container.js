@@ -12,18 +12,21 @@ export const HomeContainer = (props) => {
     const [email, setEmail] = useState('');
 
     useEffect(async () => {
-        const emailFromAsyncStorage = await AsyncStorage.getItem('@email')
-
-        setEmail(emailFromAsyncStorage)
-
-    })
+        const emailFromAsyncStorage = await AsyncStorage.getItem('@email');
+        setEmail(emailFromAsyncStorage);
+    });
 
     async function signOut() {
-        const { navigation } = props;
+        const {
+            // navigation,
+            setEmail
+        } = props;
+
         await logout();
-        AsyncStorage.removeItem('@email')
-        props.setEmail(null)
-        navigation.navigate('Login')
+        AsyncStorage.removeItem('@email');
+        setEmail(null);
+        // TODO: fix navigation is undefined on reload
+        // navigation.navigate('Login');
     }
 
     return (

@@ -3,18 +3,13 @@ import { BottomNavigation } from 'react-native-paper';
 import { View } from "react-native";
 import ChatComponent from "../../routes/Chat/Chat.component";
 import HomeComponent from "../../routes/Home";
-import { routes as NavigationRoutes } from "../../utils/BottomNavigation/routes";
+import { routes } from "../../utils/BottomNavigation/routes";
 
 export const DashboardComponent = (props) => {
     const [index, setIndex] = useState(0);
 
-    const [routes] = useState(NavigationRoutes);
-
-    // console.log(props)
     function HomeRoute() {
-
         const { navigation } = props;
-        // console.log(navigation)
         return <HomeComponent  navigation={ navigation } />
     }
 

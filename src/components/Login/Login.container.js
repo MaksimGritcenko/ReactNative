@@ -12,18 +12,21 @@ export const mapDispatchToProps = (dispatch) => ({
 
 export const LoginContainer = (props) => {
     async function loginClick(email, password) {
-        const { setEmail } = props;
-        console.log(setEmail)
-        const user = await signInWithEmailAndPassword(email, password)
+        const {
+            setEmail,
+            navigation
+        } = props;
 
-        console.log(user.user.email)
+        const user = await signInWithEmailAndPassword(email, password);
 
-        if (user === undefined) return null;
+        if (!user) return;
 
-        await AsyncStorage.setItem('@email', user.user.email)
-        await AsyncStorage.setItem('@loggedIn', 'logged')
-        setEmail(email)
-        props.navigation.navigate('Dashboard')
+        const { user: { email: userEmail } } = user;
+
+        await AsyncStorage.setItem('@email', userEmail);
+
+        setEmail(email);
+        navigation.navigate('Dashboard');
     }
 
     return (
@@ -31,7 +34,7 @@ export const LoginContainer = (props) => {
             { ...props }
             loginClick={ loginClick }
         />
-    )
+    );
 }
 
 export default connect(null, mapDispatchToProps)(LoginContainer);

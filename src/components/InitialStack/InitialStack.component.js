@@ -8,6 +8,32 @@ import DashboardComponent from "components/Dashboard/Dashboard.component";
 const Stack = createStackNavigator()
 
 export function InitialStack() {
+
+    function getNavMap() {
+        return [
+            {
+                name: "Login",
+                component: LoginComponent
+            },
+            {
+                name: "Signup",
+                component: RegisterComponent
+            },
+            {
+                name: "Dashboard",
+                component: DashboardComponent
+            }
+        ];
+    }
+
+    function renderScreens() {
+        return getNavMap().map(({ name, component }) => <Stack.Screen
+            name={ name }
+            component={ component }
+            options={{ headerShown: false }}
+        />);
+    }
+
     return (
         <Stack.Navigator
             initialRouteName="Login"
@@ -21,21 +47,7 @@ export function InitialStack() {
                     fontWeight: 'bold',
                 },
             }}>
-            <Stack.Screen
-                name="Login"
-                component={LoginComponent}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="Signup"
-                component={RegisterComponent}
-                options={{ headerShown: false }}
-            />
-            <Stack.Screen
-                name="Dashboard"
-                component={DashboardComponent}
-                options={{ headerShown: false }}
-            />
+            { renderScreens() }
         </Stack.Navigator>
     );
 }

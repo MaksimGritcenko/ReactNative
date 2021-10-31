@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         padding: 10,
         borderRadius: 10,
-        // backdropFilter: 'saturate(180%) blur(10px)'
     },
     buttonContentText: {
         color: '#fff',
