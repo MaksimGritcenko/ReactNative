@@ -1,4 +1,4 @@
-import { db } from '../Firebase';
+import { auth, db } from '../Firebase';
 
 // DB setters
 export const addDocWithAutoId = async (
@@ -94,3 +94,32 @@ export const getCollectionDocsByWhere = async (collectionName, fieldName, field)
     alert(e);
   }
 };
+
+export const logout = async () => {
+  await auth.signOut();
+};
+
+export const registerWithEmailAndPassword = async (name, email, password) => {
+  try {
+    const res = await auth.createUserWithEmailAndPassword(email, password);
+    const { user } = res;
+    return await db.collection('customers').doc(user.uid).set({
+      uid: user.uid,
+      name,
+      authProvider: 'local',
+      email,
+    });
+  } catch (err) {
+    alert(err.message);
+  }
+};
+
+export const signInWithEmailAndPassword = async (email, password) => {
+  try {
+    return await auth.signInWithEmailAndPassword(email, password);
+
+  } catch (err) {
+    alert(err);
+  }
+};
+
