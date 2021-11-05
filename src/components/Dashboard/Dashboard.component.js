@@ -1,13 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 
-import {Button, Pressable, Text, View} from "react-native";
+import {
+    Text,
+    View
+} from "react-native";
 import HomeComponent from "../../routes/Home";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import SettingsComponent from "../SideDrawer/Settings/Settings.component";
 import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
 import {NavigationContainer} from "@react-navigation/native";
+
 import ChatComponent from "../SideDrawer/Chat/Chat.component";
 import { AntDesign } from '@expo/vector-icons';
+import NotesComponent from "../SideDrawer/Notes/Notes.component";
+import ImagesComponent from "../SideDrawer/Images/Notes.component";
+import InstructionsComponent from "../SideDrawer/Instructions/Notes.component";
 
 const SideDrawer = createDrawerNavigator();
 
@@ -39,7 +46,12 @@ export const DashboardComponent = () => {
                 options: {
                     headerTitleAlign: 'center',
                     headerRight: () => (
-                        <AntDesign  style={{ marginRight: 20}} onPress={() => showSmallModal()} name={ renderIcon() } size={24} color="black" />
+                        <AntDesign
+                            style={{ marginRight: 20}}
+                            onPress={ () => showSmallModal() }
+                            name={ renderIcon() } size={24}
+                            color="black"
+                        />
                     )
                 }
             },
@@ -59,6 +71,24 @@ export const DashboardComponent = () => {
                 id: 4,
                 name: 'Chat',
                 component: ChatComponent,
+                options: null
+            },
+            {
+                id: 5,
+                name: 'Notes',
+                component: NotesComponent,
+                options: null
+            },
+            {
+                id: 6,
+                name: 'Images',
+                component: ImagesComponent,
+                options: null
+            },
+            {
+                id: 7,
+                name: 'Instructions',
+                component: InstructionsComponent,
                 options: null
             }
         ];
