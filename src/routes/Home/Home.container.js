@@ -9,6 +9,8 @@ export const mapDispatchToProps = (dispatch) => ({
     setEmail: email => dispatch(setUserEmail(email))
 });
 export const HomeContainer = (props) => {
+    const { opacity } = props;
+
     const [email, setEmail] = useState('');
 
     useEffect(async () => {
@@ -33,6 +35,7 @@ export const HomeContainer = (props) => {
         <HomeComponent
             email={ email }
             logout={ signOut }
+            opacity={ opacity }
         />
     )
 }
