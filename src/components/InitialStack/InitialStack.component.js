@@ -8,7 +8,6 @@ import DashboardComponent from "components/Dashboard/Dashboard.component";
 const Stack = createStackNavigator()
 
 export function InitialStack() {
-
     function getNavMap() {
         return [
             {
