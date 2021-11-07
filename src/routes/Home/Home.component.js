@@ -12,7 +12,7 @@ export const HomeComponent = ({ email, logout, opacity }) => {
         <View style={{ height: '100%', justifyContent: 'center', alignItems: "center"}}>
             <Text>Dashboard</Text>
             <Text>Welcome { email }</Text>
-            <View style={{ ...styles.logoutButtonWrapper, opacity: opacity} }>
+            <View style={{ ...styles.logoutButtonWrapper, opacity }}>
                 <View style={ styles.logoutButton }>
                     <Pressable title="Logout" onPress={ logout } >
                         <Text>Logout</Text>
