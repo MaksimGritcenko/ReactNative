@@ -3,20 +3,32 @@ import { connect } from "react-redux";
 
 import DashboardComponent from "./Dashboard.component";
 import { updateModalVisibility } from "../../store/ChatModal/ChatModal.action";
+import {updateNotesModalVisibility} from "../../store/Notes/Notes.action";
 
 export const mapStateToProps = (state) => ({
-    isVisible: state.ChatModalReducer.isVisible
+    isVisible: state.ChatModalReducer.isVisible,
+    isModalVisible: state.NotesReducer.isVisible
 })
 
 export const mapDispatchToProps = (dispatch) => ({
-    updateModalVisibility: status => dispatch(updateModalVisibility(status))
+    updateModalVisibility: status => dispatch(updateModalVisibility(status)),
+    updateNotesModalVisibility: isVisible => dispatch(updateNotesModalVisibility(isVisible))
 })
 
 export const DashboardContainer = (props) => {
-    const { updateModalVisibility, isVisible } = props;
+    const {
+        updateModalVisibility,
+        isVisible,
+        updateNotesModalVisibility,
+        isModalVisible
+    } = props;
 
     const toggle = () => {
         updateModalVisibility(false)
+    }
+
+    function showNotesModal() {
+        updateNotesModalVisibility(true);
     }
 
     return (
@@ -24,6 +36,7 @@ export const DashboardContainer = (props) => {
             toggle={ toggle }
             updateModalVisibility={ updateModalVisibility }
             isVisible={ isVisible }
+            showNotesModal={ showNotesModal }
         />
     )
 }

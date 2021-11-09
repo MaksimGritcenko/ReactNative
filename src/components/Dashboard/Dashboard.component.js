@@ -12,13 +12,13 @@ import {NavigationContainer} from "@react-navigation/native";
 
 import ChatComponent from "../SideDrawer/Chat/Chat.component";
 import { AntDesign } from '@expo/vector-icons';
-import NotesComponent from "../SideDrawer/Notes/Notes.component";
+import NotesComponent from "../SideDrawer/Notes";
 import ImagesComponent from "../SideDrawer/Images/Notes.component";
 import InstructionsComponent from "../SideDrawer/Instructions/Notes.component";
 
 const SideDrawer = createDrawerNavigator();
 
-export const DashboardComponent = () => {
+export const DashboardComponent = ({ showNotesModal }) => {
     const [opacity, setOpacity] = useState(0);
 
     function showSmallModal() {
@@ -77,7 +77,21 @@ export const DashboardComponent = () => {
                 id: 5,
                 name: 'Notes',
                 component: NotesComponent,
-                options: null
+                options: {
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: '#23252a',
+                    },
+                    headerRight: () => (
+                        <AntDesign
+                            style={{ marginRight: 20}}
+                            onPress={ () => showNotesModal() }
+                            name="pluscircleo"  size={24}
+                            color="#fff"
+                        />
+                    )
+                }
             },
             {
                 id: 6,

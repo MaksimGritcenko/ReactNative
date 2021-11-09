@@ -21,9 +21,10 @@ export const LoginContainer = (props) => {
 
         if (!user) return;
 
-        const { user: { email: userEmail } } = user;
+        const { user: { email: userEmail, uid } } = user;
 
         await AsyncStorage.setItem('@email', userEmail);
+        await AsyncStorage.setItem('@uid', uid)
 
         setEmail(email);
         navigation.navigate('Dashboard');
