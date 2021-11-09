@@ -6,7 +6,9 @@ import {
     TextInput,
     Pressable,
     SafeAreaView,
-    Image
+    Image,
+    KeyboardAvoidingView,
+    Platform
 } from "react-native";
 
 import styles from '../Login/Login.styles';
@@ -18,6 +20,9 @@ export const RegisterComponent = (props) => {
 
     return (
         <SafeAreaView>
+            <KeyboardAvoidingView
+                behavior={ Platform.OS === 'ios' ? "padding" : "height" }
+            >
                 <View style={ styles.container }>
                     <Image style={ styles.logo } source={require('../Login/images/skullLogo3.png')} />
                     <View style={ styles.formWrapper }>
@@ -52,6 +57,7 @@ export const RegisterComponent = (props) => {
                         </Pressable>
                     </View>
                 </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
