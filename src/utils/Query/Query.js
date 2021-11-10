@@ -60,6 +60,7 @@ export const getCollectionDocs = async (path) => {
   try {
     const docs = await db
       .collection(path)
+      .orderBy('timestamps', 'desc')
       .get()
       .then(
         (snapshot) => snapshot.docs.map(
