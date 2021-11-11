@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import {
-    FlatList, Modal,
+    FlatList,
+    Modal,
     SafeAreaView,
-    Text, TextInput, TouchableOpacity,
+    Text,
+    TextInput,
+    TouchableOpacity,
     View
 } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import { styles } from "./Notes.style";
 import EditNoteModal from "../../EditNoteModal";
 import Swipeout from 'react-native-swipeout';
+import MainComponent from "../../Main/Main.component";
+import { colorGreen, skyBlue } from "../../../constants/Colors";
 
 export const NotesComponent = ( props ) => {
     const {
@@ -44,7 +49,7 @@ export const NotesComponent = ( props ) => {
             >
                 <View>
                     <TouchableOpacity onPress={() => openSingleItem(title, content, id)}>
-                        <Text style={styles.title}>
+                        <Text style={{ ...styles.title, backgroundColor: colorGreen}}>
                             {title}
                         </Text>
                     </TouchableOpacity>
@@ -66,63 +71,65 @@ export const NotesComponent = ( props ) => {
     }
 
     return (
-        <SafeAreaView style={ styles.container }>
-            <FlatList
-                data={ noteData }
-                renderItem={ renderItem }
-                keyExtractor={({id}) => id }
-            />
-            <Modal animationType="slide" transparent={ false } visible={ isModalVisible }>
-                <View style={ styles.modalContainer }>
-                    <View style={ styles.modalHeader} >
-                        <Text style={{ color: '#fff'}}>New Note</Text>
-                        <TouchableOpacity>
-                            <AntDesign
-                                name="closecircleo"
-                                size={24}
-                                color="#fff"
-                                onPress={ () => closeNotesModal() }
+        <MainComponent>
+            <SafeAreaView>
+                <FlatList
+                    data={ noteData }
+                    renderItem={ renderItem }
+                    keyExtractor={({id}) => id }
+                />
+                <Modal animationType="slide" transparent  visible={ isModalVisible }>
+                    <View style={ styles.modalContainer }>
+                        <View style={{ ...styles.modalHeader, backgroundColor: skyBlue}} >
+                            <Text style={{ color: '#fff'}}>New Note</Text>
+                            <TouchableOpacity>
+                                <AntDesign
+                                    name="closecircleo"
+                                    size={24}
+                                    color="#fff"
+                                    onPress={ () => closeNotesModal() }
+                                />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={ styles.contentWrapper }>
+                            <TextInput
+                                style={ styles.contentWrapperTitle }
+                                multiline
+                                placeholder="Title"
+                                placeholderTextColor="#fff"
+                                onChangeText={(text) => setNoteTitle(text) }
+                                value={ noteTitle }
                             />
-                        </TouchableOpacity>
+                            <TextInput
+                                placeholder="Note"
+                                placeholderTextColor="#fff"
+                                style={ styles.contentWrapperContent }
+                                multiline
+                                onChangeText={(text) => setNoteContent(text) }
+                                value={ noteContent }
+                            />
+                            <TouchableOpacity
+                                disabled={ isDisabled() }
+                                onPress={() => {
+                                    saveNote(noteTitle, noteContent)
+                                    setNoteTitle('');
+                                    setNoteContent('');
+                                }}
+                                style={{ ...styles.saveButton, backgroundColor: isDisabled() ? 'lightgray' : '#36394d'} }
+                            >
+                                <Text style={ styles.saveButtonText }>Save</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                    <View style={ styles.contentWrapper }>
-                        <TextInput
-                            style={ styles.contentWrapperTitle }
-                            multiline
-                            placeholder="Title"
-                            placeholderTextColor="#fff"
-                            onChangeText={(text) => setNoteTitle(text) }
-                            value={ noteTitle }
-                        />
-                        <TextInput
-                            placeholder="Note"
-                            placeholderTextColor="#fff"
-                            style={ styles.contentWrapperContent }
-                            multiline
-                            onChangeText={(text) => setNoteContent(text) }
-                            value={ noteContent }
-                        />
-                        <TouchableOpacity
-                            disabled={ isDisabled() }
-                            onPress={() => {
-                                saveNote(noteTitle, noteContent)
-                                setNoteTitle('');
-                                setNoteContent('');
-                            }}
-                            style={{ ...styles.saveButton, backgroundColor: isDisabled() ? 'lightgray' : '#36394d'} }
-                        >
-                            <Text style={ styles.saveButtonText }>Save</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
-            <EditNoteModal
-                title={ title }
-                content={ content }
-                modalHeaderStyles={ styles.modalHeader }
-                editableItemId={ editableItemId }
-            />
-        </SafeAreaView>
+                </Modal>
+                <EditNoteModal
+                    title={ title }
+                    content={ content }
+                    modalHeaderStyles={ styles.modalHeader }
+                    editableItemId={ editableItemId }
+                />
+            </SafeAreaView>
+        </MainComponent>
     );
 }
 
