@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { connect } from "react-redux";
 import EditNoteModalComponent from "./EditNoteModal.component";
-import {updateEditNoteModalVisibility, updateNotes} from "../../store/Notes/Notes.action";
-import {addOrUpdateDoc, getCollectionDocs} from "../../utils/Query";
+import { updateEditNoteModalVisibility, updateNotes } from "../../store/Notes/Notes.action";
+import { addOrUpdateDoc, getCollectionDocs } from "../../utils/Query";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import firebase from "firebase";
 
 export const mapStateToProps = state => ({
     isEditModalVisible: state.NotesReducer.isEditModalVisible,
@@ -43,10 +42,19 @@ export const EditNoteModalContainer = (props) => {
         updateEditNoteModalVisibility(false);
     }
 
+    function onRequestClose() {
+        const {
+            updateEditNoteModalVisibility
+        } = props;
+
+        updateEditNoteModalVisibility(false);
+    }
+
     return(
         <EditNoteModalComponent
             { ...props }
             closeEditNotesModal={ closeEditNotesModal }
+            onRequestClose={ onRequestClose }
         />
     );
 };

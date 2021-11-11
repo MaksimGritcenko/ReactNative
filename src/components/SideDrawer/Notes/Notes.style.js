@@ -2,12 +2,10 @@ import {StyleSheet} from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        paddingBottom: 10,
-        backgroundColor: '#23252a',
-        flex: 1
+
     },
     wrapper: {
-        backgroundColor: '#3e4577',
+        backgroundColor: 'transparent',
         marginTop: 10,
         marginRight: 10,
         marginLeft: 10,
@@ -19,22 +17,20 @@ export const styles = StyleSheet.create({
         padding: 15
     },
     modalHeader: {
-        borderBottomWidth: 1,
         borderColor: '#cbcaca',
-        paddingBottom: 10,
-        backgroundColor: '#23252a',
+        paddingBottom: 15,
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: "center",
         paddingLeft: 15,
-        paddingRight: 15
+        paddingRight: 15,
     },
     contentWrapper: {
         marginTop: 10
     },
     modalContainer: {
         height: '100%',
-        backgroundColor: '#23252a'
+        backgroundColor: 'rgba(0,0,0,.8)'
     },
     contentWrapperTitle: {
         borderBottomWidth: 1,
@@ -44,7 +40,6 @@ export const styles = StyleSheet.create({
         width: '80%',
         alignSelf: 'center',
         fontSize: 20,
-        backgroundColor: '#23252a',
         color: '#fff'
     },
     contentWrapperContent: {
@@ -55,8 +50,7 @@ export const styles = StyleSheet.create({
         borderColor: '#fff',
         borderRadius: 10,
         marginTop: 20,
-        backgroundColor: '#23252a',
-        color: '#fff'
+        color: '#fff',
     },
     saveButton: {
         width: '80%',

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import {
-    Text,
     View
 } from "react-native";
 import HomeComponent from "../../routes/Home";
@@ -15,10 +14,14 @@ import { AntDesign } from '@expo/vector-icons';
 import NotesComponent from "../SideDrawer/Notes";
 import ImagesComponent from "../SideDrawer/Images/Notes.component";
 import InstructionsComponent from "../SideDrawer/Instructions/Notes.component";
+import {
+    darkGreen,
+    skyBlue
+} from "../../constants/Colors";
 
 const SideDrawer = createDrawerNavigator();
 
-export const DashboardComponent = ({ showNotesModal }) => {
+export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
     const [opacity, setOpacity] = useState(0);
 
     function showSmallModal() {
@@ -45,33 +48,59 @@ export const DashboardComponent = ({ showNotesModal }) => {
                 component: Home,
                 options: {
                     headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0
+                    },
                     headerRight: () => (
                         <AntDesign
                             style={{ marginRight: 20}}
                             onPress={ () => showSmallModal() }
                             name={ renderIcon() } size={24}
-                            color="black"
+                            color="#fff"
                         />
-                    )
+                    ),
                 }
             },
             {
                 id: 2,
                 name: "Settings",
                 component: SettingsComponent,
-                options: null
+                options: {
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0
+                    }
+                }
             },
             {
                 id: 3,
                 name: "ChatHistory",
                 component: ChatHistoryComponent,
-                options: null
+                options: {
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0
+                    }
+                }
             },
             {
                 id: 4,
                 name: 'Chat',
                 component: ChatComponent,
-                options: null
+                options: {
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0
+                    }
+                }
             },
             {
                 id: 5,
@@ -81,7 +110,8 @@ export const DashboardComponent = ({ showNotesModal }) => {
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
-                        backgroundColor: '#23252a',
+                        backgroundColor: isEditModalVisible ? darkGreen : skyBlue,
+                        elevation: 0
                     },
                     headerRight: () => (
                         <AntDesign
@@ -97,13 +127,27 @@ export const DashboardComponent = ({ showNotesModal }) => {
                 id: 6,
                 name: 'Images',
                 component: ImagesComponent,
-                options: null
+                options: {
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0
+                    }
+                }
             },
             {
                 id: 7,
                 name: 'Instructions',
                 component: InstructionsComponent,
-                options: null
+                options: {
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0
+                    }
+                }
             }
         ];
     }
@@ -126,16 +170,22 @@ export const DashboardComponent = ({ showNotesModal }) => {
         <View style={{ height: '100%'}}>
             <NavigationContainer
                 independent={true}
-                screenOptions={{
-                    headerLeft: () => <Text>Hello</Text>
-                }}
             >
-                <SideDrawer.Navigator>
+                <SideDrawer.Navigator
+                    screenOptions={{
+                        drawerStyle: {
+                            backgroundColor: darkGreen,
+                        },
+                        drawerLabelStyle: {
+                            color: '#fff'
+                        }
+                    }}
+                >
                     { renderScreens() }
                 </SideDrawer.Navigator>
             </NavigationContainer>
         </View>
-    )
-}
+    );
+};
 
 export default DashboardComponent;

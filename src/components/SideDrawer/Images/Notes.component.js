@@ -3,13 +3,16 @@ import {
     Text,
     View
 } from "react-native";
+import MainComponent from "../../Main/Main.component";
 
 export const ImagesComponent = () => {
     return (
-        <View>
-            <Text>Notes</Text>
-        </View>
+        <MainComponent>
+            <View>
+                <Text>Notes</Text>
+            </View>
+        </MainComponent>
     );
-}
+};
 
 export default ImagesComponent;
