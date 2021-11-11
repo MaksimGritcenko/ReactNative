@@ -13,7 +13,7 @@ import ChatComponent from "../SideDrawer/Chat/Chat.component";
 import { AntDesign } from '@expo/vector-icons';
 import NotesComponent from "../SideDrawer/Notes";
 import ImagesComponent from "../SideDrawer/Images/Notes.component";
-import InstructionsComponent from "../SideDrawer/Instructions/Notes.component";
+import InstructionsComponent from "../SideDrawer/Instructions";
 
 import {
     darkGreen,
