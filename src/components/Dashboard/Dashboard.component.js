@@ -14,10 +14,12 @@ import { AntDesign } from '@expo/vector-icons';
 import NotesComponent from "../SideDrawer/Notes";
 import ImagesComponent from "../SideDrawer/Images/Notes.component";
 import InstructionsComponent from "../SideDrawer/Instructions/Notes.component";
+
 import {
     darkGreen,
     skyBlue
 } from "../../constants/Colors";
+import {StatusBar} from "expo-status-bar";
 
 const SideDrawer = createDrawerNavigator();
 
@@ -51,7 +53,8 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
                     headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: skyBlue,
-                        elevation: 0
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
                     },
                     headerRight: () => (
                         <AntDesign
@@ -72,7 +75,8 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
                     headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: skyBlue,
-                        elevation: 0
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
                     }
                 }
             },
@@ -85,7 +89,8 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
                     headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: skyBlue,
-                        elevation: 0
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
                     }
                 }
             },
@@ -98,7 +103,8 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
                     headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: skyBlue,
-                        elevation: 0
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
                     }
                 }
             },
@@ -111,7 +117,8 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
                     headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: isEditModalVisible ? darkGreen : skyBlue,
-                        elevation: 0
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
                     },
                     headerRight: () => (
                         <AntDesign
@@ -132,7 +139,8 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
                     headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: skyBlue,
-                        elevation: 0
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
                     }
                 }
             },
@@ -145,7 +153,8 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
                     headerTintColor: '#fff',
                     headerStyle: {
                         backgroundColor: skyBlue,
-                        elevation: 0
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
                     }
                 }
             }
@@ -184,6 +193,7 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
                     { renderScreens() }
                 </SideDrawer.Navigator>
             </NavigationContainer>
+            <StatusBar hidden={ true } />
         </View>
     );
 };

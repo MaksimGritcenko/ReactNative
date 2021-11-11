@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         paddingLeft: 15,
         paddingRight: 15,
+        paddingTop: 15
     },
     contentWrapper: {
         marginTop: 10

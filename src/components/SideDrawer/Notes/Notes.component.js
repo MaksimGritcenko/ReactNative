@@ -14,6 +14,7 @@ import EditNoteModal from "../../EditNoteModal";
 import Swipeout from 'react-native-swipeout';
 import MainComponent from "../../Main/Main.component";
 import { colorGreen, skyBlue } from "../../../constants/Colors";
+import {StatusBar} from "expo-status-bar";
 
 export const NotesComponent = ( props ) => {
     const {
