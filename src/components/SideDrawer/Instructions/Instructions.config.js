@@ -1,0 +1,1 @@
+export const INSTRUCTIONS_PATH = '/instructions/IcenIpDAQJkeZxdw0rjG';
