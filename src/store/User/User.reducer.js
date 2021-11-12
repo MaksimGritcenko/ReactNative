@@ -1,7 +1,7 @@
 import {
     LOGIN_SCREEN_VISIBILITY,
     SET_USER_EMAIL,
-    SET_IS_ONBOARDED
+    SET_IS_ONBOARDED, SET_PREFERED_LANGUAGE
 } from "./User.action";
 
 export const setIsOnboarded = (state, action) => {
@@ -16,7 +16,8 @@ export const setIsOnboarded = (state, action) => {
 export const getInitialState = () => ({
     isLoginScreen: true,
     email: null,
-    isOnboarded: false
+    isOnboarded: false,
+    language: null
 });
 
 export const UserReducer = (
@@ -42,6 +43,14 @@ export const UserReducer = (
 
         case SET_IS_ONBOARDED:
             return setIsOnboarded(state, action);
+
+        case SET_PREFERED_LANGUAGE:
+            const { language } = action;
+
+            return {
+                ...state,
+                language
+            }
 
         default:
             return state;

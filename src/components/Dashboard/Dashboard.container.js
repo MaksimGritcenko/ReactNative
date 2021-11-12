@@ -7,7 +7,8 @@ import { updateNotesModalVisibility } from "../../store/Notes/Notes.action";
 
 export const mapStateToProps = (state) => ({
     isVisible: state.ChatModalReducer.isVisible,
-    isEditModalVisible: state.NotesReducer.isEditModalVisible
+    isEditModalVisible: state.NotesReducer.isEditModalVisible,
+    language: state.UserReducer.language
 })
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -20,7 +21,8 @@ export const DashboardContainer = (props) => {
         updateModalVisibility,
         isVisible,
         updateNotesModalVisibility,
-        isEditModalVisible
+        isEditModalVisible,
+        language
     } = props;
 
     const toggle = () => {
@@ -38,6 +40,7 @@ export const DashboardContainer = (props) => {
             isVisible={ isVisible }
             showNotesModal={ showNotesModal }
             isEditModalVisible={ isEditModalVisible }
+            language={ language }
         />
     )
 }

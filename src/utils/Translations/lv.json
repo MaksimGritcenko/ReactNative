@@ -1,0 +1,18 @@
+{
+  "LogoutButton": "Iziet",
+
+  "OnBoardingScreenFirstTitle": "Pirmais slaids",
+  "OnBoardingScreenFirstSubTitle": "Pirmā slaida kontents",
+  "OnBoardingScreenSecondTitle": "Otrais slaids",
+  "OnBoardingScreenSecondSubTitle": "Otrā slaida kontents",
+  "OnBoardingScreenThirdTitle": "Trešais slaids",
+  "OnBoardingScreenThirdSubTitle": "Trešā slaida kontents",
+
+  "NavigationDashboardTitle": "Galvenā",
+  "NavigationSettingsTitle": "Iestatījumi",
+  "NavigationChatHistoryTitle": "Čata vēsture",
+  "NavigationChatTitle": "Čats",
+  "NavigationNotesTitle": "Piezīmes",
+  "NavigationImagesTitle": "Bildes",
+  "NavigationInstructionsTitle": "Instrukcija"
+}
