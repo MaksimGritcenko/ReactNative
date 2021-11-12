@@ -3,13 +3,16 @@ import { connect } from "react-redux";
 import HomeComponent from "./Home.component";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { logout } from "../../utils/Query";
-import { setUserEmail } from "store/User/User.action";
+import { setUserEmail, setIsOnboarded } from "store/User/User.action";
+import {setPreferedLanguage} from "../../store/User/User.action";
 
 export const mapDispatchToProps = (dispatch) => ({
-    setEmail: email => dispatch(setUserEmail(email))
+    setEmail: email => dispatch(setUserEmail(email)),
+    onSuccessBoarding: () => dispatch(setIsOnboarded(false)),
+    setPreferedLanguage: language => dispatch(setPreferedLanguage(language))
 });
 export const HomeContainer = (props) => {
-    const { opacity } = props;
+    const { opacity, onSuccessBoarding, setPreferedLanguage, language } = props;
 
     const [email, setEmail] = useState('');
 
@@ -25,10 +28,10 @@ export const HomeContainer = (props) => {
         } = props;
 
         await logout();
+        // onSuccessBoarding();
+        // setPreferedLanguage(null)
         AsyncStorage.removeItem('@email');
         setEmail(null);
-        // TODO: fix navigation is undefined on reload
-        // navigation.navigate('Login');
     }
 
     return (
@@ -36,6 +39,7 @@ export const HomeContainer = (props) => {
             email={ email }
             logout={ signOut }
             opacity={ opacity }
+            language={ language }
         />
     )
 }

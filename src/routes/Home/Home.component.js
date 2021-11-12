@@ -9,9 +9,11 @@ import {
     darkGreen,
 } from "../../constants/Colors";
 
+import LV from '../../utils/Translations/lv.json';
+
 import { styles } from "./Home.styles";
 
-export const HomeComponent = ({ email, logout, opacity }) => {
+export const HomeComponent = ({ email, logout, opacity, language }) => {
     return (
         <MainComponent>
             <View style={{ height: '100%', justifyContent: 'center', alignItems: "center"}}>
@@ -26,7 +28,7 @@ export const HomeComponent = ({ email, logout, opacity }) => {
                 >
                     <View style={ styles.logoutButton }>
                         <Pressable title="Logout" onPress={ logout } >
-                            <Text style={ { color: '#fff'}}>Logout</Text>
+                            <Text style={ { color: '#fff'}}>{ language === 'lv' ? LV.LogoutButton : "Logout"}</Text>
                         </Pressable>
                     </View>
                 </View>

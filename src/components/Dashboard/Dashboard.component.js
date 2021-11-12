@@ -15,6 +15,8 @@ import NotesComponent from "../SideDrawer/Notes";
 import ImagesComponent from "../SideDrawer/Images/Notes.component";
 import InstructionsComponent from "../SideDrawer/Instructions";
 
+import LV from '../../utils/Translations/lv.json';
+
 import {
     darkGreen,
     skyBlue
@@ -23,7 +25,7 @@ import {StatusBar} from "expo-status-bar";
 
 const SideDrawer = createDrawerNavigator();
 
-export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
+export const DashboardComponent = ({ showNotesModal, isEditModalVisible, language }) => {
     const [opacity, setOpacity] = useState(0);
 
     function showSmallModal() {
@@ -33,7 +35,7 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
     }
 
     function Home() {
-        return <HomeComponent opacity={ opacity } />;
+        return <HomeComponent language={ language } opacity={ opacity } />;
     }
 
     function renderIcon() {
@@ -42,11 +44,15 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
         return 'downcircleo';
     }
 
+    function getLanguage() {
+        return language === 'lv';
+    }
+
     function getNavMap() {
         return [
             {
                 id: 1,
-                name: "Dashboard",
+                name: getLanguage() ? LV.NavigationDashboardTitle : 'Dashboard',
                 component: Home,
                 options: {
                     headerTitleAlign: 'center',
@@ -68,7 +74,7 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
             },
             {
                 id: 2,
-                name: "Settings",
+                name: getLanguage() ? LV.NavigationSettingsTitle : "Settings",
                 component: SettingsComponent,
                 options: {
                     headerTitleAlign: 'center',
@@ -82,7 +88,7 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
             },
             {
                 id: 3,
-                name: "ChatHistory",
+                name: getLanguage() ? LV.NavigationChatHistoryTitle : "ChatHistory",
                 component: ChatHistoryComponent,
                 options: {
                     headerTitleAlign: 'center',
@@ -96,7 +102,7 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
             },
             {
                 id: 4,
-                name: 'Chat',
+                name: getLanguage() ? LV.NavigationChatTitle : 'Chat',
                 component: ChatComponent,
                 options: {
                     headerTitleAlign: 'center',
@@ -110,7 +116,7 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
             },
             {
                 id: 5,
-                name: 'Notes',
+                name: getLanguage() ? LV.NavigationNotesTitle : 'Notes',
                 component: NotesComponent,
                 options: {
                     headerTitleAlign: 'center',
@@ -132,7 +138,7 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
             },
             {
                 id: 6,
-                name: 'Images',
+                name: getLanguage() ? LV.NavigationImagesTitle : 'Images',
                 component: ImagesComponent,
                 options: {
                     headerTitleAlign: 'center',
@@ -146,7 +152,7 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible }) => {
             },
             {
                 id: 7,
-                name: 'Instructions',
+                name: getLanguage() ? LV.NavigationInstructionsTitle : 'Instructions',
                 component: InstructionsComponent,
                 options: {
                     headerTitleAlign: 'center',
