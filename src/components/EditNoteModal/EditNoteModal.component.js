@@ -18,8 +18,14 @@ export const EditNoteModalComponent = (props) => {
         closeEditNotesModal,
         onRequestClose
     } = props;
-    const [headerTitle, setHeaderTitle] = useState('');
-    const [notesEditContent, setNotesEditContent] = useState('');
+    const [headerTitle, setHeaderTitle] = useState(title);
+    const [notesEditContent, setNotesEditContent] = useState(content);
+
+    function isTitleOrContentChanged() {
+        return (title === headerTitle && content === notesEditContent)
+            || headerTitle === ''
+            || notesEditContent === '';
+    }
 
     return (
         <Modal
@@ -34,16 +40,26 @@ export const EditNoteModalComponent = (props) => {
                             style={{ width: '70%', color: '#fff', fontSize: 20}}
                             multiline
                             defaultValue={ title }
-                            onChangeText={(text) => setHeaderTitle(text)}
+                            onChangeText={(text) => setHeaderTitle(text.trim())}
                         />
                     </View>
                     <TouchableOpacity>
-                        <AntDesign
-                            name="check"
-                            size={ 24 }
-                            color="#fff"
-                            onPress={ () => closeEditNotesModal(headerTitle, notesEditContent) }
-                        />
+                        { !isTitleOrContentChanged() && (
+                            <AntDesign
+                                name="check"
+                                size={ 24 }
+                                color="#fff"
+                                onPress={ () => closeEditNotesModal(headerTitle, notesEditContent) }
+                            />
+                        )}
+                        { isTitleOrContentChanged() && (
+                            <AntDesign
+                                name="closecircleo"
+                                size={ 24 }
+                                color="#fff"
+                                onPress={ () => onRequestClose() }
+                            />
+                        )}
                     </TouchableOpacity>
                 </View>
                 <View style={ styles.container }>
@@ -51,7 +67,7 @@ export const EditNoteModalComponent = (props) => {
                         style={ styles.textInput }
                         multiline
                         defaultValue={ content }
-                        onChangeText={(text) => setNotesEditContent(text)}
+                        onChangeText={(text) => setNotesEditContent(text.trim())}
                     />
                 </View>
         </Modal>
