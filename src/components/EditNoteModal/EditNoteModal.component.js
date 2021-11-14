@@ -49,7 +49,11 @@ export const EditNoteModalComponent = (props) => {
                                 name="check"
                                 size={ 24 }
                                 color="#fff"
-                                onPress={ () => closeEditNotesModal(headerTitle, notesEditContent) }
+                                onPress={ () => {
+                                    closeEditNotesModal(headerTitle, notesEditContent)
+                                    setHeaderTitle('')
+                                    setNotesEditContent('')
+                                } }
                             />
                         )}
                         { isTitleOrContentChanged() && (
