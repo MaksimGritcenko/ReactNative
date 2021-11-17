@@ -12,7 +12,7 @@ import {NavigationContainer} from "@react-navigation/native";
 import ChatComponent from "../SideDrawer/Chat/Chat.component";
 import { AntDesign } from '@expo/vector-icons';
 import NotesComponent from "../SideDrawer/Notes";
-import ImagesComponent from "../SideDrawer/Images/Notes.component";
+import ImagesComponent from "../SideDrawer/Images";
 import InstructionsComponent from "../SideDrawer/Instructions";
 
 import LV from '../../utils/Translations/lv.json';
@@ -25,7 +25,14 @@ import {StatusBar} from "expo-status-bar";
 
 const SideDrawer = createDrawerNavigator();
 
-export const DashboardComponent = ({ showNotesModal, isEditModalVisible, language }) => {
+export const DashboardComponent = (props) => {
+    const {
+        showNotesModal,
+        isEditModalVisible,
+        language,
+        showAddImageModal,
+        imageUriArray
+    } = props;
     const [opacity, setOpacity] = useState(0);
 
     function showSmallModal() {
@@ -144,11 +151,23 @@ export const DashboardComponent = ({ showNotesModal, isEditModalVisible, languag
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
-                        backgroundColor: skyBlue,
+                        backgroundColor: darkGreen,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
+                    },
+                    headerRight: () => {
+                        if (imageUriArray && imageUriArray.length >= 10) return null;
+
+                        return(
+                            <AntDesign
+                                style={{ marginRight: 20}}
+                                onPress={ () => showAddImageModal() }
+                                name="pluscircleo"  size={24}
+                                color="#fff"
+                            />
+                        )
                     }
-                }
+                },
             },
             {
                 id: 7,
