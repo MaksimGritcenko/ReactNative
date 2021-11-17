@@ -10,12 +10,13 @@ import UserReducer from "./User/User.reducer";
 import ChatModalReducer from "./ChatModal/ChatModal.reducer";
 import NotesReducer from "./Notes/Notes.reducer";
 import InstructionsReducer from "./Instructions/Instructions.reducer";
+import ImagesReducer from './Images/Images.reducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['UserReducer', 'NotesReducer', 'InstructionsReducer']
+  whitelist: ['UserReducer', 'NotesReducer', 'InstructionsReducer', 'ImagesReducer']
 }
 
 const reducersToPersist = combineReducers({
@@ -23,7 +24,8 @@ const reducersToPersist = combineReducers({
   UserReducer,
   ChatModalReducer,
   NotesReducer,
-  InstructionsReducer
+  InstructionsReducer,
+  ImagesReducer
 });
 
 const persistedReducers = persistReducer(persistConfig, reducersToPersist);
