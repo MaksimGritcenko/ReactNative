@@ -34,11 +34,18 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
         })
     };
 
+    function closeModalUfAllImagesDeleted() {
+      if (imageUriArray.length - 1 === 0) setIsModalVisible(false);
+    }
+
     function renderItem(image, index) {
         return (
             <TouchableOpacity
                 style={{ top: 50 }}
-                onLongPress={() => deleteImage(image) }
+                onLongPress={() => {
+                  deleteImage(image)
+                  closeModalUfAllImagesDeleted()
+                } }
                 activeOpacity={ 1 }
             >
                 <Image
