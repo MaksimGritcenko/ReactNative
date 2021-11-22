@@ -4,7 +4,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 // @ts-ignore
 import store, { persistor } from 'store';
-
 import Router from './src/components/Router';
 
 export default function App() {

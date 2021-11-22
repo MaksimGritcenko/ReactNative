@@ -4,13 +4,16 @@
     "slug": "pizdatijApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./src/assets/images/favicon-16x16.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./src/assets/images/splash.png",
+      "image": "./src/assets/images/favicon-16x16.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+    },
+    "notification":{
+      "icon":"./src/assets/images/favicon-16x16.png"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,16 +22,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.akotikovs.pizdatijApp",
+      "infoPlist": {
+        "UIBackgroundModes": ["location", "fetch"]
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "foregroundImage": "./src/assets/images/favicon-16x16.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "useNextNotificationsApi": true,
+      "package": "com.akotikovs.pizdatijApp"
     },
     "web": {
-      "favicon": "./src/assets/images/favicon.png"
+      "favicon": "./src/assets/images/favicon-16x16.png"
     }
   }
 }

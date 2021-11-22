@@ -14,6 +14,7 @@ import { AntDesign } from '@expo/vector-icons';
 import NotesComponent from "../SideDrawer/Notes";
 import ImagesComponent from "../SideDrawer/Images";
 import InstructionsComponent from "../SideDrawer/Instructions";
+import PushNotifications from "../PushNotifications";
 
 import LV from '../../utils/Translations/lv.json';
 
@@ -31,7 +32,8 @@ export const DashboardComponent = (props) => {
         isEditModalVisible,
         language,
         showAddImageModal,
-        imageUriArray
+        imageUriArray,
+        admin
     } = props;
     const [opacity, setOpacity] = useState(0);
 
@@ -182,6 +184,20 @@ export const DashboardComponent = (props) => {
                         shadowOffset: { width: 0, height: 0 }
                     }
                 }
+            },
+            {
+                id: 8,
+                name: getLanguage() ? LV.Notifications : 'Notifications',
+                component: PushNotifications,
+                options: {
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
+                    }
+                }
             }
         ];
     }
@@ -192,12 +208,18 @@ export const DashboardComponent = (props) => {
             name,
             component,
             options
-        }) => <SideDrawer.Screen
-            name={ name }
-            component={ component }
-            key={ id }
-            options={ options }
-        />);
+        }) => {
+            if (!admin && name === LV.Notifications || (!admin && name === 'Notifications')) return null;
+
+            return (
+                    <SideDrawer.Screen
+                        name={ name }
+                        component={ component }
+                        key={ id }
+                        options={ options }
+                    />
+                );
+        });
     }
 
     return (
