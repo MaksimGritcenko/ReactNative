@@ -2,16 +2,15 @@ import React, {useRef, useState} from "react";
 import {
     Dimensions, FlatList, Image, Modal,
     Text, TouchableOpacity,
-    View
+    View, ScrollView
 } from "react-native";
 import MainComponent from "../../Main/Main.component";
 import Carousel  from 'react-native-snap-carousel';
 import {AntDesign} from "@expo/vector-icons";
 import AddImage from "../../AddImage";
+import { styles } from "./Images.style";
 
 const { width } = Dimensions.get('window');
-const Spacing = 10;
-const THUMB_SIZE = 80;
 
 export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
     const [ indexSelected, setIndexSelected] = useState(0);
@@ -29,7 +28,7 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
         setIndexSelected(indexSelected)
 
         flatListRef?.current?.scrollToOffset({
-            offset: indexSelected * THUMB_SIZE,
+            offset: indexSelected * 80,
             animated: true
         })
     };
@@ -52,7 +51,7 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
                     source={ { uri: image } }
                     key={ index }
                     resizeMode="contain"
-                    style={{ width: '95%', height: '80%', top: 30, alignSelf: 'center' }}
+                    style={ styles.carouselImage }
                 />
             </TouchableOpacity>
         )
@@ -64,10 +63,7 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
                 <Image
                     source={ { uri: image } }
                     style={{
-                        width: THUMB_SIZE,
-                        height: THUMB_SIZE,
-                        marginRight: Spacing,
-                        borderRadius: 16,
+                        ...styles.thumbnailImage,
                         borderWidth: index === indexSelected ? 4 : 0.75,
                         borderColor: index === indexSelected ? 'orange' : 'white'
                     }}
@@ -91,23 +87,13 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
         return imageUriArray.map(({ imageUri }, index) => {
             return (
                 <TouchableOpacity
-                    style={{
-                        position: 'absolute',
-                        top: 30 + (index * 20),
-                        borderRadius: 10
-                    }}
+                    style={ styles.renderImageContainer }
                     onPress={() => openModal()}
                     key={ index }
                     activeOpacity={1}
                 >
                     <Image
-                        style={{
-                            width: 300,
-                            height: 400,
-                            borderTopRightRadius: 30,
-                            borderTopLeftRadius: 30,
-                            opacity: index !== imageUriArray.length - 1 ? 0.6 : 1,
-                        }}
+                        style={ styles.renderImage }
                         source={ { uri: imageUri } }
                     />
                 </TouchableOpacity>
@@ -117,16 +103,16 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
 
     return (
         <MainComponent>
-            <View style={{
-                height: '100%',
-                width: '100%',
-                alignSelf: "center",
-                alignItems:'center',
-                backgroundColor: 'rgba(0,0,0,0.6)'
-            }}>
-                { renderImages() }
-                <View style={{ position: "absolute", bottom: 20}}>
-                    { imageUriArray && <Text style={{ color: 'red'}}>You have uploaded { imageUriArray.length } / 10</Text> }
+            <View style={ styles.container }>
+                <ScrollView>
+                    <View style={ styles.renderImageScrollViewWrapper }>
+                        { renderImages() }
+                    </View>
+                </ScrollView>
+                <View
+                    style={ styles.renderImagesCounter }
+                >
+                    { imageUriArray && <Text style={{ color: '#fff', fontWeight: 'bold'}}>{ `${ imageUriArray.length } / 10` }</Text> }
                 </View>
             </View>
             <Modal
@@ -135,8 +121,8 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
                 visible={ isModalVisible }
                 onRequestClose={() => setIsModalVisible(false) }
             >
-                <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0, 0.5)'}}>
-                    <TouchableOpacity style={{ position: "absolute", right: 20, top: 17, zIndex: 10, backgroundColor: "#000"}}>
+                <View style={ styles.modalContainer }>
+                    <TouchableOpacity style={ styles.modalCloseButton }>
                         <AntDesign
                             name="closecircleo"
                             size={24}
@@ -161,7 +147,7 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
                             horizontal
                             style={{ position: 'absolute', bottom: 40 }}
                             showsHorizontalScrollIndicator={ false }
-                            contentContainerStyle={{ paddingHorizontal: Spacing }}
+                            contentContainerStyle={{ paddingHorizontal: 10 }}
                             keyExtractor={ item => item.id }
                             ref={ flatListRef }
                         />
