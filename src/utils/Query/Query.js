@@ -1,5 +1,7 @@
 import { auth, db } from '../Firebase';
 
+const EXPO_FETCH_URL = 'https://exp.host/--/api/v2/push/send';
+
 // DB setters
 export const addDocWithAutoId = async (
   collectionPath,
@@ -77,6 +79,26 @@ export const getCollectionDocs = async (path) => {
   }
 };
 
+export const getCollectionDocsWithoutOrder = async (path) => {
+  try {
+    const docs = await db
+        .collection(path)
+        .get()
+        .then(
+            (snapshot) => snapshot.docs.map(
+                (doc) => ({
+                  data: doc.data(),
+                  id: doc.id,
+                }),
+            ),
+        );
+
+    return docs;
+  } catch (e) {
+    alert(e);
+  }
+};
+
 export const getCollectionDocsByWhere = async (collectionName, fieldName, field) => {
   try {
     return await db
@@ -123,4 +145,18 @@ export const signInWithEmailAndPassword = async (email, password) => {
     alert(err);
   }
 };
+
+// Expo send notifications
+
+export const sendNotificationsToAllTokensFromFirebase = async (message) => {
+  await fetch(EXPO_FETCH_URL, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Accept-encoding': 'gzip, deflate',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(message),
+  });
+}
 

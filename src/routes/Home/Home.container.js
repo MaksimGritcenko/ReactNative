@@ -6,13 +6,14 @@ import { logout } from "../../utils/Query";
 import { setUserEmail, setIsOnboarded } from "store/User/User.action";
 import {setPreferedLanguage} from "../../store/User/User.action";
 
+
 export const mapDispatchToProps = (dispatch) => ({
     setEmail: email => dispatch(setUserEmail(email)),
     onSuccessBoarding: () => dispatch(setIsOnboarded(false)),
     setPreferedLanguage: language => dispatch(setPreferedLanguage(language))
 });
 export const HomeContainer = (props) => {
-    const { opacity, onSuccessBoarding, setPreferedLanguage, language } = props;
+    const { opacity, language } = props;
 
     const [email, setEmail] = useState('');
 
@@ -23,14 +24,13 @@ export const HomeContainer = (props) => {
 
     async function signOut() {
         const {
-            // navigation,
             setEmail
         } = props;
 
         await logout();
-        // onSuccessBoarding();
-        // setPreferedLanguage(null)
-        AsyncStorage.removeItem('@email');
+
+        await AsyncStorage.removeItem('@email');
+        await AsyncStorage.removeItem('@uid')
         setEmail(null);
     }
 

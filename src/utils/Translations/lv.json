@@ -14,5 +14,8 @@
   "NavigationChatTitle": "Čats",
   "NavigationNotesTitle": "Piezīmes",
   "NavigationImagesTitle": "Bildes",
-  "NavigationInstructionsTitle": "Instrukcija"
+  "NavigationInstructionsTitle": "Instrukcija",
+
+  "Notifications": "Notifikācijas",
+  "NotificationTitle": "Sūtīt jaunu notifikāciju"
 }
