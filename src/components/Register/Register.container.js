@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import { connect } from "react-redux";
 
 import RegisterComponent from "./Register.component";
@@ -12,12 +12,27 @@ export const mapDispatchToProps = (dispatch) => ({
     setEmail: email => dispatch(setUserEmail(email))
 })
 export const RegisterContainer = (props) => {
+    const [isLoading, setIsLoading] = useState(false);
+
     async function registrationClick(email, password, confirmPassword) {
         const { setEmail, navigation } = props;
 
-        if (password !== confirmPassword) return alert('Password and Repeat Password should match')
+        if ((password !== confirmPassword) || password.length === 0) {
+            alert('Password and Repeat Password should match, or password is empty')
+            return;
+        }
 
-        await registerWithEmailAndPassword(null, email, password)
+        if (email.length === 0) {
+            alert('email is empty')
+            return;
+        }
+
+        setIsLoading(true);
+        const user = await registerWithEmailAndPassword(null, email, password)
+
+        if (!user) {
+            setIsLoading(false);
+        }
 
         await saveNotificationToken();
 
@@ -54,6 +69,7 @@ export const RegisterContainer = (props) => {
         <RegisterComponent
             registerUser={ registrationClick }
             { ...props }
+            isLoading={ isLoading }
         />
     )
 }

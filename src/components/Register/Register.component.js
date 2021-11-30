@@ -14,6 +14,8 @@ import {
 import styles from '../Login/Login.styles';
 
 export const RegisterComponent = (props) => {
+    const { isLoading } = props;
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -50,7 +52,10 @@ export const RegisterComponent = (props) => {
                             Already have an account? Click to login
                         </Text>
                         <Pressable
-                            style={ styles.button }
+                            style={{
+                                ...styles.button,
+                                opacity: isLoading ? .4 : 1
+                            } }
                             onPress={ () => props.registerUser(email, password, confirmPassword) }
                         >
                             <Text style={ styles.buttonContentText }>Register</Text>
