@@ -1,7 +1,7 @@
 import React from "react";
 
 import MainComponent from "../../Main/Main.component";
-import {useWindowDimensions, View} from 'react-native';
+import { ScrollView, useWindowDimensions, View } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 
 export const InstructionsComponent = ({ content }) => {
@@ -13,9 +13,11 @@ export const InstructionsComponent = ({ content }) => {
 
     return (
         <MainComponent>
-            <View style={{ flex: 1, padding: 20, alignItems: 'center' }} >
-                <RenderHtml source={ source } contentWidth={ width } />
-            </View>
+            <ScrollView>
+              <View style={{ flex: 1, padding: 20, alignItems: 'center', borderWidth: 1, backgroundColor: 'rgba(0,0,0, 0.8)' }}>
+                <RenderHtml source={ source } contentWidth={ width } baseStyle={{ color: '#fff'}} />
+              </View>
+            </ScrollView>
         </MainComponent>
     );
 }

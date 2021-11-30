@@ -58,6 +58,19 @@ export const getDocByPath = async (path) => {
   }
 };
 
+export const getDocFieldByPath = async (collection, document, field) => {
+  try {
+    const docFieldData = await db.collection(collection)
+      .doc(document)
+      .get()
+      .then((snapShot) => snapShot.get(field))
+
+    return docFieldData;
+  } catch (e) {
+    alert(e)
+  }
+}
+
 export const getCollectionDocs = async (path) => {
   try {
     const docs = await db
