@@ -79,5 +79,4 @@ dist/
 # Not needed for now
 android/
 ios/
-index.js
 metro.config.js

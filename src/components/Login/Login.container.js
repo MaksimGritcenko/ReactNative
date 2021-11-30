@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import {connect} from "react-redux";
 
 import LoginComponent from "./Login.component";
@@ -11,15 +11,21 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 export const LoginContainer = (props) => {
+    const [isLoading, setIsLoading] = useState(false);
+
     async function loginClick(email, password) {
         const {
             setEmail,
             navigation
         } = props;
 
+        setIsLoading(true);
         const user = await signInWithEmailAndPassword(email, password);
 
-        if (!user) return;
+        if (!user) {
+            setIsLoading(false);
+            return;
+        }
 
         const { user: { email: userEmail, uid } } = user;
 
@@ -34,6 +40,7 @@ export const LoginContainer = (props) => {
         <LoginComponent
             { ...props }
             loginClick={ loginClick }
+            isLoading={ isLoading }
         />
     );
 }

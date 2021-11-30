@@ -14,6 +14,12 @@ import {
 import styles from './Login.styles';
 
 export const LoginComponent = (props) => {
+    const {
+        isLoading,
+        loginClick,
+        navigation
+    } = props;
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -39,11 +45,14 @@ export const LoginComponent = (props) => {
                         />
                         <Text
                             style={styles.registerLink}
-                            onPress={() => props.navigation.navigate('Signup')}>
+                            onPress={() => navigation.navigate('Signup')}>
                             Doesn't have account? Click to register
                         </Text>
                         <Pressable
-                            style={ styles.button }
+                            style={{
+                                ...styles.button,
+                                opacity: isLoading ? .4 : 1
+                            } }
                             onPress={ () => props.loginClick(email, password) }
                         >
                             <Text style={ styles.buttonContentText }>Login</Text>
