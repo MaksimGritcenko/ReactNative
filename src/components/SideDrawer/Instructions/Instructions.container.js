@@ -1,9 +1,13 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import Instructions from "./Instructions.component";
-import { getDocByPath } from "../../../utils/Query";
+import { getDocFieldByPath } from "../../../utils/Query";
 import { setInstructions } from "../../../store/Instructions/Instructions.action";
-import { INSTRUCTIONS_PATH } from "./Instructions.config";
+import {
+    COLLECTION_PATH,
+    DOCUMENT_PATH,
+    INSTRUCTION_FIELD_NAME,
+} from './Instructions.config';
 
 export const mapStateToProps = state => ({
     data: state.InstructionsReducer.data
@@ -16,8 +20,8 @@ export const mapDispatchToProps = dispatch => ({
 export const InstructionsContainer = ({ setInstructions, data }) => {
 
     useEffect(async () => {
-        const data = await getDocByPath(INSTRUCTIONS_PATH);
-        setInstructions(data.content)
+        const data = await getDocFieldByPath(COLLECTION_PATH, DOCUMENT_PATH, INSTRUCTION_FIELD_NAME);
+        setInstructions(data)
     }, [])
 
     return (
