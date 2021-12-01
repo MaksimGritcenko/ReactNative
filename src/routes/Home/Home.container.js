@@ -34,12 +34,20 @@ export const HomeContainer = (props) => {
         setEmail(null);
     }
 
+    async function searchResults(searchText) {
+        const apiResponse = await fetch("https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages");
+        const data = await apiResponse.json();
+
+        console.log(data)
+    }
+
     return (
         <HomeComponent
             email={ email }
             logout={ signOut }
             opacity={ opacity }
             language={ language }
+            searchResults={ searchResults }
         />
     )
 }

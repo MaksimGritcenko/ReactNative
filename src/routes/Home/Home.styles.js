@@ -1,6 +1,9 @@
 import {
+    Dimensions,
     StyleSheet
-} from "react-native";
+} from 'react-native';
+
+const { width } = Dimensions.get('window')
 
 export const styles = StyleSheet.create({
     logoutButtonWrapper:{
@@ -11,5 +14,16 @@ export const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     logoutButton: {
+    },
+    container: {
+        flex: 1,
+        width,
+        alignItems: 'center'
+    },
+    searchInput: {
+        borderWidth: 1,
+        borderRadius: 15,
+        width: '90%',
+        padding: 10
     }
 })
