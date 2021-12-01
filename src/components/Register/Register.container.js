@@ -5,8 +5,15 @@ import RegisterComponent from "./Register.component";
 import {addDocWithAutoId, registerWithEmailAndPassword} from "../../utils/Query";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setUserEmail } from "store/User/User.action";
-import * as Permissions from "expo-permissions";
 import * as Notifications from "expo-notifications";
+import { emailValidate, passwordValidate } from '../../utils/UseFullFunctions';
+import { Alert } from 'react-native';
+import {
+    EMAIL_ERROR_MESSAGE,
+    EMAIL_ERROR_TITLE, EXPO_TOKEN_PUSH_PATH,
+    PASSWORD_ERROR_MESSAGE,
+    PASSWORD_ERROR_TITLE
+} from './Register.config';
 
 export const mapDispatchToProps = (dispatch) => ({
     setEmail: email => dispatch(setUserEmail(email))
@@ -17,14 +24,15 @@ export const RegisterContainer = (props) => {
     async function registrationClick(email, password, confirmPassword) {
         const { setEmail, navigation } = props;
 
-        if ((password !== confirmPassword) || password.length === 0) {
-            alert('Password and Repeat Password should match, or password is empty')
+        emailValidate(email)
+        if (!emailValidate(email)) {
+            Alert.alert(EMAIL_ERROR_TITLE, EMAIL_ERROR_MESSAGE);
             return;
         }
 
-        if (email.length === 0) {
-            alert('email is empty')
-            return;
+        if (!passwordValidate(password) || (password !== confirmPassword) ) {
+            Alert.alert(PASSWORD_ERROR_TITLE, PASSWORD_ERROR_MESSAGE);
+            return
         }
 
         setIsLoading(true);
@@ -43,7 +51,7 @@ export const RegisterContainer = (props) => {
 
     async function saveNotificationToken() {
         const { status } = await Notifications.getPermissionsAsync();
-        const path = '/expoTokensForPushNotifications';
+        const path = EXPO_TOKEN_PUSH_PATH;
 
         let finalStatus = status;
 
