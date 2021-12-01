@@ -8,6 +8,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import SettingsComponent from "../SideDrawer/Settings/Settings.component";
 import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
 import {NavigationContainer} from "@react-navigation/native";
+import { Entypo } from '@expo/vector-icons';
 
 import ChatComponent from "../SideDrawer/Chat/Chat.component";
 import { AntDesign } from '@expo/vector-icons';
@@ -71,14 +72,15 @@ export const DashboardComponent = (props) => {
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
                     },
-                    headerRight: () => (
-                        <AntDesign
-                            style={{ marginRight: 20}}
-                            onPress={ () => showSmallModal() }
-                            name={ renderIcon() } size={24}
-                            color="#fff"
-                        />
-                    ),
+                    // Enable Logout button if necessary
+                    // headerRight: () => (
+                    //     <AntDesign
+                    //         style={{ marginRight: 20}}
+                    //         onPress={ () => showSmallModal() }
+                    //         name={ renderIcon() } size={24}
+                    //         color="#fff"
+                    //     />
+                    // ),
                 }
             },
             {
@@ -136,10 +138,11 @@ export const DashboardComponent = (props) => {
                         shadowOffset: { width: 0, height: 0 }
                     },
                     headerRight: () => (
-                        <AntDesign
+                        <Entypo
                             style={{ marginRight: 20}}
                             onPress={ () => showNotesModal() }
-                            name="pluscircleo"  size={24}
+                            name="new-message"
+                            size={24}
                             color="#fff"
                         />
                     )

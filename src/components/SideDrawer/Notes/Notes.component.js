@@ -13,8 +13,10 @@ import { styles } from "./Notes.style";
 import EditNoteModal from "../../EditNoteModal";
 import Swipeout from 'react-native-swipeout';
 import MainComponent from "../../Main/Main.component";
-import { colorGreen, skyBlue } from "../../../constants/Colors";
-import {StatusBar} from "expo-status-bar";
+import { colorGreen, darkGreen, skyBlue } from '../../../constants/Colors';
+
+import moment from 'moment';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const NotesComponent = ( props ) => {
     const {
@@ -42,17 +44,34 @@ export const NotesComponent = ( props ) => {
         ]
     }
 
-    const Item = ({ title, content, id }) => {
+    const Item = ({ title, content, id, timestamps }) => {
         return (
             <Swipeout
                 right={ swipeButtons(id) }
                 style={ styles.wrapper }
             >
                 <View>
-                    <TouchableOpacity onPress={() => openSingleItem(title, content, id)}>
-                        <Text style={{ ...styles.title, backgroundColor: colorGreen}}>
-                            {title}
-                        </Text>
+                    <TouchableOpacity onPress={ () => openSingleItem(title, content, id) }>
+                        <View style={ styles.title }>
+                            <View style={{ position: 'absolute', left: '50%', transform: [{rotateZ: '60deg'}], }}>
+                                <View style={{ width: 10, height: 10, backgroundColor: skyBlue, borderWidth: 1, borderRadius: 10, top: 20}} />
+                                <MaterialIcons style={{ top: -10, right: 10}} name="push-pin" size={30} color={ darkGreen } />
+                            </View>
+                            <View>
+                                <Text style={{ color: '#ff001d', fontSize: 12, marginBottom: 15 }}>
+                                    { moment(timestamps).fromNow()}
+                                </Text>
+                                <Text style={{ color: 'darkGreen', fontSize: 16, fontWeight: 'bold', marginBottom: 15 }}>
+                                    {title}
+                                </Text>
+                            </View>
+                            <View>
+                                <Text style={{ textAlign: 'right', fontSize: 16, color: '#ff001d'}}>
+                                    View note...
+                                </Text>
+                            </View>
+                        </View>
+
                     </TouchableOpacity>
                 </View>
             </Swipeout>
@@ -60,10 +79,15 @@ export const NotesComponent = ( props ) => {
     }
 
     const renderItem = ({ item }) => {
-        const { data: { title, content }, id } = item;
+        const { data: { title, content, timestamps }, id } = item;
 
         return (
-            <Item title={ title } content={ content } id={ id } />
+            <Item
+              title={ title }
+              content={ content }
+              id={ id }
+              timestamps={ timestamps }
+            />
         );
     }
 
@@ -97,13 +121,13 @@ export const NotesComponent = ( props ) => {
                                 style={ styles.contentWrapperTitle }
                                 multiline
                                 placeholder="Title"
-                                placeholderTextColor="#fff"
+                                placeholderTextColor="rgba(255,255,255,.5)"
                                 onChangeText={(text) => setNoteTitle(text) }
                                 value={ noteTitle }
                             />
                             <TextInput
                                 placeholder="Note"
-                                placeholderTextColor="#fff"
+                                placeholderTextColor="rgba(255,255,255,.5)"
                                 style={ styles.contentWrapperContent }
                                 multiline
                                 onChangeText={(text) => setNoteContent(text) }

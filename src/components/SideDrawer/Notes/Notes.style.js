@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import { colorGreen, darkGreen } from '../../../constants/Colors';
 
 export const styles = StyleSheet.create({
     container: {
@@ -14,7 +15,9 @@ export const styles = StyleSheet.create({
     title: {
         color: '#fff',
         fontWeight: 'bold',
-        padding: 15
+        padding: 15,
+        backgroundColor: "#f2f2f2",
+        flexDirection: 'column'
     },
     modalHeader: {
         borderColor: '#cbcaca',
@@ -31,14 +34,14 @@ export const styles = StyleSheet.create({
     },
     modalContainer: {
         height: '100%',
-        backgroundColor: 'rgba(0,0,0,.8)'
+        backgroundColor: darkGreen
     },
     contentWrapperTitle: {
         borderBottomWidth: 1,
-        borderColor: '#fff',
+        borderColor: 'rgba(255,255,255,.1)',
         borderRadius: 10,
         padding: 10,
-        width: '80%',
+        width: '95%',
         alignSelf: 'center',
         fontSize: 20,
         color: '#fff'
@@ -46,15 +49,15 @@ export const styles = StyleSheet.create({
     contentWrapperContent: {
         borderBottomWidth: 1,
         padding: 10,
-        width: '80%',
+        width: '95%',
         alignSelf: 'center',
-        borderColor: '#fff',
+        borderColor: 'rgba(255,255,255,.1)',
         borderRadius: 10,
         marginTop: 20,
         color: '#fff',
     },
     saveButton: {
-        width: '80%',
+        width: '95%',
         marginTop: 15,
         alignSelf: 'center',
         padding: 10,
