@@ -77,7 +77,8 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
         setIsModalVisible(false)
     }
 
-    function openModal() {
+    function openModal(i) {
+        setIndexSelected(i)
         setIsModalVisible(true);
     }
 
@@ -88,7 +89,7 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
             return (
                 <TouchableOpacity
                     style={ styles.renderImageContainer }
-                    onPress={() => openModal()}
+                    onPress={() => openModal(index)}
                     key={ index }
                     activeOpacity={1}
                 >
@@ -132,6 +133,7 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
                     </TouchableOpacity>
                     { imageUriArray && (
                         <Carousel
+                            firstItem={ indexSelected }
                             data={ imageUriArray }
                             renderItem={({ item: { imageUri }, index }) => renderItem(imageUri, index)}
                             sliderWidth={ width }
