@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 
 import AddImageComponent from "./AddImage.component";
 import {setIsActiveAddImageModal, updateImageInStorage} from "../../store/Images/Images.action";
-import {Platform} from "react-native";
+import { Alert, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import { Camera } from 'expo-camera';
 
 export const mapStateToProps = state => ({
     isOpened: state.ImagesReducer.isOpened,
@@ -20,17 +21,28 @@ export const mapDispatchToProps = (dispatch) => ({
 export const AddImageContainer = (props) => {
     const { isOpened, setIsActiveAddImageModal } = props;
 
+    const [hasPermissions, setHasPermissions] = useState(false);
+
     const [image, setImage] = useState(null);
 
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
-               await Permissions.getAsync(Permissions.CAMERA)
+               const { status } = await Camera.requestCameraPermissionsAsync();
+               setHasPermissions(status === 'granted');
             }
         })();
     }, [])
 
     const pickImage = async () => {
+        if (!hasPermissions) {
+            const { status } = await Camera.requestCameraPermissionsAsync();
+            if (status !== 'granted') return Alert.alert('Permissions', 'Turn on permissions to continue');
+
+            setHasPermissions(status === 'granted');
+            return;
+        }
+
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
