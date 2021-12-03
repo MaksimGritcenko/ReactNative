@@ -27,31 +27,6 @@ export const PushNotificationsContainer = ({ tokens, language }) => {
         await sendNotificationsToAllTokensFromFirebase(message)
     }
 
-    async function registerForPushNotificationsAsync() {
-        if (Constants.isDevice) {
-            const { status: existingStatus } = await Notifications.getPermissionsAsync();
-            let finalStatus = existingStatus;
-            if (existingStatus !== STATUS_GRANTED) {
-                const { status } = await Notifications.requestPermissionsAsync();
-                finalStatus = status;
-            }
-            if (finalStatus !== STATUS_GRANTED) {
-                alert(FAILED_TOKEN_FETCHING);
-                return;
-            }
-        } else {
-            alert(PHYSICAL_DEVICE);
-        }
-
-        if (Platform.OS === ANDROID_PLATFORM) {
-            Notifications.setNotificationChannelAsync('default', {
-                name: 'default',
-                importance: Notifications.AndroidImportance.MAX,
-                vibrationPattern: [0, 250, 250, 250],
-            });
-        }
-    }
-
     return (
         <PushNotificationsComponent
             sendPushNotification={ sendPushNotification }
