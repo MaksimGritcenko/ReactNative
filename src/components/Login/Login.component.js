@@ -35,11 +35,13 @@ export const LoginComponent = (props) => {
                         <TextInput
                             style={ styles.textInput }
                             placeholder="Email"
+                            placeholderTextColor="rgba(0,0,0,0.2)"
                             onChangeText={text => setEmail(text) }
                         />
                         <TextInput
                             style={ [styles.textInput, { marginTop: 10}] }
                             placeholder="Password"
+                            placeholderTextColor="rgba(0,0,0,0.2)"
                             onChangeText={ text => setPassword(text)}
                             secureTextEntry={true}
                         />
