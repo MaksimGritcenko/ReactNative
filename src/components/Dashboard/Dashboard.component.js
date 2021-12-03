@@ -10,7 +10,7 @@ import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.componen
 import {NavigationContainer} from "@react-navigation/native";
 import { Entypo } from '@expo/vector-icons';
 
-import ChatComponent from "../SideDrawer/Chat/Chat.component";
+import ChatComponent from "../SideDrawer/Chat";
 import { AntDesign } from '@expo/vector-icons';
 import NotesComponent from "../SideDrawer/Notes";
 import ImagesComponent from "../SideDrawer/Images";

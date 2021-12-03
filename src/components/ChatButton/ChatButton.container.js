@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import ChatButtonComponent from "./ChatButton.component";
-import { updateModalVisibility } from "../../store/ChatModal/ChatModal.action";
+import { updateModalVisibility } from "../../store/Chat/Chat.action";
 
 export const mapDispatchToProps = (dispatch) => ({
     updateModalVisibility: status => dispatch(updateModalVisibility(status))

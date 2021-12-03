@@ -7,7 +7,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 
 import AdminReducer from './Admin/Admin.reducer';
 import UserReducer from "./User/User.reducer";
-import ChatModalReducer from "./ChatModal/ChatModal.reducer";
+import ChatReducer from "./Chat/Chat.reducer";
 import NotesReducer from "./Notes/Notes.reducer";
 import InstructionsReducer from "./Instructions/Instructions.reducer";
 import ImagesReducer from './Images/Images.reducer';
@@ -17,13 +17,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['UserReducer', 'NotesReducer', 'InstructionsReducer', 'ImagesReducer', 'PushNotifications']
+  whitelist: [
+      'UserReducer',
+      'NotesReducer',
+      'InstructionsReducer',
+      'ImagesReducer',
+      'PushNotifications',
+      'ChatReducer'
+  ]
 }
 
 const reducersToPersist = combineReducers({
   AdminReducer,
   UserReducer,
-  ChatModalReducer,
+  ChatReducer,
   NotesReducer,
   InstructionsReducer,
   ImagesReducer,

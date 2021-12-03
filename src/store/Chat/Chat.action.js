@@ -1,0 +1,36 @@
+export const UPDATE_ACTIVE_CHAT_CHAIN = 'UPDATE_ACTIVE_CHAT_CHAIN';
+export const UPDATE_ACTIVE_QUESTION_ID = 'UPDATE_ACTIVE_QUESTION_ID';
+export const UPDATE_IS_CHAIN_LOADING = 'UPDATE_IS_CHAIN_LOADING';
+export const UPDATE_FORMULATIONS = 'UPDATE_FORMULATIONS';
+export const UPDATE_ANSWERS = 'UPDATE_ANSWERS';
+export const UPDATE_IS_FORMULATION_LOADING = 'UPDATE_IS_FORMULATION_LOADING';
+
+export const updateActiveChatChain = (activeChatChain) => ({
+    type: UPDATE_ACTIVE_CHAT_CHAIN,
+    activeChatChain
+});
+
+export const updateActiveQuestionId = (activeQuestionId) => ({
+    type: UPDATE_ACTIVE_QUESTION_ID,
+    activeQuestionId
+});
+
+export const updateIsChainLoading = (isChainLoading) => ({
+    type: UPDATE_IS_CHAIN_LOADING,
+    isChainLoading
+});
+
+export const updateFormulations = (formulation) => ({
+    type: UPDATE_FORMULATIONS,
+    formulation
+});
+
+export const updateAnswers = (answer) => ({
+    type: UPDATE_ANSWERS,
+    answer
+});
+
+export const updateIsFormulationLoading = (isFormulationLoading) => ({
+    type: UPDATE_IS_FORMULATION_LOADING,
+    isFormulationLoading
+});
