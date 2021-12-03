@@ -2,15 +2,15 @@ import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
 
 import DashboardComponent from "./Dashboard.component";
-import { updateModalVisibility } from "../../store/ChatModal/ChatModal.action";
+import { updateModalVisibility } from "../../store/Chat/Chat.action";
 import { updateNotesModalVisibility } from "../../store/Notes/Notes.action";
 import { setIsActiveAddImageModal } from "../../store/Images/Images.action";
 import { getCollectionDocsWithoutOrder } from "../../utils/Query";
 import { setExpoTokens } from "../../store/PushNotifications/PushNotifications.action";
+import { getPsychotypes } from "../../store/PsychoTypes/PsychoTypes.dispatcher";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const mapStateToProps = (state) => ({
-    isVisible: state.ChatModalReducer.isVisible,
     isEditModalVisible: state.NotesReducer.isEditModalVisible,
     language: state.UserReducer.language,
     imageUrlArr: state.ImagesReducer.imageUrlArr
@@ -20,19 +20,22 @@ export const mapDispatchToProps = (dispatch) => ({
     updateModalVisibility: status => dispatch(updateModalVisibility(status)),
     updateNotesModalVisibility: isVisible => dispatch(updateNotesModalVisibility(isVisible)),
     setIsActiveAddImageModal: isOpened => dispatch(setIsActiveAddImageModal(isOpened)),
-    setPushTokens: tokens => dispatch(setExpoTokens(tokens))
+    setPushTokens: tokens => dispatch(setExpoTokens(tokens)),
+    init: async () => {
+        getPsychotypes(dispatch);
+    },
 });
 
 export const DashboardContainer = (props) => {
     const {
         updateModalVisibility,
-        isVisible,
         updateNotesModalVisibility,
         isEditModalVisible,
         language,
         setIsActiveAddImageModal,
         imageUrlArr,
-        setPushTokens
+        setPushTokens,
+        init
     } = props;
 
     const [admin, setAdmin] = useState(false);
@@ -43,6 +46,7 @@ export const DashboardContainer = (props) => {
 
         if (emailFromAsyncStorage === 'admin@admin.com') setAdmin(true)
         setPushTokens(tokens)
+        init()
     }, [])
 
     const toggle = () => {
@@ -61,7 +65,6 @@ export const DashboardContainer = (props) => {
         <DashboardComponent
             toggle={ toggle }
             updateModalVisibility={ updateModalVisibility }
-            isVisible={ isVisible }
             showNotesModal={ showNotesModal }
             isEditModalVisible={ isEditModalVisible }
             language={ language }

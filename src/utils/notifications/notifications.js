@@ -8,8 +8,6 @@ export const notifications = (data) => {
         notificationTimeMinutes
     } = data;
 
-    console.log(data)
-
     Notifications.scheduleNotificationAsync({
         content: {
             title: notificationTitle,

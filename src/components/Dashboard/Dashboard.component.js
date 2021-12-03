@@ -9,7 +9,7 @@ import SettingsComponent from "../SideDrawer/Settings/Settings.component";
 import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
 import {NavigationContainer} from "@react-navigation/native";
 
-import ChatComponent from "../SideDrawer/Chat/Chat.component";
+import ChatComponent from "../SideDrawer/Chat";
 import { AntDesign } from '@expo/vector-icons';
 import NotesComponent from "../SideDrawer/Notes";
 import ImagesComponent from "../SideDrawer/Images";
