@@ -8,8 +8,11 @@ import {
     KeyboardAvoidingView,
     Platform,
 } from "react-native";
+import { TypingAnimation } from 'react-native-typing-animation';
 import { Ionicons } from '@expo/vector-icons';
+
 import MainComponent from "../../Main/Main.component";
+import ChatModal from "../../../components/ChatModal";
 
 import { styles } from './Chat.styles';
 import { ScrollView } from "react-native-gesture-handler";
@@ -21,7 +24,8 @@ export const ChatComponent = (props) => {
         chatMsgBottomOffset,
         setChatMsgHeight,
         onInputChange,
-        onInputSend
+        onInputSend,
+        inputTxt
     } = props;
 
     function renderProgress() {
@@ -36,7 +40,7 @@ export const ChatComponent = (props) => {
         return (
             <View style={ styles.ChatProgress }>
                 <Text>
-                    { `${ currentQst } / ${ totalQst }` }
+                    { `${ currentQst || 1 } / ${ totalQst }` }
                 </Text>
             </View>
         );
@@ -48,6 +52,7 @@ export const ChatComponent = (props) => {
                 <TextInput
                   placeholder="Type your answer here..."
                   onChangeText={ onInputChange }
+                  value={ inputTxt }
                 />
                 <Pressable
                   style={ styles.ChatInputButton }
@@ -92,7 +97,36 @@ export const ChatComponent = (props) => {
     function renderChatBlocks() {
         const { formulations } = props;
 
-        return formulations.map(renderChatMessages);
+        return (
+            <>
+                { formulations.map(renderChatMessages) }
+                { renderTypingAnim() }
+            </>
+        );
+    }
+
+    function renderTypingAnim() {
+        const { isFormulationLoading } = props;
+
+        if (!isFormulationLoading) {
+            return null;
+        }
+
+        return <View style={ {
+              ...styles.ChatMessage,
+              ...styles.ChatTypingAnim,
+        } }>
+            <TypingAnimation
+              style={{ bottom: 4 }}
+              dotColor="black"
+              dotMargin={10}
+              dotAmplitude={2}
+              dotSpeed={0.15}
+              dotRadius={3.5}
+              dotX={0}
+              dotY={0}
+            />
+        </View>;
     }
 
     function renderQstAnswers() {
@@ -156,6 +190,9 @@ export const ChatComponent = (props) => {
                     </KeyboardAvoidingView>
                 </View>
             </View>
+            {/* <ChatModal
+              isVisible={ isSuccessPopupVisible }
+            /> */}
         </MainComponent>
     );
 };

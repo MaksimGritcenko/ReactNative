@@ -6,15 +6,23 @@ import {
     updateIsChainLoading,
     updateIsFormulationLoading,
     updateFormulations,
-    updateActiveQuestionId
+    updateActiveQuestionId,
+    updateIsChatDataSending
 } from './Chat.action';
 
 import {
     getCollectionDocsByWhere,
-    getDocByPath
+    getDocByPath,
+    addDocWithAutoId
 } from '../../utils/Query';
+import { getIsAlreadyAsked } from '../../utils/ChatHelpers';
 
-import { QUESTION_COLLECTION, QUESTION_FORMULATIONS_COLLECTION } from '../../utils/Constants'
+import {
+    QUESTION_COLLECTION,
+    QUESTION_FORMULATIONS_COLLECTION,
+    ADMIN_COLLECTION,
+    INBOX_SUBCOLLECTION
+} from '../../utils/Constants'
 
 
 export async function getChatQuestionsForChain(dispatch, activeQstId) {
@@ -37,16 +45,39 @@ export async function getChatQuestionsForChain(dispatch, activeQstId) {
     }
 }
 
-export async function queryFormulation(questionId, dispatch) {
+export async function queryFormulation(questionId, formulations, dispatch) {
+    const isAlreadyAsked = getIsAlreadyAsked(formulations, questionId);
+
+    if (!questionId || isAlreadyAsked) {
+        return;
+    }
+
     dispatch(updateIsFormulationLoading(true));
     const path = `${ QUESTION_COLLECTION }/${ questionId }/${ QUESTION_FORMULATIONS_COLLECTION }/E3YRU8WwodGFgCGJANmY`;
 
     try {
         const formualation = await getDocByPath(path);
-        dispatch(updateFormulations(formualation));
+        dispatch(updateFormulations(formualation, questionId));
     } catch (e) {
 
     } finally {
         dispatch(updateIsFormulationLoading(false));
+    }
+}
+
+export async function sendChatResult(formulations, answers, adminId, customerEmail, dispatch) {
+    const path = `${ ADMIN_COLLECTION }/${ adminId }/${ INBOX_SUBCOLLECTION }`;
+    const dataToSend = {
+        questionnaire: formulations.map((question, i) => ({ question, answer: answers[i] })),
+        customerEmail
+    };
+
+    try {
+        dispatch(updateIsChatDataSending(true));
+        const result = await addDocWithAutoId(path, dataToSend)
+    } catch(e) {
+
+    } finally {
+        dispatch(updateIsChatDataSending(false));
     }
 }

@@ -11,3 +11,13 @@ export const getNextActiveQstId = (activeId, qstsArr) => {
         return acc;
     }, '');
 }
+
+export const getIsAlreadyAsked = (prevFormulations, formulationQstId) => prevFormulations
+    .reduce((acc, { questionId }) => {
+        if (questionId === formulationQstId) {
+            acc = true;
+        }
+
+        return acc;
+    },
+false);
