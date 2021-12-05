@@ -12,7 +12,6 @@ import { TypingAnimation } from 'react-native-typing-animation';
 import { Ionicons } from '@expo/vector-icons';
 
 import MainComponent from "../../Main/Main.component";
-import ChatModal from "../../../components/ChatModal";
 
 import { styles } from './Chat.styles';
 import { ScrollView } from "react-native-gesture-handler";
@@ -190,9 +189,6 @@ export const ChatComponent = (props) => {
                     </KeyboardAvoidingView>
                 </View>
             </View>
-            {/* <ChatModal
-              isVisible={ isSuccessPopupVisible }
-            /> */}
         </MainComponent>
     );
 };
