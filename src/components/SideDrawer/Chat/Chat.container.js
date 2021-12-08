@@ -22,15 +22,22 @@ export const mapStateToProps = (state) => ({
     answers: state.ChatReducer.answers,
     isFormulationLoading: state.ChatReducer.isFormulationLoading,
     activeChainAdminId: state.ChatReducer.activeChainAdminId,
+    activeChatTabId: state.ChatReducer.activeChatTabId,
     customerEmail: state.UserReducer.email,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    getChatQuestionsForChain: (activeQstId) => getChatQuestionsForChain(dispatch, activeQstId),
+    getChatQuestionsForChain: (activeQstId, activeChatTabId) => getChatQuestionsForChain(dispatch, activeQstId, activeChatTabId),
     queryFormulation: (questionId, formulations) => queryFormulation(questionId, formulations, dispatch),
     updateAnswers: (answer) => dispatch(updateAnswers(answer)),
     updateActiveQuestionId: (activeQuestionId) => dispatch(updateActiveQuestionId(activeQuestionId)),
-    sendChatResult: (formulations, answers, adminId, customerEmail) => sendChatResult(formulations, answers, adminId, customerEmail, dispatch),
+    sendChatResult: (
+        formulations,
+        answers,
+        adminId,
+        customerEmail,
+        tabId
+    ) => sendChatResult(formulations, answers, adminId, customerEmail, tabId, dispatch),
 });
 
 export const ChatComponentContainer = (props) => {
@@ -45,7 +52,8 @@ export const ChatComponentContainer = (props) => {
         answers,
         activeChainAdminId,
         formulations,
-        customerEmail
+        customerEmail,
+        activeChatTabId
     } = props;
 
     const [chatMsgBottomOffset, setChatMsgBottomOffset] = useState(0);
@@ -54,7 +62,7 @@ export const ChatComponentContainer = (props) => {
     const [prevActiveQstId, setPrevActiveQstId] = useState('');
 
     useEffect(async () => {
-        await getChatQuestionsForChain(activeQuestionId);
+        await getChatQuestionsForChain(activeQuestionId, activeChatTabId);
         queryFirstFormul();
     }, []);
 
@@ -100,6 +108,13 @@ export const ChatComponentContainer = (props) => {
     }
 
     function onInputSend() {
+        sendChatResult(
+            formulations,
+            [ ...answers, 'asdsadsad' ],
+            activeChainAdminId,
+            customerEmail,
+            activeChatTabId
+        );
 
         if (!inputTxt) {
             return;
@@ -111,7 +126,13 @@ export const ChatComponentContainer = (props) => {
 
     function onLastQuestionResponse(lastAnswer) {
         // setting answer, as the value doesn't contain the last anwser
-        sendChatResult(formulations, [ ...answers, lastAnswer ], activeChainAdminId, customerEmail);
+        sendChatResult(
+            formulations,
+            [ ...answers, lastAnswer ],
+            activeChainAdminId,
+            customerEmail,
+            activeChatTabId
+        );
     }
 
     function onInputChange(txt) {

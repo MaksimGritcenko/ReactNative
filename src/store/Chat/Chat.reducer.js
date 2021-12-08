@@ -5,7 +5,8 @@ import {
     UPDATE_FORMULATIONS,
     UPDATE_IS_FORMULATION_LOADING,
     UPDATE_ANSWERS,
-    UPDATE_IS_CHAT_DATA_SENDING
+    UPDATE_IS_CHAT_DATA_SENDING,
+    UPDATE_ACTIVE_CHAT_TAB_ID
 } from "./Chat.action";
 
 import { getIsAlreadyAsked } from '../../utils/ChatHelpers';
@@ -58,6 +59,8 @@ export const updateActiveChatChain = (state, action) => {
 
 export const getInitialState = () => ({
     activeChatChain: {},
+    // TODO: get active tab id from search
+    activeChatTabId: '4MUgKyzSjLIbgbteWyah',
     activeChainAdminId: '',
     activeQuestionId: null,
     formulations: [],
@@ -74,6 +77,14 @@ export const ChatReducer = (
     switch (action.type) {
         case UPDATE_ACTIVE_CHAT_CHAIN:
             return updateActiveChatChain(state, action);
+
+        case UPDATE_ACTIVE_CHAT_TAB_ID:
+            const { activeChatTabId } = this.props;
+
+            return {
+                ...state,
+                activeChatTabId
+            }
 
         case UPDATE_IS_CHAIN_LOADING:
             const { isChainLoading } = action;

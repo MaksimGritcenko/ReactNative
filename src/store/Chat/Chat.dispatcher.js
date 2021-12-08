@@ -15,6 +15,9 @@ import {
     getDocByPath,
     addDocWithAutoId
 } from '../../utils/Query';
+
+import { getServerTimestamp } from '../../utils/Firebase'
+
 import { getIsAlreadyAsked } from '../../utils/ChatHelpers';
 
 import {
@@ -25,13 +28,11 @@ import {
 } from '../../utils/Constants'
 
 
-export async function getChatQuestionsForChain(dispatch, activeQstId) {
+export async function getChatQuestionsForChain(dispatch, activeQstId, activeChatTabId) {
     dispatch(updateIsChainLoading(true));
 
-    const tabId = '4MUgKyzSjLIbgbteWyah';
-
     try {
-        const questionsForTab = await getCollectionDocsByWhere(QUESTION_COLLECTION, 'tabId', tabId);
+        const questionsForTab = await getCollectionDocsByWhere(QUESTION_COLLECTION, 'tabId', activeChatTabId);
         dispatch(updateActiveChatChain(questionsForTab));
 
         if (activeQstId === null) {
@@ -65,16 +66,19 @@ export async function queryFormulation(questionId, formulations, dispatch) {
     }
 }
 
-export async function sendChatResult(formulations, answers, adminId, customerEmail, dispatch) {
+export async function sendChatResult(formulations, answers, adminId, customerEmail, tabId, dispatch) {
     const path = `${ ADMIN_COLLECTION }/${ adminId }/${ INBOX_SUBCOLLECTION }`;
+
     const dataToSend = {
         questionnaire: formulations.map((question, i) => ({ question, answer: answers[i] })),
-        customerEmail
+        customerEmail,
+        tabId,
+        timestamp: getServerTimestamp()
     };
 
     try {
         dispatch(updateIsChatDataSending(true));
-        const result = await addDocWithAutoId(path, dataToSend)
+        await addDocWithAutoId(path, dataToSend)
     } catch(e) {
 
     } finally {

@@ -5,10 +5,16 @@ export const UPDATE_FORMULATIONS = 'UPDATE_FORMULATIONS';
 export const UPDATE_ANSWERS = 'UPDATE_ANSWERS';
 export const UPDATE_IS_FORMULATION_LOADING = 'UPDATE_IS_FORMULATION_LOADING';
 export const UPDATE_IS_CHAT_DATA_SENDING = 'UPDATE_IS_CHAT_DATA_SENDING';
+export const UPDATE_ACTIVE_CHAT_TAB_ID = 'UPDATE_ACTIVE_CHAT_TAB_ID';
 
 export const updateActiveChatChain = (activeChatChain) => ({
     type: UPDATE_ACTIVE_CHAT_CHAIN,
     activeChatChain
+});
+
+export const updateActiveChatTabId = (activeChatTabId) => ({
+    type: UPDATE_ACTIVE_CHAT_TAB_ID,
+    activeChatTabId
 });
 
 export const updateActiveQuestionId = (activeQuestionId) => ({
