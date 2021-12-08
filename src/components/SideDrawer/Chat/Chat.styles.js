@@ -64,7 +64,7 @@ export const styles = StyleSheet.create({
     ChatInputButton: {
         position: 'absolute',
         right: 15,
-        height: '100%',
+        height: 24,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
@@ -87,5 +87,11 @@ export const styles = StyleSheet.create({
     ChatAnswer: {
         alignSelf: 'flex-end',
         backgroundColor: lightViolet
+    },
+    ChatTypingAnim: {
+        justifyContent: 'center',
+        height: 34,
+        width: 70,
+        paddingLeft: 30,
     }
 });

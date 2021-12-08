@@ -1,6 +1,8 @@
 // admins collection
 export const ADMIN_COLLECTION = 'admins';
 
+export const INBOX_SUBCOLLECTION = 'inbox';
+
 export const CHAT_BOARDS_SUBCOLLECTION = 'chat-boards';
 
 // question collection

@@ -4,27 +4,25 @@ import {
     UPDATE_IS_CHAIN_LOADING,
     UPDATE_FORMULATIONS,
     UPDATE_IS_FORMULATION_LOADING,
-    UPDATE_ANSWERS
+    UPDATE_ANSWERS,
+    UPDATE_IS_CHAT_DATA_SENDING,
+    UPDATE_ACTIVE_CHAT_TAB_ID
 } from "./Chat.action";
 
+import { getIsAlreadyAsked } from '../../utils/ChatHelpers';
+
 export const updateFormulations = (state, action) => {
-    const { formulation } = action;
+    const { formulation, questionId } = action;
     const { formulations: prevFormulations } = state;
 
-    const isAlreadyAsked = prevFormulations.reduce((acc, { formulationText }) => {
-        if (formulationText === formulation.formulationText) {
-            acc = true;
-        }
-
-        return acc;
-    }, false);
+    const isAlreadyAsked = getIsAlreadyAsked(prevFormulations, questionId);
 
     if (isAlreadyAsked) {
         return state;
     }
 
     const formulations = formulation
-        ? [ ...prevFormulations, formulation ]
+        ? [ ...prevFormulations, { ...formulation, questionId } ]
         : [];
 
     return {
@@ -47,13 +45,29 @@ export const updateAnswers = (state, action) => {
     };
 }
 
+export const updateActiveChatChain = (state, action) => {
+    const { activeChatChain } = action;
+
+    const activeChainAdminId = activeChatChain[0].data.adminId;
+
+    return {
+        ...state,
+        activeChatChain,
+        activeChainAdminId
+    }
+}
+
 export const getInitialState = () => ({
     activeChatChain: {},
+    // TODO: get active tab id from search
+    activeChatTabId: '4MUgKyzSjLIbgbteWyah',
+    activeChainAdminId: '',
     activeQuestionId: null,
     formulations: [],
     answers: [],
     isChainLoading: false,
     isFormulationLoading: false,
+    isChatDataSending: false,
 });
 
 export const ChatReducer = (
@@ -62,11 +76,14 @@ export const ChatReducer = (
 ) => {
     switch (action.type) {
         case UPDATE_ACTIVE_CHAT_CHAIN:
-            const { activeChatChain } = action;
+            return updateActiveChatChain(state, action);
+
+        case UPDATE_ACTIVE_CHAT_TAB_ID:
+            const { activeChatTabId } = this.props;
 
             return {
                 ...state,
-                activeChatChain
+                activeChatTabId
             }
 
         case UPDATE_IS_CHAIN_LOADING:
@@ -91,6 +108,14 @@ export const ChatReducer = (
             return {
                 ...state,
                 isFormulationLoading
+            }
+
+        case UPDATE_IS_CHAT_DATA_SENDING:
+            const { isChatDataSending } = action;
+
+            return {
+                ...state,
+                isChatDataSending
             }
 
         case UPDATE_FORMULATIONS:

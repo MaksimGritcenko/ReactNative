@@ -19,6 +19,7 @@ const firebaseConfig = {
   measurementId: FIREBASE_MEASUREMENT_ID,
 };
 
+export const getServerTimestamp = () => firebase.firestore.FieldValue.serverTimestamp();
 
 const app = firebase.initializeApp(firebaseConfig);
 
