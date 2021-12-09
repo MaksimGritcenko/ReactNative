@@ -4,6 +4,8 @@ import MainComponent from "../../Main/Main.component";
 import { ScrollView, useWindowDimensions, View } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 
+import { styles } from './Instructions.style';
+
 export const InstructionsComponent = ({ content }) => {
     const { width } = useWindowDimensions();
 
@@ -13,11 +15,15 @@ export const InstructionsComponent = ({ content }) => {
 
     return (
         <MainComponent>
-            <ScrollView>
-              <View style={{ flex: 1, padding: 20, alignItems: 'center', borderWidth: 1, backgroundColor: 'rgba(0,0,0, 0.8)' }}>
-                <RenderHtml source={ source } contentWidth={ width } baseStyle={{ color: '#fff'}} />
-              </View>
-            </ScrollView>
+            <View style={ styles.InstructionsWrapper }>
+                <View style={ styles.InnerInstructionsWrapper }>
+                    <ScrollView>
+                        <View style={ styles.Instructions }>
+                            <RenderHtml source={ source } contentWidth={ width } baseStyle={{ color: '#fff'}} />
+                        </View>
+                    </ScrollView>
+                </View>
+            </View>
         </MainComponent>
     );
 }

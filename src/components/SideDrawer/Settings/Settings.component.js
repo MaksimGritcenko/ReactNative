@@ -1,13 +1,17 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import MainComponent from "../../Main/Main.component";
+
+import { styles } from './Settings.style';
 
 export const SettingsComponent = () => {
     return (
         <MainComponent>
-            <View>
-                <Text>Settings</Text>
-            </View>
+            <SafeAreaView style={ styles.Settings }>
+                <Text>
+                    Settings
+                </Text>
+            </SafeAreaView>
         </MainComponent>
     );
 }

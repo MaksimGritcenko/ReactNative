@@ -37,8 +37,6 @@ export const HomeContainer = (props) => {
     async function searchResults(searchText) {
         const apiResponse = await fetch("https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages");
         const data = await apiResponse.json();
-
-        console.log(data)
     }
 
     return (

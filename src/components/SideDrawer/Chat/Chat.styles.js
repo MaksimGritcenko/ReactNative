@@ -1,13 +1,14 @@
 import { Dimensions, StyleSheet } from "react-native";
 
 import { whiteYellow, whiteDarkYellow, lightViolet } from '../../../constants/Colors';
+import { CONTENT_PADDING_TOP } from '../../../constants/Layout';
 
 const { width } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
     Chat: {
-        backgroundColor: whiteYellow,
         flex: 1,
+        paddingTop: CONTENT_PADDING_TOP,
         alignItems: 'center'
     },
     ChatScrollView: {
@@ -16,7 +17,6 @@ export const styles = StyleSheet.create({
     },
     ChatWrapper: {
         width,
-        paddingHorizontal: '2.5%',
         alignItems: 'center',
         justifyContent: 'space-between',
         flex: 1,
@@ -29,41 +29,40 @@ export const styles = StyleSheet.create({
         width: "100%"
     },
     QuestionAnswers: {
+        width: '95%',
+        padding: '2.5%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        backgroundColor: whiteYellow
+        flexWrap: 'wrap'
     },
     QuestionAnswerItem: {
+        display: 'flex',
+        alignItems: 'center',
         paddingVertical: 8,
         paddingHorizontal: 5,
         paddingLeft: 10,
         marginBottom: 5,
         width: '49%',
         borderRadius: 10,
-        borderWidth: 1
+        backgroundColor: whiteYellow
     },
     ChatInput: {
         display: 'flex',
-        justifyContent: 'center',
         paddingVertical: 10,
         marginBottom: 10,
         paddingHorizontal: 12,
         borderWidth: 1,
-        borderRadius: 10,
-        height: 40,
+        minHeight: 50,
+        borderRadius: 20,
         paddingRight: 55,
         width: "100%",
         backgroundColor: whiteYellow
     },
-    QstsAnswInputWrapper: {
-        backgroundColor: whiteYellow
-
-    },
     ChatInputButton: {
         position: 'absolute',
         right: 15,
+        top: 12,
         height: 24,
         display: 'flex',
         alignItems: 'center',
@@ -80,12 +79,15 @@ export const styles = StyleSheet.create({
         paddingVertical: 7,
         paddingHorizontal: 12,
         borderRadius: 15,
+        borderBottomLeftRadius: 0,
         maxWidth: '60%',
         marginTop: 20,
         backgroundColor: whiteDarkYellow
     },
     ChatAnswer: {
         alignSelf: 'flex-end',
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 0,
         backgroundColor: lightViolet
     },
     ChatTypingAnim: {
@@ -93,5 +95,12 @@ export const styles = StyleSheet.create({
         height: 34,
         width: 70,
         paddingLeft: 30,
+    },
+    InputBlock: {
+        width: '100%',
+        paddingHorizontal: '2.5%',
+        paddingTop: 10,
+        minHeight: 70,
+        backgroundColor: whiteDarkYellow
     }
 });

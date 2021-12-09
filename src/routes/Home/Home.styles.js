@@ -3,9 +3,18 @@ import {
     StyleSheet
 } from 'react-native';
 
+import { CONTENT_PADDING_TOP } from '../../constants/Layout';
+
 const { width } = Dimensions.get('window')
 
 export const styles = StyleSheet.create({
+    HomeWrapper: {
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: "center",
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+
+    },
     logoutButtonWrapper:{
         padding: 20,
         position: 'absolute',
@@ -17,13 +26,14 @@ export const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        marginTop: CONTENT_PADDING_TOP,
         width,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     searchInput: {
         borderWidth: 1,
         borderRadius: 15,
-        width: '90%',
+        width: '95%',
         padding: 10
     }
 })

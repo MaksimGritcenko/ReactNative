@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { NavigationContainer } from '@react-navigation/native';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import DashboardComponent from "../Dashboard";
 import InitialStack from "../InitialStack";
@@ -18,7 +17,7 @@ export const mapStateToProps = (state) => ({
     isOnboarded: state.UserReducer.isOnboarded
 });
 
-export const mapDispatchToProps = (dispatch) => ({});
+export const mapDispatchToProps = () => ({});
 
 export function Router(props) {
   const { email, isOnboarded } = props
@@ -76,7 +75,7 @@ export function Router(props) {
     return null;
   }
 
-  return  renderProviderContent();
+  return renderProviderContent();
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Router);

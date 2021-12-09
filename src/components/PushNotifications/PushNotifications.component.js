@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import styles from "../Login/Login.styles";
-import {darkGreen} from "../../constants/Colors";
+import {darkBlue} from "../../constants/Colors";
 import LV from '../../utils/Translations/lv.json';
 import { IOS_PLATFORM } from "./PushNotifications.config";
 
@@ -49,7 +49,7 @@ export const PushNotificationsComponent = ({ sendPushNotification, language }) =
                             value={ text }
                         />
                         <Pressable
-                            style={{ ...styles.button, backgroundColor: darkGreen, width: '50%'} }
+                            style={ { ...styles.button, backgroundColor: darkBlue, width: '50%'} }
                             onPress={ () => {
                                 sendPushNotification(title, text);
                                 setText('');
