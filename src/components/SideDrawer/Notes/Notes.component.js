@@ -13,7 +13,7 @@ import { styles } from "./Notes.style";
 import EditNoteModal from "../../EditNoteModal";
 import Swipeout from 'react-native-swipeout';
 import MainComponent from "../../Main/Main.component";
-import { colorGreen, darkGreen, skyBlue } from '../../../constants/Colors';
+import { darkBlue, skyBlue } from '../../../constants/Colors';
 
 import moment from 'moment';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -55,13 +55,13 @@ export const NotesComponent = ( props ) => {
                         <View style={ styles.title }>
                             <View style={{ position: 'absolute', left: '50%', transform: [{rotateZ: '60deg'}], }}>
                                 <View style={{ width: 10, height: 10, backgroundColor: skyBlue, borderWidth: 1, borderRadius: 10, top: 20}} />
-                                <MaterialIcons style={{ top: -10, right: 10}} name="push-pin" size={30} color={ darkGreen } />
+                                <MaterialIcons style={{ top: -10, right: 10}} name="push-pin" size={30} color={ darkBlue } />
                             </View>
                             <View>
                                 <Text style={{ color: '#ff001d', fontSize: 12, marginBottom: 15 }}>
                                     { moment(timestamps).fromNow()}
                                 </Text>
-                                <Text style={{ color: 'darkGreen', fontSize: 16, fontWeight: 'bold', marginBottom: 15 }}>
+                                <Text style={{ color: 'darkBlue', fontSize: 16, fontWeight: 'bold', marginBottom: 15 }}>
                                     {title}
                                 </Text>
                             </View>
@@ -97,7 +97,7 @@ export const NotesComponent = ( props ) => {
 
     return (
         <MainComponent>
-            <SafeAreaView>
+            <SafeAreaView style={ styles.container }>
                 <FlatList
                     data={ noteData }
                     renderItem={ renderItem }
@@ -140,7 +140,7 @@ export const NotesComponent = ( props ) => {
                                     setNoteTitle('');
                                     setNoteContent('');
                                 }}
-                                style={{ ...styles.saveButton, backgroundColor: isDisabled() ? 'lightgray' : '#36394d'} }
+                                style={ { ...styles.saveButton, backgroundColor: isDisabled() ? 'lightgray' : '#36394d'} }
                             >
                                 <Text style={ styles.saveButtonText }>Save</Text>
                             </TouchableOpacity>

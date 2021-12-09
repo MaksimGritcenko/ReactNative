@@ -1,13 +1,15 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, SafeAreaView} from "react-native";
 import MainComponent from "../../Main/Main.component";
+
+import { styles } from './ChatHistory.styles';
 
 export const ChatHistoryComponent = () => {
     return (
-        <MainComponent>
-            <View>
+        <MainComponent >
+            <SafeAreaView style={ styles.ChatHistory }>
                 <Text>ChatHistory</Text>
-            </View>
+            </SafeAreaView>
         </MainComponent>
     );
 };

@@ -50,6 +50,7 @@ export const ChatComponent = (props) => {
             <View style={ styles.ChatInput }>
                 <TextInput
                   placeholder="Type your answer here..."
+                  multiline={ true }
                   onChangeText={ onInputChange }
                   value={ inputTxt }
                 />
@@ -156,7 +157,7 @@ export const ChatComponent = (props) => {
         );
     }
 
-    const keyboardVerticalOffset = Platform.OS === 'ios' ? 65 : -200;
+    const keyboardVerticalOffset = Platform.OS === 'ios' ? 80 : -200;
 
     return (
         <MainComponent>
@@ -184,7 +185,9 @@ export const ChatComponent = (props) => {
                           onLayout={ (e) => setChatMsgHeight(e.nativeEvent.layout.height) }
                         >
                             { renderQstAnswers() }
-                            { renderInputField() }
+                            <View style={ styles.InputBlock }>
+                                { renderInputField() }
+                            </View>
                         </View>
                     </KeyboardAvoidingView>
                 </View>

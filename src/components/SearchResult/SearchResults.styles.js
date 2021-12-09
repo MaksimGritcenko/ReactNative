@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
-import { colorGreen, darkGreen } from '../../constants/Colors';
+import { colorGreen } from '../../constants/Colors';
 
 const { width } = Dimensions.get('window');
 
@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     paddingBottom: 10,
     borderTopWidth: 1,
     width,
-    backgroundColor: 'rgba(0,0,0,.1)'
   },
   singleItem: {
     margin: 10,
@@ -20,12 +19,12 @@ export const styles = StyleSheet.create({
     paddingBottom: 10
   },
   title: {
-    color: darkGreen,
+    color: '#fff',
     fontSize: 18,
     fontWeight: 'bold'
   },
   content: {
-    color: darkGreen,
+    color: '#fff',
     fontSize: 14,
     marginTop: 8
   }

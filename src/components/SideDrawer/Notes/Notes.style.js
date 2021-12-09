@@ -1,9 +1,11 @@
 import {StyleSheet} from "react-native";
-import { colorGreen, darkGreen } from '../../../constants/Colors';
+import { darkBlue } from '../../../constants/Colors';
+import { CONTENT_PADDING_TOP } from '../../../constants/Layout';
 
 export const styles = StyleSheet.create({
     container: {
-
+        flex: 1,
+        paddingTop: CONTENT_PADDING_TOP
     },
     wrapper: {
         backgroundColor: 'transparent',
@@ -34,7 +36,7 @@ export const styles = StyleSheet.create({
     },
     modalContainer: {
         height: '100%',
-        backgroundColor: darkGreen
+        backgroundColor: darkBlue
     },
     contentWrapperTitle: {
         borderBottomWidth: 1,

@@ -20,7 +20,7 @@ import PushNotifications from "../PushNotifications";
 import LV from '../../utils/Translations/lv.json';
 
 import {
-    darkGreen,
+    darkBlue,
     skyBlue
 } from "../../constants/Colors";
 import {StatusBar} from "expo-status-bar";
@@ -65,22 +65,16 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationDashboardTitle : 'Dashboard',
                 component: Home,
                 options: {
+                    lazy: false,
+                    headerTransparent: true,
+                    headerShown: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
+                    gestureEnabled: true,
                     headerStyle: {
-                        backgroundColor: skyBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
-                    },
-                    // Enable Logout button if necessary
-                    // headerRight: () => (
-                    //     <AntDesign
-                    //         style={{ marginRight: 20}}
-                    //         onPress={ () => showSmallModal() }
-                    //         name={ renderIcon() } size={24}
-                    //         color="#fff"
-                    //     />
-                    // ),
+                    }
                 }
             },
             {
@@ -88,6 +82,8 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationSettingsTitle : "Settings",
                 component: SettingsComponent,
                 options: {
+                    lazy: false,
+                    headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
@@ -102,6 +98,8 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationChatHistoryTitle : "ChatHistory",
                 component: ChatHistoryComponent,
                 options: {
+                    lazy: false,
+                    headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
@@ -116,6 +114,8 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationChatTitle : 'Chat',
                 component: ChatComponent,
                 options: {
+                    lazy: false,
+                    headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
@@ -130,10 +130,12 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationNotesTitle : 'Notes',
                 component: NotesComponent,
                 options: {
+                    lazy: false,
+                    headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
-                        backgroundColor: isEditModalVisible ? darkGreen : skyBlue,
+                        backgroundColor: isEditModalVisible ? darkBlue : skyBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
                     },
@@ -153,10 +155,12 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationImagesTitle : 'Images',
                 component: ImagesComponent,
                 options: {
+                    lazy: false,
+                    headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
-                        backgroundColor: darkGreen,
+                        backgroundColor: darkBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
                     },
@@ -179,6 +183,8 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationInstructionsTitle : 'Instructions',
                 component: InstructionsComponent,
                 options: {
+                    lazy: false,
+                    headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
@@ -193,6 +199,8 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.Notifications : 'Notifications',
                 component: PushNotifications,
                 options: {
+                    lazy: false,
+                    headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     headerStyle: {
@@ -215,25 +223,25 @@ export const DashboardComponent = (props) => {
             if (!admin && name === LV.Notifications || (!admin && name === 'Notifications')) return null;
 
             return (
-                    <SideDrawer.Screen
-                        name={ name }
-                        component={ component }
-                        key={ id }
-                        options={ options }
-                    />
-                );
+                <SideDrawer.Screen
+                    name={ name }
+                    component={ component }
+                    key={ id }
+                    options={ options }
+                />
+            );
         });
     }
 
     return (
-        <View style={{ height: '100%'}}>
+        <View style={{ flex: 1 }}>
             <NavigationContainer
                 independent={true}
             >
                 <SideDrawer.Navigator
                     screenOptions={{
                         drawerStyle: {
-                            backgroundColor: darkGreen,
+                            backgroundColor: darkBlue,
                         },
                         drawerLabelStyle: {
                             color: '#fff'
@@ -243,7 +251,7 @@ export const DashboardComponent = (props) => {
                     { renderScreens() }
                 </SideDrawer.Navigator>
             </NavigationContainer>
-            <StatusBar hidden={ true } />
+            <StatusBar hidden={ false } style="dark" />
         </View>
     );
 };

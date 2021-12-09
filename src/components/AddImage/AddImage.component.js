@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { styles } from "./AddImage.styles";
 import {AntDesign, Entypo} from '@expo/vector-icons';
-import {colorGreen, darkGreen} from "../../constants/Colors";
+import {colorGreen, darkBlue} from "../../constants/Colors";
 
 
 export const AddImageComponent = (props) => {
@@ -26,7 +26,7 @@ export const AddImageComponent = (props) => {
             transparent={ false} visible={ isOpened }
             onRequestClose={() => onRequestClose() }
         >
-            <View style={ { ...styles.container, backgroundColor: darkGreen } }>
+            <View style={ { ...styles.container, backgroundColor: darkBlue } }>
                 { image && (
                     <TouchableOpacity style={ styles.saveButton }>
                         <AntDesign

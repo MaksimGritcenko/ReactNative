@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import {
     Text,
     View,
-    Pressable, TextInput, ActivityIndicator
+    Pressable,
+    TextInput
 } from 'react-native';
 import MainComponent from "../../components/Main/Main.component";
 import {
-    darkGreen,
+    darkBlue,
 } from "../../constants/Colors";
 
 import LV from '../../utils/Translations/lv.json';
@@ -31,11 +32,11 @@ export const HomeComponent = ({ logout, opacity, language }) => {
 
     return (
         <MainComponent>
-            <View style={{ height: '100%', justifyContent: 'center', alignItems: "center"}}>
+            <View style={ styles.HomeWrapper }>
                 <View style={ styles.container }>
                     <View style={ styles.searchInput }>
                         <TextInput
-                          style={{ fontWeight: 'bold', fontSize: 20 }}
+                          style={{ fontWeight: 'bold', color: '#fff', fontSize: 20 }}
                           placeholder="Search"
                           onChangeText={ text => setSearchText(text) }
                           onSubmitEditing={() => searchResults(searchText)}
@@ -47,16 +48,16 @@ export const HomeComponent = ({ logout, opacity, language }) => {
                     ...styles.logoutButtonWrapper,
                     opacity,
                     borderWidth: 1,
-                    borderColor: darkGreen,
-                    borderRadius: 20 }}
-                >
+                    borderColor: darkBlue,
+                    borderRadius: 20,
+                    marginTop: 80
+                }}>
                     <View style={ styles.logoutButton }>
                         <Pressable title="Logout" onPress={ logout } >
                             <Text style={ { color: '#fff'}}>{ language === 'lv' ? LV.LogoutButton : "Logout"}</Text>
                         </Pressable>
                     </View>
                 </View>
-
             </View>
         </MainComponent>
     );

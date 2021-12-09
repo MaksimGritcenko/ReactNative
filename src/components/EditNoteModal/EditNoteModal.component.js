@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./EditNoteModal.styles";
-import { darkGreen } from "../../constants/Colors";
+import { darkBlue } from "../../constants/Colors";
 
 export const EditNoteModalComponent = (props) => {
     const {
@@ -34,7 +34,7 @@ export const EditNoteModalComponent = (props) => {
             visible={ isEditModalVisible }
             onRequestClose={() => onRequestClose()}
         >
-                <View style={{ ...modalHeaderStyles, backgroundColor: darkGreen } }>
+                <View style={{ ...modalHeaderStyles, backgroundColor: darkBlue } }>
                     <View style={ styles.headerRight }>
                         <TextInput
                             style={{ width: '70%', color: '#fff', fontSize: 20}}

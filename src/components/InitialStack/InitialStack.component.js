@@ -3,7 +3,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginComponent from "components/Login";
 import RegisterComponent from "components/Register";
-import DashboardComponent from "components/Dashboard/Dashboard.component";
+import DashboardComponent from "components/Dashboard";
 
 const Stack = createStackNavigator()
 
