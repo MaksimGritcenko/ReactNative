@@ -3,60 +3,68 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'flex-end',
-        alignItems: 'center',
         height: '100%',
-        backgroundColor: '#70fff1'
     },
     textInput: {
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        width: '80%',
-        padding: 10,
-        borderRadius: 10
+        borderBottomWidth: 1,
+        width: '100%',
+        paddingLeft: 45,
+        paddingVertical: 10,
+        borderRadius: 10,
+        color: '#fff',
+        marginBottom: 30
     },
     button: {
         backgroundColor: 'rgba(0,0,0,0.7)',
-        width: '30%',
         marginTop: 20,
-        padding: 10,
-        borderRadius: 10,
+        paddingVertical: 20,
+        borderRadius: 50,
+        shadowColor: '#000',
+        shadowOpacity: 0.8,
+        elevation: 10,
+        shadowRadius: 15 ,
+        shadowOffset : { width: 1, height: 13},
     },
     buttonContentText: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 24,
+        fontWeight: 'bold',
         alignSelf: 'center',
         padding: 0,
         margin: 0
     },
     title: {
-        fontSize: 30,
+        fontSize: 40,
         marginBottom: 20,
         fontWeight: 'bold',
-        textAlign: 'center'
+        width: '90%',
+        color: '#f5f1f5'
     },
     registerLink: {
-        color: 'coral',
-        fontWeight: 'bold',
-        marginTop: 5,
+        color: 'rgba(255,255,255, 0.5)',
+        marginTop: 20,
+        textAlign: 'center',
+        textTransform: 'capitalize',
     },
     formWrapper: {
-        borderWidth: 1,
-        borderColor: '#fff',
         width: '100%',
-        height: '70%',
+        height: '100%',
         alignItems: 'center',
-        backgroundColor: '#f2f2f2',
-        // paddingTop: 15,
-        borderTopRightRadius: 50,
-        borderTopLeftRadius: 50,
-        justifyContent: 'center'
+        backgroundColor: '#414555',
+        justifyContent: 'space-evenly'
     },
-    logo: {
-        width: 200,
-        height: 200,
+    textInputWrapper: {
+        position: 'relative',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    icon: {
         position: 'absolute',
-        top: 50,
-        backgroundColor: 'transparent',
+        left: 10,
+        top: 10
+    },
+    buttonContainer: {
+        width: '75%'
     }
 })
 
