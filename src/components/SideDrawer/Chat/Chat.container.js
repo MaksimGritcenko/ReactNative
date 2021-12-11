@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { connect } from 'react-redux';
-import { Keyboard } from 'react-native';
+import { Keyboard, Alert } from 'react-native';
 
 import {
     getChatQuestionsForChain,
     queryFormulation,
-    sendChatResult
+    sendChatResult,
+    toDefaultChatState
 } from '../../../store/Chat/Chat.dispatcher';
 import {
     updateAnswers,
@@ -14,6 +15,9 @@ import {
 import ChatComponent from './Chat.component';
 
 import { getNextActiveQstId } from '../../../utils/ChatHelpers';
+import { useNavigation } from "@react-navigation/native";
+import { getIsLV } from '../../../utils/Translations/Translations';
+import LV from '../../../utils/Translations/lv.json';
 
 export const mapStateToProps = (state) => ({
     activeQuestionId: state.ChatReducer.activeQuestionId,
@@ -24,6 +28,7 @@ export const mapStateToProps = (state) => ({
     activeChainAdminId: state.ChatReducer.activeChainAdminId,
     activeChatTabId: state.ChatReducer.activeChatTabId,
     customerEmail: state.UserReducer.email,
+    language: state.UserReducer.language,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -31,6 +36,7 @@ export const mapDispatchToProps = (dispatch) => ({
     queryFormulation: (questionId, formulations) => queryFormulation(questionId, formulations, dispatch),
     updateAnswers: (answer) => dispatch(updateAnswers(answer)),
     updateActiveQuestionId: (activeQuestionId) => dispatch(updateActiveQuestionId(activeQuestionId)),
+    toDefaultChatState: () => toDefaultChatState(dispatch),
     sendChatResult: (
         formulations,
         answers,
@@ -40,9 +46,11 @@ export const mapDispatchToProps = (dispatch) => ({
     ) => sendChatResult(formulations, answers, adminId, customerEmail, tabId, dispatch),
 });
 
+export const TYPING_TIMEOUT = 2000;
+
 export const ChatComponentContainer = (props) => {
     const {
-        getChatQuestionsForChain,
+        language,
         queryFormulation,
         updateAnswers,
         activeQuestionId,
@@ -53,19 +61,30 @@ export const ChatComponentContainer = (props) => {
         activeChainAdminId,
         formulations,
         customerEmail,
-        activeChatTabId
+        activeChatTabId,
+        toDefaultChatState
     } = props;
+
+    const navigation = useNavigation();
 
     const [chatMsgBottomOffset, setChatMsgBottomOffset] = useState(0);
     const [chatMsgHeight, setChatMsgHeight] = useState(0);
     const [inputTxt, setInputTxt] = useState('');
     const [prevActiveQstId, setPrevActiveQstId] = useState('');
+    const [isTypingTimeoutOver, setIsTypingTimeoutOver] = useState(true);
+    const [prevFormulations, setPrevFormulations] = useState([]);
+    const [activeQuestionIdx, setActiveQuestionIdx] = useState(0);
 
-    useEffect(async () => {
-        await getChatQuestionsForChain(activeQuestionId, activeChatTabId);
-        queryFirstFormul();
+    // querying the first batch of data
+    useEffect(() => {
+        if (!formulations.length) {
+            runTypingTimeout();
+        } else {
+            setActiveQuestionIdx(formulations.length - 1);
+        }
     }, []);
 
+    // keyboard appearing events
     useEffect(() => {
         Keyboard.addListener('keyboardDidShow', onKeyBoardChange.bind(this, true));
         Keyboard.addListener('keyboardDidHide', onKeyBoardChange.bind(this, false));
@@ -75,6 +94,17 @@ export const ChatComponentContainer = (props) => {
         return () => {
             Keyboard.removeAllListeners('keyboardDidShow');
             Keyboard.removeAllListeners('keyboardDidHide');
+        }
+    });
+
+    // typing animation delay
+    useEffect(() => {
+        if (
+            isTypingTimeoutOver
+            && formulations.length !== prevFormulations.length
+        ) {
+            setActiveQuestionIdx(formulations.length - 1);
+            setPrevFormulations(formulations);
         }
     });
 
@@ -94,9 +124,23 @@ export const ChatComponentContainer = (props) => {
         }
     }
 
+    function runTypingTimeout() {
+        if (
+            activeChatChain.length !== formulations.length
+            && activeQuestionIdx !== formulations.length
+        ) {
+            setIsTypingTimeoutOver(false);
+        }
+
+        setTimeout(() => {
+            setIsTypingTimeoutOver(true);
+        }, TYPING_TIMEOUT);
+    }
+
     function onAnswerClick(answer) {
         const nextId = getNextActiveQstId(activeQuestionId, activeChatChain);
 
+        runTypingTimeout();
         updateAnswers(answer);
         updateActiveQuestionId(nextId);
 
@@ -124,8 +168,24 @@ export const ChatComponentContainer = (props) => {
         setInputTxt('');
     }
 
+    function showLastQstAlert() {
+        Alert.alert(
+            'Questionnaire is completed!',
+            'Psychologist will contact you very soon via email.',
+            [
+                {
+                    text: 'Ok',
+                    onPress: onAlertSuccessClick
+                }
+            ]
+        );
+    }
+
     function onLastQuestionResponse(lastAnswer) {
         // setting answer, as the value doesn't contain the last anwser
+
+        showLastQstAlert();
+
         sendChatResult(
             formulations,
             [ ...answers, lastAnswer ],
@@ -133,6 +193,11 @@ export const ChatComponentContainer = (props) => {
             customerEmail,
             activeChatTabId
         );
+    }
+
+    function onAlertSuccessClick() {
+        navigation.jumpTo(getIsLV(language) ? LV.NavigationDashboardTitle : 'Dashboard');
+        toDefaultChatState();
     }
 
     function onInputChange(txt) {
@@ -144,6 +209,8 @@ export const ChatComponentContainer = (props) => {
             ...props,
             chatMsgBottomOffset,
             inputTxt,
+            isTypingTimeoutOver,
+            activeQuestionIdx,
         };
     }
 
@@ -151,7 +218,8 @@ export const ChatComponentContainer = (props) => {
         onAnswerClick,
         onInputChange,
         onInputSend,
-        setChatMsgHeight
+        setChatMsgHeight,
+        onAlertSuccessClick
     }
 
     return (

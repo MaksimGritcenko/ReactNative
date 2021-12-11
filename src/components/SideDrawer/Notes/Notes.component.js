@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import {
     FlatList,
     Modal,
-    SafeAreaView,
+    Platform,
     Text,
     TextInput,
     TouchableOpacity,
     View
 } from "react-native";
+import GestureRecognizer from 'react-native-swipe-gestures';
+
 import { AntDesign } from '@expo/vector-icons';
 import { styles } from "./Notes.style";
 import EditNoteModal from "../../EditNoteModal";
 import Swipeout from 'react-native-swipeout';
 import MainComponent from "../../Main/Main.component";
-import { darkBlue, skyBlue } from '../../../constants/Colors';
+import { darkBlue, lightGray, placeholderTextColor } from '../../../constants/Colors';
 
 import moment from 'moment';
-import { MaterialIcons } from '@expo/vector-icons';
 
 export const NotesComponent = ( props ) => {
     const {
@@ -51,18 +52,17 @@ export const NotesComponent = ( props ) => {
                 style={ styles.wrapper }
             >
                 <View>
-                    <TouchableOpacity onPress={ () => openSingleItem(title, content, id) }>
+                    <TouchableOpacity activeOpacity={ .8 } onPress={ () => openSingleItem(title, content, id) }>
                         <View style={ styles.title }>
-                            <View style={{ position: 'absolute', left: '50%', transform: [{rotateZ: '60deg'}], }}>
-                                <View style={{ width: 10, height: 10, backgroundColor: skyBlue, borderWidth: 1, borderRadius: 10, top: 20}} />
-                                <MaterialIcons style={{ top: -10, right: 10}} name="push-pin" size={30} color={ darkBlue } />
-                            </View>
                             <View>
                                 <Text style={{ color: '#ff001d', fontSize: 12, marginBottom: 15 }}>
                                     { moment(timestamps).fromNow()}
                                 </Text>
-                                <Text style={{ color: 'darkBlue', fontSize: 16, fontWeight: 'bold', marginBottom: 15 }}>
-                                    {title}
+                                <Text
+                                  numberOfLines={ 2 }
+                                  style={{ color: darkBlue, fontSize: 16, fontWeight: 'bold', marginBottom: 15 }}
+                                >
+                                    { title }
                                 </Text>
                             </View>
                             <View>
@@ -97,63 +97,78 @@ export const NotesComponent = ( props ) => {
 
     return (
         <MainComponent>
-            <SafeAreaView style={ styles.container }>
+            <View style={ styles.container }>
                 <FlatList
                     data={ noteData }
+                    showsVerticalScrollIndicator={ false }
                     renderItem={ renderItem }
                     keyExtractor={({id}) => id }
                 />
-                <Modal animationType="slide" transparent  visible={ isModalVisible }>
-                    <View style={ styles.modalContainer }>
-                        <View style={{ ...styles.modalHeader, backgroundColor: skyBlue}} >
-                            <Text style={{ color: '#fff'}}>New Note</Text>
-                            <TouchableOpacity>
-                                <AntDesign
-                                    name="closecircleo"
-                                    size={24}
-                                    color="#fff"
-                                    onPress={ () => closeNotesModal() }
+                <GestureRecognizer
+                  style={{ flex: 1 }}
+                  onSwipeDown={ () => closeNotesModal() }
+                >
+                    <Modal animationType="slide" transparent  visible={ isModalVisible }>
+                        <View style={ {
+                            ...styles.modalContainer,
+                            paddingTop: Platform.OS == 'ios' ? 21 : 0
+                        } }>
+                            <View style={{ ...styles.modalHeader, backgroundColor: '#123246' }} >
+                                <Text style={{ color: '#fff'}}>New Note</Text>
+                                <TouchableOpacity>
+                                    <AntDesign
+                                        name="closecircleo"
+                                        size={24}
+                                        color="#fff"
+                                        onPress={ () => closeNotesModal() }
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={ styles.contentWrapper }>
+                                <TextInput
+                                    style={ styles.contentWrapperTitle }
+                                    placeholder="Title"
+                                    placeholderTextColor={ placeholderTextColor }
+                                    onChangeText={(text) => setNoteTitle(text) }
+                                    value={ noteTitle }
                                 />
-                            </TouchableOpacity>
+                                <TextInput
+                                    placeholder="Note"
+                                    placeholderTextColor={ placeholderTextColor }
+                                    style={ styles.contentWrapperContent }
+                                    multiline
+                                    onChangeText={(text) => setNoteContent(text) }
+                                    value={ noteContent }
+                                />
+                                <TouchableOpacity
+                                    disabled={ isDisabled() }
+                                    onPress={() => {
+                                        saveNote(noteTitle, noteContent)
+                                        setNoteTitle('');
+                                        setNoteContent('');
+                                    }}
+                                    style={ { ...styles.saveButton, backgroundColor: isDisabled() ? 'lightgray' : '#09507E'} }
+                                >
+                                    <Text
+                                    style={ {
+                                        ...styles.saveButtonText,
+                                        color: isDisabled() ? darkBlue : lightGray
+                                    } }
+                                    >
+                                        Save
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                        <View style={ styles.contentWrapper }>
-                            <TextInput
-                                style={ styles.contentWrapperTitle }
-                                multiline
-                                placeholder="Title"
-                                placeholderTextColor="rgba(255,255,255,.5)"
-                                onChangeText={(text) => setNoteTitle(text) }
-                                value={ noteTitle }
-                            />
-                            <TextInput
-                                placeholder="Note"
-                                placeholderTextColor="rgba(255,255,255,.5)"
-                                style={ styles.contentWrapperContent }
-                                multiline
-                                onChangeText={(text) => setNoteContent(text) }
-                                value={ noteContent }
-                            />
-                            <TouchableOpacity
-                                disabled={ isDisabled() }
-                                onPress={() => {
-                                    saveNote(noteTitle, noteContent)
-                                    setNoteTitle('');
-                                    setNoteContent('');
-                                }}
-                                style={ { ...styles.saveButton, backgroundColor: isDisabled() ? 'lightgray' : '#36394d'} }
-                            >
-                                <Text style={ styles.saveButtonText }>Save</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Modal>
+                    </Modal>
+                </GestureRecognizer>
                 <EditNoteModal
                     title={ title }
                     content={ content }
                     modalHeaderStyles={ styles.modalHeader }
                     editableItemId={ editableItemId }
                 />
-            </SafeAreaView>
+            </View>
         </MainComponent>
     );
 }

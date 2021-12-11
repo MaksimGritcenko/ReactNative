@@ -1,22 +1,32 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { setIsOnboarded } from 'store/User/User.action'
+import { setIsOnboarded, setPreferedLanguage } from 'store/User/User.action'
+import { getOnboardingContent } from "../../store/Onboarding/Onboarding.dispatcher";
+
 import OnBoarding from "./OnBoarding.component";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {setPreferedLanguage} from "../../store/User/User.action";
 
 export const mapStateToProps = state => ({
     isOnboarded: state.UserReducer.isOnboarded,
-    language: state.UserReducer.language
+    language: state.UserReducer.language,
+    onboardingContent: state.OnboardingReducer.onboardingContent,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
     onSuccessBoarding: () => dispatch(setIsOnboarded(true)),
-    setPreferedLanguage: language => dispatch(setPreferedLanguage(language))
+    setPreferedLanguage: language => dispatch(setPreferedLanguage(language)),
+    getOnboardingContent: () => getOnboardingContent(dispatch),
 });
 
 export const OnBoardingContainer = (props) => {
+    const {
+        getOnboardingContent
+    } = props;
+
+    useEffect(() => {
+        getOnboardingContent();
+    }, []);
+
     function onDone() {
         const { onSuccessBoarding } = props;
         onSuccessBoarding();

@@ -29,7 +29,7 @@ export const UserReducer = (
             const { status } = action;
 
             return {
-                ...action,
+                ...state,
                 isLoginScreen: status
             }
 

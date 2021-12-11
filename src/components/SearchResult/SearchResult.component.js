@@ -1,22 +1,30 @@
 import React from 'react';
 import { FlatList, View, Text } from 'react-native';
 import { styles } from './SearchResults.styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export const SearchResultComponent = ({ data }) => {
-  if (!data) {
+export const SearchResultComponent = ({
+    data,
+    onResultClick,
+}) => {
+  if (!data || !data.length) {
     return null
   }
 
   function renderCard(item) {
-    const { name, details } = item;
+    const { id: qstId, data: { name, tabId } } = item;
 
     return (
-      <View style={ styles.singleItem }>
-        <Text style={ styles.title }>name: { name }</Text>
-        <Text style={ styles.content }>details: { details }</Text>
-      </View>
+      <TouchableOpacity
+        activeOpacity={ .9 }
+        onPress={ () => onResultClick(tabId, qstId) }
+        style={ styles.singleItem }
+    >
+        <Text style={ styles.title }>{ name }</Text>
+      </TouchableOpacity>
     )
   }
+
   return (
     <View
       style={ styles.container }

@@ -1,10 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Modal,
     View,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Platform
 } from "react-native";
+import GestureRecognizer from 'react-native-swipe-gestures';
+
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./EditNoteModal.styles";
 import { darkBlue } from "../../constants/Colors";
@@ -18,63 +21,100 @@ export const EditNoteModalComponent = (props) => {
         closeEditNotesModal,
         onRequestClose
     } = props;
-    const [headerTitle, setHeaderTitle] = useState(title);
-    const [notesEditContent, setNotesEditContent] = useState(content);
+
+
+    const [headerTitle, setHeaderTitle] = useState('');
+    const [notesEditContent, setNotesEditContent] = useState('');
+    const [prevIsEditModalVisible, setPrevIsEditModalVisible] = useState(false);
+
+    useEffect(() => {
+        if (!isEditModalVisible) {
+            setNotesEditContent('');
+            setHeaderTitle('');
+            setPrevIsEditModalVisible(isEditModalVisible);
+        }
+
+        if (isEditModalVisible && isEditModalVisible !== prevIsEditModalVisible) {
+            setNotesEditContent(content);
+            setHeaderTitle(title);
+            setPrevIsEditModalVisible(isEditModalVisible);
+        }
+    });
 
     function isTitleOrContentChanged() {
-        return (title === headerTitle && content === notesEditContent)
-            || headerTitle === ''
-            || notesEditContent === '';
+        return !!headerTitle
+            && !!notesEditContent
+            && (title !== headerTitle || content !== notesEditContent);
+    }
+
+    function onTitleChange(text) {
+        setHeaderTitle(text.trim())
+    }
+
+    function onNoteTxtChange(text) {
+        setNotesEditContent(text.trim())
     }
 
     return (
-        <Modal
-            animationType="slide"
-            transparent
-            visible={ isEditModalVisible }
-            onRequestClose={() => onRequestClose()}
+        <GestureRecognizer
+          style={{ flex: 1 }}
+          onSwipeDown={ () => onRequestClose() }
         >
-                <View style={{ ...modalHeaderStyles, backgroundColor: darkBlue } }>
-                    <View style={ styles.headerRight }>
+            <Modal
+                animationType="slide"
+                transparent
+                visible={ isEditModalVisible }
+                onRequestClose={() => onRequestClose()}
+            >
+                    <View style={ {
+                      ...modalHeaderStyles,
+                      backgroundColor: darkBlue,
+                      paddingTop: Platform.OS === 'ios' ? 35 : 15
+                    } }>
+                        <View style={ styles.headerRight }>
+                            <TextInput
+                                style={{ width: '92%', color: '#fff', fontSize: 20}}
+                                multiline
+                                defaultValue={ title }
+                                onChangeText={ onTitleChange }
+                            />
+                        </View>
+                        <TouchableOpacity>
+                            { isTitleOrContentChanged() && (
+                                <AntDesign
+                                    name="check"
+                                    size={ 24 }
+                                    color="#fff"
+                                    onPress={ () => {
+                                        closeEditNotesModal(headerTitle, notesEditContent)
+                                        setHeaderTitle('')
+                                        setNotesEditContent('')
+                                    } }
+                                />
+                            )}
+                            { !isTitleOrContentChanged() && (
+                                <AntDesign
+                                    name="closecircleo"
+                                    size={ 24 }
+                                    color="#fff"
+                                    onPress={ () => onRequestClose() }
+                                />
+                            )}
+                        </TouchableOpacity>
+                    </View>
+                    <View style={ {
+                        ...styles.container,
+                        paddingTop: Platform.OS === 'ios' ? 15 : 0
+                    } }>
                         <TextInput
-                            style={{ width: '70%', color: '#fff', fontSize: 20}}
+                            style={ styles.textInput }
                             multiline
-                            defaultValue={ title }
-                            onChangeText={(text) => setHeaderTitle(text.trim())}
+                            defaultValue={ content }
+                            onChangeText={ onNoteTxtChange }
                         />
                     </View>
-                    <TouchableOpacity>
-                        { !isTitleOrContentChanged() && (
-                            <AntDesign
-                                name="check"
-                                size={ 24 }
-                                color="#fff"
-                                onPress={ () => {
-                                    closeEditNotesModal(headerTitle, notesEditContent)
-                                    setHeaderTitle('')
-                                    setNotesEditContent('')
-                                } }
-                            />
-                        )}
-                        { isTitleOrContentChanged() && (
-                            <AntDesign
-                                name="closecircleo"
-                                size={ 24 }
-                                color="#fff"
-                                onPress={ () => onRequestClose() }
-                            />
-                        )}
-                    </TouchableOpacity>
-                </View>
-                <View style={ styles.container }>
-                    <TextInput
-                        style={ styles.textInput }
-                        multiline
-                        defaultValue={ content }
-                        onChangeText={(text) => setNotesEditContent(text.trim())}
-                    />
-                </View>
-        </Modal>
+            </Modal>
+        </GestureRecognizer>
     );
 };
 

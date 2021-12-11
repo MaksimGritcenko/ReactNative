@@ -5,13 +5,20 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { logout } from "../../utils/Query";
 import { setUserEmail, setIsOnboarded } from "store/User/User.action";
 import {setPreferedLanguage} from "../../store/User/User.action";
+import { searchChatQsts } from '../../store/Chat/Chat.dispatcher';
 
+
+export const mapStateToProps = (state) => ({
+    searchResults: state.ChatReducer.searchResults
+});
 
 export const mapDispatchToProps = (dispatch) => ({
     setEmail: email => dispatch(setUserEmail(email)),
     onSuccessBoarding: () => dispatch(setIsOnboarded(false)),
-    setPreferedLanguage: language => dispatch(setPreferedLanguage(language))
+    setPreferedLanguage: language => dispatch(setPreferedLanguage(language)),
+    searchChatQsts: () => searchChatQsts(dispatch)
 });
+
 export const HomeContainer = (props) => {
     const { opacity, language } = props;
 
@@ -34,20 +41,15 @@ export const HomeContainer = (props) => {
         setEmail(null);
     }
 
-    async function searchResults(searchText) {
-        const apiResponse = await fetch("https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages");
-        const data = await apiResponse.json();
-    }
-
     return (
         <HomeComponent
+            { ...props }
             email={ email }
             logout={ signOut }
             opacity={ opacity }
             language={ language }
-            searchResults={ searchResults }
         />
     )
 }
 
-export default connect(null, mapDispatchToProps)(HomeContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContainer);

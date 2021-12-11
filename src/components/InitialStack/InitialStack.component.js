@@ -45,7 +45,7 @@ export function InitialStack() {
                 headerTitleStyle: {
                     fontWeight: 'bold',
                 },
-            }}>
+        }}>
             { renderScreens() }
         </Stack.Navigator>
     );

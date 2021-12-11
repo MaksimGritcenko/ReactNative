@@ -8,26 +8,28 @@ import {
 import MainComponent from "../../components/Main/Main.component";
 import {
     darkBlue,
+    placeholderTextColor
 } from "../../constants/Colors";
 
 import LV from '../../utils/Translations/lv.json';
-import SearchResultComponent from '../../components/SearchResult/SearchResult.component';
+import SearchResult from '../../components/SearchResult';
 
 import { styles } from "./Home.styles";
 
-export const HomeComponent = ({ logout, opacity, language }) => {
+export const HomeComponent = (props) => {
+    const {
+        logout,
+        opacity,
+        language,
+        searchChatQsts,
+        searchResults
+    } = props;
+
     const [searchText, setSearchText] = useState('');
     const [searchData, setSearchData] = useState('');
 
-    async function searchResults(searchText) {
-        // todo: nizhe fetch tupo chtobi dannije fake dostatj i zastilitj spisok
-        // todo: sam spisok nahoditsja v SearchResult.component.js.
-        // todo: searchText eto tekst kotorij udot propisal v inpute.
-        // todo: daljshe sam xD
-
-        const apiResponse = await fetch("https://my-json-server.typicode.com/kevintomas1995/logRocket_searchBar/languages");
-        const data = await apiResponse.json();
-        setSearchData(data)
+    function getSearchResults() {
+        searchChatQsts();
     }
 
     return (
@@ -38,11 +40,12 @@ export const HomeComponent = ({ logout, opacity, language }) => {
                         <TextInput
                           style={{ fontWeight: 'bold', color: '#fff', fontSize: 20 }}
                           placeholder="Search"
+                          placeholderTextColor={ placeholderTextColor }
                           onChangeText={ text => setSearchText(text) }
-                          onSubmitEditing={() => searchResults(searchText)}
+                          onSubmitEditing={() => getSearchResults()}
                         />
                     </View>
-                    <SearchResultComponent data={ searchData } />
+                    <SearchResult language={ language } data={ searchResults } />
                 </View>
                 <View style={{
                     ...styles.logoutButtonWrapper,

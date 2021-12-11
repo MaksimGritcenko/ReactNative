@@ -1,67 +1,81 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     KeyboardAvoidingView,
     Platform,
-    Pressable,
-    SafeAreaView,
     Text,
     TextInput,
-    View
+    View,
+    TouchableOpacity
 } from "react-native";
 
-import styles from "../Login/Login.styles";
-import {darkBlue} from "../../constants/Colors";
-import LV from '../../utils/Translations/lv.json';
+import MainComponent from "../../components/Main/Main.component";
+import styles from "./PushNotifications.styles";
+import { darkBlue, placeholderTextColor, lightGray } from "../../constants/Colors";
 import { IOS_PLATFORM } from "./PushNotifications.config";
 
 export const PushNotificationsComponent = ({ sendPushNotification, language }) => {
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+    const [isAbleToSend, setIsAbleToSend] = useState(false);
 
-    function getLanguage() {
-        return language === 'lv';
-    }
-
-    function renderTitle() {
-        return getLanguage() ? LV.NotificationTitle : 'Send notifications'
-    }
+    useEffect(() => {
+        if (title && text) {
+            setIsAbleToSend(true);
+        } else {
+            setIsAbleToSend(false);
+        }
+    });
 
     return (
-        <SafeAreaView>
-            <KeyboardAvoidingView
-                behavior={ Platform.OS === IOS_PLATFORM ? "padding" : "height" }
-            >
-                <View>
-                    <View style={{ borderColor: 'red', alignItems: 'center'}} >
-                        <Text style={ { ... styles.title, marginTop: 100 } }>
-                            { renderTitle() }
-                        </Text>
-                        <TextInput
-                            style={ styles.textInput }
-                            placeholder="Title"
-                            onChangeText={text => setTitle(text) }
-                            value={ title }
-                        />
-                        <TextInput
-                            style={ [styles.textInput, { marginTop: 10}] }
-                            placeholder="Text"
-                            onChangeText={ text => setText(text)}
-                            value={ text }
-                        />
-                        <Pressable
-                            style={ { ...styles.button, backgroundColor: darkBlue, width: '50%'} }
-                            onPress={ () => {
-                                sendPushNotification(title, text);
-                                setText('');
-                                setTitle('');
-                            } }
-                        >
-                            <Text style={ styles.buttonContentText }>Send Notifications</Text>
-                        </Pressable>
+        <MainComponent>
+            <View style={ styles.container }>
+                <KeyboardAvoidingView
+                    style={{ backgroundColor: 'transparent' }}
+                    behavior={ Platform.OS === IOS_PLATFORM ? "padding" : "height" }
+                >
+                    <View>
+                        <View style={{ alignItems: 'center'}} >
+                            <TextInput
+                                style={ styles.textInput }
+                                placeholder="Title"
+                                placeholderTextColor={ placeholderTextColor }
+                                onChangeText={text => setTitle(text) }
+                                value={ title }
+                            />
+                            <TextInput
+                                style={ [styles.textInput, { marginTop: 10 }] }
+                                placeholder="Text"
+                                placeholderTextColor={ placeholderTextColor }
+                                onChangeText={ text => setText(text)}
+                                value={ text }
+                            />
+                                <TouchableOpacity
+                                    style={ {
+                                        ...styles.button,
+                                        backgroundColor: isAbleToSend ? darkBlue : lightGray,
+                                    } }
+                                    activeOpacity={ .9 }
+                                    disabled={ !isAbleToSend }
+                                    onPress={ () => {
+                                        sendPushNotification(title, text);
+                                        setText('');
+                                        setTitle('');
+                                    } }
+                                >
+                                    <Text
+                                      style={ {
+                                          ...styles.buttonContentText,
+                                          color: isAbleToSend ? lightGray : darkBlue
+                                        } }
+                                    >
+                                        Send Notifications
+                                    </Text>
+                                </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
-            </KeyboardAvoidingView>
-        </SafeAreaView>
+                </KeyboardAvoidingView>
+            </View>
+        </MainComponent>
     );
 }
 

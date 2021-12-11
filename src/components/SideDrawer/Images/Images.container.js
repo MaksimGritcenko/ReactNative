@@ -9,7 +9,8 @@ import {
 } from "../../../store/Images/Images.action";
 
 export const mapStateToProps = state => ({
-    imageUrlArr: state.ImagesReducer.imageUrlArr
+    imageUrlArr: state.ImagesReducer.imageUrlArr,
+    language: state.UserReducer.language
 });
 
 export const mapDispatchToProps = dispatch => ({
@@ -18,7 +19,7 @@ export const mapDispatchToProps = dispatch => ({
     updateImagesArrayAfterDelete: data => dispatch(updateImagesArrayAfterDelete(data)),
 })
 
-export const ImagesContainer = ({ imageUrlArr, updateImagesArrayAfterDelete, setInitialValueInArray }) => {
+export const ImagesContainer = ({ imageUrlArr, updateImagesArrayAfterDelete, setInitialValueInArray, language }) => {
     function deleteImage(imageUrl) {
         const newArr = imageUrlArr.filter(({ imageUri }) => {
             return imageUri !== imageUrl
@@ -35,6 +36,7 @@ export const ImagesContainer = ({ imageUrlArr, updateImagesArrayAfterDelete, set
 
     return (
         <ImagesComponent
+            language={ language }
             imageUriArray={ imageUrlArr }
             deleteImage={ deleteImage }
         />

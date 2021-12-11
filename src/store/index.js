@@ -12,6 +12,7 @@ import NotesReducer from "./Notes/Notes.reducer";
 import InstructionsReducer from "./Instructions/Instructions.reducer";
 import ImagesReducer from './Images/Images.reducer';
 import PushNotifications from "./PushNotifications/PushNotifications.reducer";
+import OnboardingReducer from "./Onboarding/Onboarding.reducer";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const persistConfig = {
@@ -23,7 +24,7 @@ const persistConfig = {
       'InstructionsReducer',
       'ImagesReducer',
       'PushNotifications',
-      'ChatReducer'
+      'ChatReducer',
   ]
 }
 
@@ -34,7 +35,8 @@ const reducersToPersist = combineReducers({
   NotesReducer,
   InstructionsReducer,
   ImagesReducer,
-  PushNotifications
+  PushNotifications,
+  OnboardingReducer
 });
 
 const persistedReducers = persistReducer(persistConfig, reducersToPersist);

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, Platform } from "react-native";
 import { CONTENT_PADDING_TOP } from '../../../constants/Layout';
 
 const { width, height } = Dimensions.get('window');
@@ -9,12 +9,13 @@ export const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         alignSelf: "center",
-        alignItems:'center',
         backgroundColor: 'rgba(0,0,0,0.6)'
     },
     renderImageScrollViewWrapper: {
+        marginHorizontal: '2%',
         flexDirection: 'row',
         flexWrap: 'wrap',
+        paddingBottom: 60,
         justifyContent: 'space-between'
     },
     renderImagesCounter: {
@@ -27,7 +28,7 @@ export const styles = StyleSheet.create({
     },
     renderImageContainer: {
         borderRadius: 10,
-        width: width / 2.3,
+        width: '44%',
         height: height/ 5,
         margin: 10
     },
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
     modalCloseButton: {
         position: "absolute",
         right: 20,
-        top: 17,
+        top: Platform.OS === 'ios' ? 30 : 17,
         zIndex: 10,
         backgroundColor: "#000"
     },
@@ -59,5 +60,14 @@ export const styles = StyleSheet.create({
         height: '80%',
         top: 30,
         alignSelf: 'center'
+    },
+    NoImgWrapper: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1
+    },
+    NoImg: {
+        color: 'rgba(220, 220, 220, 1)',
+        fontSize: 16
     }
 });

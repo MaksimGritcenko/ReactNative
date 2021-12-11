@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import styles from '../Login/Login.styles';
-import { AntDesign, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
 export const RegisterComponent = (props) => {
@@ -34,35 +34,35 @@ export const RegisterComponent = (props) => {
                         <View style={{ width: '75%'}}>
                             <View style={ styles.textInputWrapper }>
                                 <View style={ styles.icon }>
-                                    <Feather name="user" size={29} color="white" />
+                                    <Feather name="user" size={29} color="rgba(220,220,220,1)" />
                                 </View>
                                 <TextInput
                                   style={ styles.textInput }
                                   placeholder="Email"
-                                  placeholderTextColor="rgba(255,255,255,.5)"
+                                  placeholderTextColor={ placeholderTextColor }
                                   onChangeText={text => setEmail(text) }
                                 />
                             </View>
                             <View style={ { ...styles.textInputWrapper, flexDirection: 'column'} }>
                                 <View style={ styles.icon }>
-                                    <Ionicons name="lock-closed-outline" size={29} color="white" />
+                                    <Ionicons name="lock-closed-outline" size={29} color="rgba(220,220,220,1)" />
                                 </View>
                                 <TextInput
                                   style={ [styles.textInput, { marginTop: 10}] }
                                   placeholder="Password"
-                                  placeholderTextColor="rgba(255,255,255,.5)"
+                                  placeholderTextColor={ placeholderTextColor }
                                   onChangeText={ text => setPassword(text)}
                                   secureTextEntry={true}
                                 />
                             </View>
                             <View style={ { ...styles.textInputWrapper, flexDirection: 'column'} }>
                                 <View style={ styles.icon }>
-                                    <Ionicons name="lock-closed-outline" size={29} color="white" />
+                                    <Ionicons name="lock-closed-outline" size={29} color="rgba(220,220,220,1)" />
                                 </View>
                                 <TextInput
                                   style={ [styles.textInput, { marginTop: 10}] }
                                   placeholder="Repeat Password"
-                                  placeholderTextColor="rgba(255,255,255,5)"
+                                  placeholderTextColor={ placeholderTextColor }
                                   onChangeText={ text => setConfirmPassword(text)}
                                   secureTextEntry={true}
                                 />

@@ -1,12 +1,8 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import PushNotificationsComponent from "./PushNotifications.component";
-import Constants from "expo-constants";
-import * as Notifications from "expo-notifications";
-import { Platform } from "react-native";
 import { sendNotificationsToAllTokensFromFirebase } from "../../utils/Query";
-import {ANDROID_PLATFORM, FAILED_TOKEN_FETCHING, PHYSICAL_DEVICE, STATUS_GRANTED} from "./PushNotifications.config";
 
 export const mapStateToProps = state => ({
     tokens: state.PushNotifications.tokens,

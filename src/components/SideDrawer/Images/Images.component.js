@@ -4,18 +4,24 @@ import {
     Text, TouchableOpacity,
     View, ScrollView
 } from "react-native";
+import GestureRecognizer from 'react-native-swipe-gestures';
+
 import MainComponent from "../../Main/Main.component";
 import Carousel  from 'react-native-snap-carousel';
 import {AntDesign} from "@expo/vector-icons";
 import AddImage from "../../AddImage";
 import { styles } from "./Images.style";
 
+import { getIsLV } from '../../../utils/Translations/Translations';
+import LV from '../../../utils/Translations/lv.json';
+
 const { width } = Dimensions.get('window');
 
-export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
-    const [ indexSelected, setIndexSelected] = useState(0);
+export const ImagesComponent = ({ imageUriArray, deleteImage, language }) => {
     const carouselRef = useRef();
     const flatListRef = useRef();
+
+    const [indexSelected, setIndexSelected] = useState(0);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const onTouchThumbnail = touched => {
@@ -102,9 +108,23 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
         })
     }
 
-    return (
-        <MainComponent>
-            <View style={ styles.container }>
+    function renderNoImgsTxt() {
+        return (
+            <View style={ styles.NoImgWrapper }>
+                <Text style={ styles.NoImg }>
+                    { getIsLV(language) ? LV.PressToAddImage : 'Press + to add image' }
+                </Text>
+            </View>
+        );
+    }
+
+    function renderImagesBlock() {
+        if (!imageUriArray || !imageUriArray.length) {
+            return renderNoImgsTxt();
+        }
+
+        return (
+            <>
                 <ScrollView>
                     <View style={ styles.renderImageScrollViewWrapper }>
                         { renderImages() }
@@ -115,47 +135,61 @@ export const ImagesComponent = ({ imageUriArray, deleteImage }) => {
                 >
                     { imageUriArray && <Text style={{ color: '#fff', fontWeight: 'bold'}}>{ `${ imageUriArray.length } / 10` }</Text> }
                 </View>
+            </>
+        );
+    }
+
+    return (
+        <MainComponent>
+            <View style={ styles.container }>
+                { renderImagesBlock() }
             </View>
-            <Modal
-                animationType="slide"
-                transparent
-                visible={ isModalVisible }
-                onRequestClose={() => setIsModalVisible(false) }
+            <GestureRecognizer
+              style={{ flex: 1 }}
+              onSwipeDown={ () => closeModal() }
             >
-                <View style={ styles.modalContainer }>
-                    <TouchableOpacity style={ styles.modalCloseButton }>
-                        <AntDesign
-                            name="closecircleo"
-                            size={24}
-                            color="#fff"
-                            onPress={ () => closeModal() }
-                        />
-                    </TouchableOpacity>
-                    { imageUriArray && (
-                        <Carousel
-                            firstItem={ indexSelected }
-                            data={ imageUriArray }
-                            renderItem={({ item: { imageUri }, index }) => renderItem(imageUri, index)}
-                            sliderWidth={ width }
-                            itemWidth={ width }
-                            onSnapToItem={ index => onSelect(index) }
-                            ref={ carouselRef }
-                        />
-                    )}
-                    { imageUriArray && (
-                        <FlatList
-                            data={ imageUriArray }
-                            renderItem={({ item: { imageUri }, index }) => renderThumbnails(imageUri, index)}
-                            horizontal
-                            style={{ position: 'absolute', bottom: 40 }}
-                            showsHorizontalScrollIndicator={ false }
-                            contentContainerStyle={{ paddingHorizontal: 10 }}
-                            keyExtractor={ item => item.id }
-                            ref={ flatListRef }
-                        />
-                    )}
-                </View>
-            </Modal>
+                <Modal
+                    animationType="slide"
+                    transparent
+                    visible={ isModalVisible }
+                    onRequestClose={() => setIsModalVisible(false) }
+                >
+                    <View style={ styles.modalContainer }>
+                        <TouchableOpacity style={ styles.modalCloseButton }>
+                            <AntDesign
+                                name="closecircleo"
+                                size={24}
+                                color="#fff"
+                                onPress={ () => closeModal() }
+                            />
+                        </TouchableOpacity>
+                        { imageUriArray && (
+                            <Carousel
+                                firstItem={ indexSelected }
+                                initialNumToRender={ 10 }
+                                data={ imageUriArray }
+                                renderItem={({ item: { imageUri }, index }) => renderItem(imageUri, index)}
+                                sliderWidth={ width }
+                                itemWidth={ width }
+                                onSnapToItem={ index => onSelect(index) }
+                                ref={ carouselRef }
+                            />
+                        )}
+                        { imageUriArray && (
+                            <FlatList
+                                data={ imageUriArray }
+                                renderItem={({ item: { imageUri }, index }) => renderThumbnails(imageUri, index)}
+                                horizontal
+                                style={{ position: 'absolute', bottom: 40 }}
+                                showsHorizontalScrollIndicator={ false }
+                                contentContainerStyle={{ paddingHorizontal: 10 }}
+                                keyExtractor={ item => item.id }
+                                ref={ flatListRef }
+                            />
+                        )}
+                    </View>
+                </Modal>
+            </GestureRecognizer>
             <AddImage />
         </MainComponent>
     );
