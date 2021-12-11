@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import {
+    Platform,
     View
 } from "react-native";
 import HomeComponent from "../../routes/Home";
@@ -8,7 +9,6 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import SettingsComponent from "../SideDrawer/Settings/Settings.component";
 import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
 import {NavigationContainer} from "@react-navigation/native";
-import { Entypo } from '@expo/vector-icons';
 
 import ChatComponent from "../SideDrawer/Chat";
 import { AntDesign } from '@expo/vector-icons';
@@ -25,6 +25,14 @@ import {
 } from "../../constants/Colors";
 import {StatusBar} from "expo-status-bar";
 
+import {
+    Entypo,
+    SimpleLineIcons,
+    MaterialCommunityIcons,
+    MaterialIcons,
+    Ionicons,
+} from '@expo/vector-icons';
+
 const SideDrawer = createDrawerNavigator();
 
 export const DashboardComponent = (props) => {
@@ -34,31 +42,26 @@ export const DashboardComponent = (props) => {
         language,
         showAddImageModal,
         imageUriArray,
-        admin
+        admin,
     } = props;
     const [opacity, setOpacity] = useState(0);
 
-    function showSmallModal() {
-        setOpacity(1)
-
-        if (opacity === 1) setOpacity(0)
-    }
 
     function Home() {
         return <HomeComponent language={ language } opacity={ opacity } />;
-    }
-
-    function renderIcon() {
-        if (opacity === 1) return 'upcircleo';
-
-        return 'downcircleo';
     }
 
     function getLanguage() {
         return language === 'lv';
     }
 
+
     function getNavMap() {
+        const drawerLabelStyle = {
+            color: '#fff',
+            left: -15
+        };
+
         return [
             {
                 id: 1,
@@ -71,10 +74,16 @@ export const DashboardComponent = (props) => {
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     gestureEnabled: true,
+                    drawerIcon: () => (<SimpleLineIcons
+                        name="home"
+                        size={24}
+                        color="#fff"
+                    />),
                     headerStyle: {
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
-                    }
+                    },
+                    drawerLabelStyle
                 }
             },
             {
@@ -86,11 +95,17 @@ export const DashboardComponent = (props) => {
                     headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
+                    drawerIcon: () => (<SimpleLineIcons
+                        name="settings"
+                        size={24}
+                        color="#fff"
+                    />),
                     headerStyle: {
                         backgroundColor: skyBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
-                    }
+                    },
+                    drawerLabelStyle
                 }
             },
             {
@@ -102,27 +117,42 @@ export const DashboardComponent = (props) => {
                     headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
+                    drawerIcon: () => (<MaterialCommunityIcons
+                        name="history"
+                        size={24}
+                        color="#fff"
+                    />),
                     headerStyle: {
                         backgroundColor: skyBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
-                    }
+                    },
+                    drawerLabelStyle
                 }
             },
             {
                 id: 4,
                 name: getLanguage() ? LV.NavigationChatTitle : 'Chat',
                 component: ChatComponent,
+                isEnabled: false,
                 options: {
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
+                    drawerIcon: () => (<Ionicons
+                        name="chatbox-outline"
+                        size={24}
+                        color="#fff"
+                    />),
+
+                    isEnabled: false,
                     headerStyle: {
                         backgroundColor: skyBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
-                    }
+                    },
+                    drawerLabelStyle
                 }
             },
             {
@@ -134,11 +164,17 @@ export const DashboardComponent = (props) => {
                     headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
+                    drawerIcon: () => (<MaterialIcons
+                        name="notes"
+                        size={24}
+                        color="#fff"
+                    />),
                     headerStyle: {
                         backgroundColor: isEditModalVisible ? darkBlue : skyBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
                     },
+                    drawerLabelStyle,
                     headerRight: () => (
                         <Entypo
                             style={{ marginRight: 20}}
@@ -159,11 +195,17 @@ export const DashboardComponent = (props) => {
                     headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
+                    drawerIcon: () => (<Ionicons
+                        name="md-images-outline"
+                        size={24}
+                        color="#fff"
+                    />),
                     headerStyle: {
                         backgroundColor: darkBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
                     },
+                    drawerLabelStyle,
                     headerRight: () => {
                         if (imageUriArray && imageUriArray.length >= 10) return null;
 
@@ -187,6 +229,12 @@ export const DashboardComponent = (props) => {
                     headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
+                    drawerIcon: () => (<Ionicons
+                        name="ios-book-outline"
+                        size={24}
+                        color="#fff"
+                    />),
+                    drawerLabelStyle,
                     headerStyle: {
                         backgroundColor: skyBlue,
                         elevation: 0,
@@ -203,8 +251,13 @@ export const DashboardComponent = (props) => {
                     headerTransparent: true,
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
+                    drawerIcon: () => (<Ionicons
+                        name="md-notifications-outline"
+                        size={24}
+                        color="#fff"
+                    />),
+                    drawerLabelStyle,
                     headerStyle: {
-                        backgroundColor: skyBlue,
                         elevation: 0,
                         shadowOffset: { width: 0, height: 0 }
                     }
@@ -233,6 +286,8 @@ export const DashboardComponent = (props) => {
         });
     }
 
+    const statusBarStyle = Platform.OS === 'ios' ? 'dark' : 'light';
+
     return (
         <View style={{ flex: 1 }}>
             <NavigationContainer
@@ -251,7 +306,7 @@ export const DashboardComponent = (props) => {
                     { renderScreens() }
                 </SideDrawer.Navigator>
             </NavigationContainer>
-            <StatusBar hidden={ false } style="dark" />
+            <StatusBar hidden={ false } style={ statusBarStyle } />
         </View>
     );
 };

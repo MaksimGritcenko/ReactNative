@@ -1,5 +1,9 @@
 import { StyleSheet } from "react-native";
 
+import {
+    placeholderTextColor
+} from "../../constants/Colors";
+
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'flex-end',
@@ -41,7 +45,7 @@ const styles = StyleSheet.create({
         color: '#f5f1f5'
     },
     registerLink: {
-        color: 'rgba(255,255,255, 0.5)',
+        color: placeholderTextColor,
         marginTop: 20,
         textAlign: 'center',
         textTransform: 'capitalize',

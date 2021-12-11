@@ -1,13 +1,15 @@
-
-
-
 import {
     updateActiveChatChain,
     updateIsChainLoading,
     updateIsFormulationLoading,
     updateFormulations,
     updateActiveQuestionId,
-    updateIsChatDataSending
+    updateIsChatDataSending,
+    updateSearchResults,
+    updateIsSearching,
+    updateActiveChatTabId,
+    updateAnswers,
+    updateActiveChainAdminId
 } from './Chat.action';
 
 import {
@@ -28,17 +30,33 @@ import {
 } from '../../utils/Constants'
 
 
-export async function getChatQuestionsForChain(dispatch, activeQstId, activeChatTabId) {
+export async function getChatQuestionsForChain(
+    dispatch,
+    activeChatTabId,
+    activeQstId
+) {
     dispatch(updateIsChainLoading(true));
 
     try {
-        const questionsForTab = await getCollectionDocsByWhere(QUESTION_COLLECTION, 'tabId', activeChatTabId);
-        dispatch(updateActiveChatChain(questionsForTab));
-
-        if (activeQstId === null) {
-            // TODO: hard coded first id
-            dispatch(updateActiveQuestionId(questionsForTab[0].id));
+        if (!activeChatTabId) {
+            return;
         }
+
+        const questionsForTab = await getCollectionDocsByWhere(QUESTION_COLLECTION, 'tabId', activeChatTabId);
+        await queryFormulation(activeQstId, questionsForTab, dispatch);
+
+        // palcing selected question in a front of array
+        questionsForTab.sort((a) => {
+            if (a.id === activeQstId) {
+                return -1;
+            }
+
+            return 0
+        });
+
+        dispatch(updateActiveChatChain(questionsForTab));
+        dispatch(updateActiveChatTabId(activeChatTabId));
+        dispatch(updateActiveQuestionId(activeQstId));
     } catch (e) {
 
     } finally {
@@ -84,4 +102,37 @@ export async function sendChatResult(formulations, answers, adminId, customerEma
     } finally {
         dispatch(updateIsChatDataSending(false));
     }
+}
+
+export async function searchChatQsts(dispatch) {
+    dispatch(updateIsSearching(true));
+
+    const tabIds = [
+        '4MUgKyzSjLIbgbteWyah',
+        'aHjuDuZCUgLzdQyG9lYp'
+    ];
+
+    try {
+        const questions = [];
+
+        for (const id of tabIds) {
+            const result = await getCollectionDocsByWhere(QUESTION_COLLECTION, 'tabId', id);
+            questions.push(...result);
+        }
+
+        dispatch(updateSearchResults(questions));
+    } catch (e) {
+
+    } finally {
+        dispatch(updateIsSearching(false));
+    }
+}
+
+export function toDefaultChatState(dispatch) {
+    dispatch(updateActiveChatChain({}));
+    dispatch(updateActiveChainAdminId(''));
+    dispatch(updateActiveChatTabId(''));
+    dispatch(updateActiveQuestionId(''));
+    dispatch(updateFormulations(null));
+    dispatch(updateAnswers(null));
 }

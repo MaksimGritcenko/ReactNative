@@ -6,7 +6,10 @@ import {
     UPDATE_IS_FORMULATION_LOADING,
     UPDATE_ANSWERS,
     UPDATE_IS_CHAT_DATA_SENDING,
-    UPDATE_ACTIVE_CHAT_TAB_ID
+    UPDATE_ACTIVE_CHAT_TAB_ID,
+    UPDATE_SEARCH_RESULTS,
+    UPDATE_IS_SEARCHING,
+    UPDATE_ACTIVE_CHAIN_ADMIN_ID
 } from "./Chat.action";
 
 import { getIsAlreadyAsked } from '../../utils/ChatHelpers';
@@ -48,6 +51,13 @@ export const updateAnswers = (state, action) => {
 export const updateActiveChatChain = (state, action) => {
     const { activeChatChain } = action;
 
+    if (!Object.keys(activeChatChain).length) {
+        return {
+            ...state,
+            activeChatChain
+        };
+    }
+
     const activeChainAdminId = activeChatChain[0].data.adminId;
 
     return {
@@ -59,8 +69,7 @@ export const updateActiveChatChain = (state, action) => {
 
 export const getInitialState = () => ({
     activeChatChain: {},
-    // TODO: get active tab id from search
-    activeChatTabId: '4MUgKyzSjLIbgbteWyah',
+    activeChatTabId: '',
     activeChainAdminId: '',
     activeQuestionId: null,
     formulations: [],
@@ -68,6 +77,8 @@ export const getInitialState = () => ({
     isChainLoading: false,
     isFormulationLoading: false,
     isChatDataSending: false,
+    searchResults: [],
+    isSearching: false
 });
 
 export const ChatReducer = (
@@ -79,7 +90,7 @@ export const ChatReducer = (
             return updateActiveChatChain(state, action);
 
         case UPDATE_ACTIVE_CHAT_TAB_ID:
-            const { activeChatTabId } = this.props;
+            const { activeChatTabId } = action;
 
             return {
                 ...state,
@@ -110,12 +121,36 @@ export const ChatReducer = (
                 isFormulationLoading
             }
 
+        case UPDATE_ACTIVE_CHAIN_ADMIN_ID:
+            const { activeChainAdminId } = action;
+
+            return {
+                ...state,
+                activeChainAdminId
+            }
+
         case UPDATE_IS_CHAT_DATA_SENDING:
             const { isChatDataSending } = action;
 
             return {
                 ...state,
                 isChatDataSending
+            }
+
+        case UPDATE_SEARCH_RESULTS:
+            const { searchResults } = action;
+
+            return {
+                ...state,
+                searchResults
+            }
+
+        case UPDATE_IS_SEARCHING:
+            const { isSearching } = action;
+
+            return {
+                ...state,
+                isSearching
             }
 
         case UPDATE_FORMULATIONS:

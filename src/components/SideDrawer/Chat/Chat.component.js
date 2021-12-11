@@ -24,22 +24,20 @@ export const ChatComponent = (props) => {
         setChatMsgHeight,
         onInputChange,
         onInputSend,
-        inputTxt
+        inputTxt,
+        activeChatChain,
+        activeQuestionIdx,
+        isTypingTimeoutOver,
+        isFormulationLoading,
     } = props;
 
     function renderProgress() {
-        const {
-            formulations,
-            activeChatChain
-        } = props;
-
-        const currentQst = formulations.length;
         const totalQst = activeChatChain.length;
 
         return (
             <View style={ styles.ChatProgress }>
                 <Text>
-                    { `${ currentQst || 1 } / ${ totalQst }` }
+                    { `${ activeQuestionIdx + 1 || 1 } / ${ totalQst }` }
                 </Text>
             </View>
         );
@@ -99,16 +97,17 @@ export const ChatComponent = (props) => {
 
         return (
             <>
-                { formulations.map(renderChatMessages) }
+                { formulations
+                    .slice(0, activeQuestionIdx + 1)
+                    .map(renderChatMessages)
+                }
                 { renderTypingAnim() }
             </>
         );
     }
 
     function renderTypingAnim() {
-        const { isFormulationLoading } = props;
-
-        if (!isFormulationLoading) {
+        if (!isFormulationLoading && isTypingTimeoutOver) {
             return null;
         }
 
@@ -132,11 +131,15 @@ export const ChatComponent = (props) => {
     function renderQstAnswers() {
         const { formulations } = props;
 
-        if (!formulations.length || !activeQuestionId) {
+        if (
+            !formulations.length
+            || !activeQuestionId
+            || !isTypingTimeoutOver
+        ) {
             return null;
         }
 
-        const answers = formulations[formulations.length - 1].answers;
+        const answers = formulations[activeQuestionIdx].answers;
 
         return (
             <View style={ styles.QuestionAnswers }>
@@ -157,40 +160,67 @@ export const ChatComponent = (props) => {
         );
     }
 
-    const keyboardVerticalOffset = Platform.OS === 'ios' ? 80 : -200;
+    function renderNoChatMsg() {
+        return (
+            <View style={ styles.NoChatWrapper }>
+                <View style={ styles.NoChat }>
+                    <Text style={ styles.NoChatTxt }>
+                        You don't have an active chat. Use search!
+                    </Text>
+                </View>
+            </View>
+        );
+    }
+
+
+    function renderActiveChat() {
+        const keyboardVerticalOffset = Platform.OS === 'ios' ? 80 : -200;
+
+        if (
+            isTypingTimeoutOver
+            && !activeChatChain
+            || !activeChatChain.length
+        ) {
+            return renderNoChatMsg();
+        }
+
+        return (
+            <View style={ styles.ChatWrapper }>
+                { renderProgress() }
+                <ScrollView
+                    contentContainerStyle={ styles.ChatScrollView }
+                    showsVerticalScrollIndicator={ false }
+                    alwaysBounceVertical={ true }
+                    automaticallyAdjustContentInsets={ true }
+                    contentInset={ { bottom: chatMsgBottomOffset } }
+                >
+                    <View style={ styles.ChatMessagesContainer }>
+                        { renderChatBlocks() }
+                    </View>
+                </ScrollView>
+                <KeyboardAvoidingView
+                    behavior={ Platform.OS === 'ios' ? 'position' : 'height' }
+                    keyboardVerticalOffset={keyboardVerticalOffset}
+                    style={ styles.QstsAnswInputContainer }
+                >
+                    <View
+                        style={ styles.QstsAnswInputWrapper }
+                        onLayout={ (e) => setChatMsgHeight(e.nativeEvent.layout.height) }
+                    >
+                        { renderQstAnswers() }
+                        <View style={ styles.InputBlock }>
+                            { renderInputField() }
+                        </View>
+                    </View>
+                </KeyboardAvoidingView>
+            </View>
+        );
+    }
 
     return (
         <MainComponent>
             <View style={ styles.Chat }>
-                <View style={ styles.ChatWrapper }>
-                    { renderProgress() }
-                    <ScrollView
-                      contentContainerStyle={ styles.ChatScrollView }
-                      showsVerticalScrollIndicator={ false }
-                      alwaysBounceVertical={ true }
-                      automaticallyAdjustContentInsets={ true }
-                      contentInset={ { bottom: chatMsgBottomOffset } }
-                    >
-                        <View style={ styles.ChatMessagesContainer }>
-                            { renderChatBlocks() }
-                        </View>
-                    </ScrollView>
-                    <KeyboardAvoidingView
-                        behavior={ Platform.OS === 'ios' ? 'position' : 'height' }
-                        keyboardVerticalOffset={keyboardVerticalOffset}
-                        style={ styles.QstsAnswInputContainer }
-                    >
-                        <View
-                          style={ styles.QstsAnswInputWrapper }
-                          onLayout={ (e) => setChatMsgHeight(e.nativeEvent.layout.height) }
-                        >
-                            { renderQstAnswers() }
-                            <View style={ styles.InputBlock }>
-                                { renderInputField() }
-                            </View>
-                        </View>
-                    </KeyboardAvoidingView>
-                </View>
+                { renderActiveChat() }
             </View>
         </MainComponent>
     );

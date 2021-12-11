@@ -13,7 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const mapStateToProps = (state) => ({
     isEditModalVisible: state.NotesReducer.isEditModalVisible,
     language: state.UserReducer.language,
-    imageUrlArr: state.ImagesReducer.imageUrlArr
+    imageUrlArr: state.ImagesReducer.imageUrlArr,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -63,6 +63,7 @@ export const DashboardContainer = (props) => {
 
     return (
         <DashboardComponent
+            { ...props }
             toggle={ toggle }
             updateModalVisibility={ updateModalVisibility }
             showNotesModal={ showNotesModal }

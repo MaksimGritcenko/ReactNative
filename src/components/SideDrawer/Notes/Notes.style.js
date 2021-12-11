@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { darkBlue } from '../../../constants/Colors';
 import { CONTENT_PADDING_TOP } from '../../../constants/Layout';
 
@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         marginRight: 10,
         marginLeft: 10,
+        marginBottom: 10,
         borderRadius: 10,
     },
     title: {
@@ -52,6 +53,7 @@ export const styles = StyleSheet.create({
         borderBottomWidth: 1,
         padding: 10,
         width: '95%',
+        maxHeight: Platform.OS === 'ios' ? 185 : 200,
         alignSelf: 'center',
         borderColor: 'rgba(255,255,255,.1)',
         borderRadius: 10,
@@ -59,15 +61,15 @@ export const styles = StyleSheet.create({
         color: '#fff',
     },
     saveButton: {
-        width: '95%',
-        marginTop: 15,
-        alignSelf: 'center',
+        width: '40%',
+        marginTop: 20,
+        alignSelf: 'flex-end',
         padding: 10,
+        marginRight: 18,
         borderRadius: 10,
     },
     saveButtonText: {
         textAlign: "center",
-        textTransform: 'uppercase',
         fontWeight: "bold",
         color: '#fff',
         fontSize: 20

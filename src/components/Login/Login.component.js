@@ -5,20 +5,21 @@ import {
     View,
     TextInput,
     Pressable,
-    SafeAreaView,
-    Image,
     KeyboardAvoidingView,
     Platform, StatusBar
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 
+import {
+    placeholderTextColor
+} from "../../constants/Colors";
+
 import styles from './Login.styles';
 
 export const LoginComponent = (props) => {
     const {
         isLoading,
-        loginClick,
         navigation
     } = props;
 
@@ -40,24 +41,28 @@ export const LoginComponent = (props) => {
                                     <AntDesign
                                       name="login"
                                       size={24}
-                                      color="black"
+                                      color="rgba(220,220,220,1)"
                                     />
                                 </View>
                                 <TextInput
                                   style={ styles.textInput }
                                   placeholder="Email"
-                                  placeholderTextColor="rgba(0,0,0,0.5)"
+                                  placeholderTextColor={ placeholderTextColor }
                                   onChangeText={text => setEmail(text) }
                                 />
                             </View>
                             <View style={ styles.textInputWrapper }>
                                 <View style={ styles.icon }>
-                                    <Ionicons name="lock-closed-outline" size={29} color="black" />
+                                    <Ionicons
+                                      name="lock-closed-outline"
+                                      size={29}
+                                      color="rgba(220,220,220,1)"
+                                    />
                                 </View>
                                 <TextInput
                                   style={ [styles.textInput, { marginTop: 10}] }
                                   placeholder="Password"
-                                  placeholderTextColor="rgba(0,0,0,0.5)"
+                                  placeholderTextColor={ placeholderTextColor }
                                   onChangeText={ text => setPassword(text)}
                                   secureTextEntry={true}
                                 />
@@ -65,7 +70,7 @@ export const LoginComponent = (props) => {
                         </View>
                         <View style={ styles.buttonContainer }>
                             <Pressable
-                              style={{
+                              style={ {
                                   ...styles.button,
                                   opacity: isLoading ? .4 : 1
                               } }
@@ -74,7 +79,7 @@ export const LoginComponent = (props) => {
                                 <Text style={ styles.buttonContentText }>Log in</Text>
                             </Pressable>
                             <Text
-                              style={styles.registerLink}
+                              style={ styles.registerLink }
                               onPress={() => navigation.navigate('Signup')}>
                                 First time? Click to sign up
                             </Text>

@@ -1,11 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        position: 'relative'
+        position: 'relative',
+        paddingTop: Platform.OS === 'ios' ? 15 : 0
     },
     addImageButton: {
         width: 100,
@@ -13,11 +14,12 @@ export const styles = StyleSheet.create({
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: "center",
+        backgroundColor: "#fff"
 
     },
     saveButton: {
         position: "absolute",
-        top: 20,
+        top: Platform.OS === 'ios' ? 30 : 20,
         right: 25,
     }
 })

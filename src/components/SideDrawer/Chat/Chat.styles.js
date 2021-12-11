@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-import { whiteYellow, whiteDarkYellow, lightViolet } from '../../../constants/Colors';
+import { whiteYellow, whiteDarkYellow, lightViolet, darkOverlay } from '../../../constants/Colors';
 import { CONTENT_PADDING_TOP } from '../../../constants/Layout';
 
 const { width } = Dimensions.get('window');
@@ -14,6 +14,20 @@ export const styles = StyleSheet.create({
     ChatScrollView: {
         width: width - width / 20,
         paddingBottom: 10
+    },
+    NoChatWrapper: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    NoChat: {
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: darkOverlay
+    },
+    NoChatTxt: {
+        fontSize: 16,
+        color: '#fff'
     },
     ChatWrapper: {
         width,
@@ -29,7 +43,7 @@ export const styles = StyleSheet.create({
         width: "100%"
     },
     QuestionAnswers: {
-        width: '95%',
+        width: '100%',
         padding: '2.5%',
         display: 'flex',
         flexDirection: 'row',
@@ -41,7 +55,6 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 8,
         paddingHorizontal: 5,
-        paddingLeft: 10,
         marginBottom: 5,
         width: '49%',
         borderRadius: 10,

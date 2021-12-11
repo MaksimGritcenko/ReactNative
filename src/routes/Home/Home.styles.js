@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 
 import { CONTENT_PADDING_TOP } from '../../constants/Layout';
+import { darkOverlay } from '../../constants/Colors';
 
 const { width } = Dimensions.get('window')
 
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: "center",
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        backgroundColor: darkOverlay,
 
     },
     logoutButtonWrapper:{
@@ -31,9 +32,9 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     searchInput: {
-        borderWidth: 1,
+        backgroundColor: 'rgba(100, 100, 100, .3)',
         borderRadius: 15,
         width: '95%',
         padding: 10
     }
-})
+});
