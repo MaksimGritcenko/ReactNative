@@ -1,7 +1,7 @@
 import React from "react";
 import { ImageBackground, SafeAreaView } from "react-native";
 import { styles } from "./Main.styles";
-import BGImg from '../../constants/images/background.jpg';
+import BGImg from '../../constants/images/bg.jpg';
 
 export const MainComponent = ({ children }) => {
     return (

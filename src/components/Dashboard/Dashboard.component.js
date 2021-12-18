@@ -6,7 +6,7 @@ import {
 } from "react-native";
 import HomeComponent from "../../routes/Home";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import SettingsComponent from "../SideDrawer/Settings/Settings.component";
+import SettingsComponent from "../SideDrawer/Settings";
 import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
 import {NavigationContainer} from "@react-navigation/native";
 

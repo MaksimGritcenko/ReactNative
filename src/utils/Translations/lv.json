@@ -18,5 +18,14 @@
 
   "Notifications": "Notifikācijas",
   "NotificationTitle": "Sūtīt jaunu notifikāciju",
-  "PressToAddImage": "Uzspied + lai pievienotu bildi galerijai"
+  "PressToAddImage": "Uzspied + lai pievienotu bildi galerijai",
+
+  "GeneralSettings": "Iestatījumi",
+  "Language": "Valoda",
+  "FontSize": "Burtu izmērs",
+  "ChangePassword": "Mainīt paroli",
+  "DeleteChatHistory": "Dzēst sarakstes vēsturi",
+  "Change": "Mainīt",
+  "EnterNewPassword": "Ievadiet jauno paroli",
+  "ConfirmPassword": "Atkārtojiet paroli"
 }
