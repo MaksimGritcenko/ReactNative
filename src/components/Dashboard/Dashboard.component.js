@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import {
     Platform,
     View
-} from "react-native";
+} from 'react-native';
 import HomeComponent from "../../routes/Home";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import SettingsComponent from "../SideDrawer/Settings";
 import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
-import {NavigationContainer} from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 import ChatComponent from "../SideDrawer/Chat";
 import { AntDesign } from '@expo/vector-icons';
@@ -46,7 +46,6 @@ export const DashboardComponent = (props) => {
     } = props;
     const [opacity, setOpacity] = useState(0);
 
-
     function Home() {
         return <HomeComponent language={ language } opacity={ opacity } />;
     }
@@ -54,7 +53,6 @@ export const DashboardComponent = (props) => {
     function getLanguage() {
         return language === 'lv';
     }
-
 
     function getNavMap() {
         const drawerLabelStyle = {
@@ -68,6 +66,7 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationDashboardTitle : 'Dashboard',
                 component: Home,
                 options: {
+                    headerTitle: '',
                     lazy: false,
                     headerTransparent: true,
                     headerShown: true,
@@ -81,7 +80,7 @@ export const DashboardComponent = (props) => {
                     />),
                     headerStyle: {
                         elevation: 0,
-                        shadowOffset: { width: 0, height: 0 }
+                        shadowOffset: { width: 0, height: 0 },
                     },
                     drawerLabelStyle
                 }
@@ -92,6 +91,7 @@ export const DashboardComponent = (props) => {
                 component: ChatComponent,
                 isEnabled: false,
                 options: {
+                    headerTitle: '',
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
@@ -116,6 +116,7 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationImagesTitle : 'Images',
                 component: ImagesComponent,
                 options: {
+                    headerTitle: '',
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
@@ -150,6 +151,7 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationNotesTitle : 'Notes',
                 component: NotesComponent,
                 options: {
+                    headerTitle: '',
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
@@ -181,6 +183,7 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationChatHistoryTitle : "ChatHistory",
                 component: ChatHistoryComponent,
                 options: {
+                    headerTitle: '',
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
@@ -203,6 +206,7 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationSettingsTitle : "Settings",
                 component: SettingsComponent,
                 options: {
+                    headerTitle: '',
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
@@ -225,6 +229,7 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.NavigationInstructionsTitle : 'Instructions',
                 component: InstructionsComponent,
                 options: {
+                    headerTitle: '',
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
@@ -247,6 +252,7 @@ export const DashboardComponent = (props) => {
                 name: getLanguage() ? LV.Notifications : 'Notifications',
                 component: PushNotifications,
                 options: {
+                    headerTitle: '',
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
