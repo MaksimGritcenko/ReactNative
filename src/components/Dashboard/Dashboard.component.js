@@ -87,51 +87,7 @@ export const DashboardComponent = (props) => {
                 }
             },
             {
-                id: 2,
-                name: getLanguage() ? LV.NavigationSettingsTitle : "Settings",
-                component: SettingsComponent,
-                options: {
-                    lazy: false,
-                    headerTransparent: true,
-                    headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
-                    drawerIcon: () => (<SimpleLineIcons
-                        name="settings"
-                        size={24}
-                        color="#fff"
-                    />),
-                    headerStyle: {
-                        backgroundColor: skyBlue,
-                        elevation: 0,
-                        shadowOffset: { width: 0, height: 0 }
-                    },
-                    drawerLabelStyle
-                }
-            },
-            {
-                id: 3,
-                name: getLanguage() ? LV.NavigationChatHistoryTitle : "ChatHistory",
-                component: ChatHistoryComponent,
-                options: {
-                    lazy: false,
-                    headerTransparent: true,
-                    headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
-                    drawerIcon: () => (<MaterialCommunityIcons
-                        name="history"
-                        size={24}
-                        color="#fff"
-                    />),
-                    headerStyle: {
-                        backgroundColor: skyBlue,
-                        elevation: 0,
-                        shadowOffset: { width: 0, height: 0 }
-                    },
-                    drawerLabelStyle
-                }
-            },
-            {
-                id: 4,
+                id:2,
                 name: getLanguage() ? LV.NavigationChatTitle : 'Chat',
                 component: ChatComponent,
                 isEnabled: false,
@@ -141,9 +97,9 @@ export const DashboardComponent = (props) => {
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     drawerIcon: () => (<Ionicons
-                        name="chatbox-outline"
-                        size={24}
-                        color="#fff"
+                      name="chatbox-outline"
+                      size={24}
+                      color="#fff"
                     />),
 
                     isEnabled: false,
@@ -156,38 +112,7 @@ export const DashboardComponent = (props) => {
                 }
             },
             {
-                id: 5,
-                name: getLanguage() ? LV.NavigationNotesTitle : 'Notes',
-                component: NotesComponent,
-                options: {
-                    lazy: false,
-                    headerTransparent: true,
-                    headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
-                    drawerIcon: () => (<MaterialIcons
-                        name="notes"
-                        size={24}
-                        color="#fff"
-                    />),
-                    headerStyle: {
-                        backgroundColor: isEditModalVisible ? darkBlue : skyBlue,
-                        elevation: 0,
-                        shadowOffset: { width: 0, height: 0 }
-                    },
-                    drawerLabelStyle,
-                    headerRight: () => (
-                        <Entypo
-                            style={{ marginRight: 20}}
-                            onPress={ () => showNotesModal() }
-                            name="new-message"
-                            size={24}
-                            color="#fff"
-                        />
-                    )
-                }
-            },
-            {
-                id: 6,
+                id: 3,
                 name: getLanguage() ? LV.NavigationImagesTitle : 'Images',
                 component: ImagesComponent,
                 options: {
@@ -196,9 +121,9 @@ export const DashboardComponent = (props) => {
                     headerTitleAlign: 'center',
                     headerTintColor: '#fff',
                     drawerIcon: () => (<Ionicons
-                        name="md-images-outline"
-                        size={24}
-                        color="#fff"
+                      name="md-images-outline"
+                      size={24}
+                      color="#fff"
                     />),
                     headerStyle: {
                         backgroundColor: darkBlue,
@@ -210,15 +135,90 @@ export const DashboardComponent = (props) => {
                         if (imageUriArray && imageUriArray.length >= 10) return null;
 
                         return(
-                            <AntDesign
-                                style={{ marginRight: 20}}
-                                onPress={ () => showAddImageModal() }
-                                name="pluscircleo"  size={24}
-                                color="#fff"
-                            />
+                          <AntDesign
+                            style={{ marginRight: 20}}
+                            onPress={ () => showAddImageModal() }
+                            name="pluscircleo"  size={24}
+                            color="#fff"
+                          />
                         )
                     }
                 },
+            },
+            {
+                id: 4,
+                name: getLanguage() ? LV.NavigationNotesTitle : 'Notes',
+                component: NotesComponent,
+                options: {
+                    lazy: false,
+                    headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    drawerIcon: () => (<MaterialIcons
+                      name="notes"
+                      size={24}
+                      color="#fff"
+                    />),
+                    headerStyle: {
+                        backgroundColor: isEditModalVisible ? darkBlue : skyBlue,
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
+                    },
+                    drawerLabelStyle,
+                    headerRight: () => (
+                      <Entypo
+                        style={{ marginRight: 20}}
+                        onPress={ () => showNotesModal() }
+                        name="new-message"
+                        size={24}
+                        color="#fff"
+                      />
+                    )
+                }
+            },
+            {
+                id: 5,
+                name: getLanguage() ? LV.NavigationChatHistoryTitle : "ChatHistory",
+                component: ChatHistoryComponent,
+                options: {
+                    lazy: false,
+                    headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    drawerIcon: () => (<MaterialCommunityIcons
+                      name="history"
+                      size={24}
+                      color="#fff"
+                    />),
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
+                    },
+                    drawerLabelStyle
+                }
+            },
+            {
+                id: 5,
+                name: getLanguage() ? LV.NavigationSettingsTitle : "Settings",
+                component: SettingsComponent,
+                options: {
+                    lazy: false,
+                    headerTransparent: true,
+                    headerTitleAlign: 'center',
+                    headerTintColor: '#fff',
+                    drawerIcon: () => (<SimpleLineIcons
+                      name="settings"
+                      size={24}
+                      color="#fff"
+                    />),
+                    headerStyle: {
+                        backgroundColor: skyBlue,
+                        elevation: 0,
+                        shadowOffset: { width: 0, height: 0 }
+                    },
+                    drawerLabelStyle
+                }
             },
             {
                 id: 7,
