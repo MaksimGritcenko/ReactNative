@@ -24,16 +24,16 @@ export const RegisterContainer = (props) => {
     async function registrationClick(email, password, confirmPassword) {
         const { setEmail, navigation } = props;
 
-        emailValidate(email)
-        if (!emailValidate(email)) {
-            Alert.alert(EMAIL_ERROR_TITLE, EMAIL_ERROR_MESSAGE);
-            return;
-        }
+        // emailValidate(email)
+        // if (!emailValidate(email)) {
+        //     Alert.alert(EMAIL_ERROR_TITLE, EMAIL_ERROR_MESSAGE);
+        //     return;
+        // }
 
-        if (!passwordValidate(password) || (password !== confirmPassword) ) {
-            Alert.alert(PASSWORD_ERROR_TITLE, PASSWORD_ERROR_MESSAGE);
-            return
-        }
+        // if (!passwordValidate(password) || (password !== confirmPassword) ) {
+        //     Alert.alert(PASSWORD_ERROR_TITLE, PASSWORD_ERROR_MESSAGE);
+        //     return
+        // }
 
         setIsLoading(true);
         const user = await registerWithEmailAndPassword(null, email, password)

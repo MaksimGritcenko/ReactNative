@@ -5,11 +5,12 @@ import {
     View,
     TextInput,
     Pressable,
-    SafeAreaView,
     Image,
     KeyboardAvoidingView,
     Platform
 } from "react-native";
+
+import { placeholderTextColor } from '../../constants/Colors';
 
 import styles from '../Login/Login.styles';
 import { Ionicons } from '@expo/vector-icons';
