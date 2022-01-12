@@ -1,69 +1,62 @@
-import React, { useState } from 'react';
-import {
-    Text,
-    View,
-    Pressable,
-    TextInput
-} from 'react-native';
-import MainComponent from "../../components/Main/Main.component";
-import {
-    darkBlue,
-    placeholderTextColor
-} from "../../constants/Colors";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View, StyleSheet, TextInput } from 'react-native';
+import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, connectSearchBox } from 'react-instantsearch-native';
 
-import LV from '../../utils/Translations/lv.json';
-import SearchResult from '../../components/SearchResult';
+const searchClient = algoliasearch(
+    'B9DIM6R7DB', // app ID
+    'eb925579bcd9ea5c216cd8aec6a6a99e' // app key
+);
 
-import { styles } from "./Home.styles";
+class SearchBox extends Component {
 
-export const HomeComponent = (props) => {
-    const {
-        logout,
-        opacity,
-        language,
-        searchChatQsts,
-        searchResults
-    } = props;
-
-    const [searchText, setSearchText] = useState('');
-    const [searchData, setSearchData] = useState('');
-
-    function getSearchResults() {
-        searchChatQsts();
-    }
-
+  render() {
     return (
-        <MainComponent>
-            <View style={ styles.HomeWrapper }>
-                <View style={ styles.container }>
-                    <View style={ styles.searchInput }>
-                        <TextInput
-                          style={{ fontWeight: 'bold', color: '#fff', fontSize: 20 }}
-                          placeholder="Search"
-                          placeholderTextColor={ placeholderTextColor }
-                          onChangeText={ text => setSearchText(text) }
-                          onSubmitEditing={() => getSearchResults()}
-                        />
-                    </View>
-                    <SearchResult language={ language } data={ searchResults } />
-                </View>
-                <View style={{
-                    ...styles.logoutButtonWrapper,
-                    opacity,
-                    borderWidth: 1,
-                    borderColor: darkBlue,
-                    borderRadius: 20,
-                    marginTop: 80
-                }}>
-                    <View style={ styles.logoutButton }>
-                        <Pressable title="Logout" onPress={ logout } >
-                            <Text style={ { color: '#fff'}}>{ language === 'lv' ? LV.LogoutButton : "Logout"}</Text>
-                        </Pressable>
-                    </View>
-                </View>
-            </View>
-        </MainComponent>
+      <View style={{ paddingTop: 20, borderWidth: 1 }}>
+        <TextInput
+          onChangeText={text => this.props.refine(text)}
+          value={this.props.currentRefinement}
+          placeholder={'Search a product...'}
+          clearButtonMode={'always'}
+          spellCheck={false}
+          autoCorrect={false}
+          autoCapitalize={'none'}
+          style={{ borderWidth: 2 }}
+          
+        />
+      </View>
     );
+  }
+}
+
+SearchBox.propTypes = {
+  refine: PropTypes.func.isRequired,
+  currentRefinement: PropTypes.string,
 };
 
-export default HomeComponent;
+const ConnectedSearchBox = connectSearchBox(SearchBox);
+
+class MyApp extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <View
+        style={{
+          alignItems: 'center',
+          flexDirection: 'column',
+          paddingTop: 120,
+        }}
+      >
+        <InstantSearch searchClient={searchClient} indexName="questions">
+          <ConnectedSearchBox />
+        </InstantSearch>
+      </View>
+    );
+  }
+}
+
+export default MyApp;
