@@ -43,6 +43,7 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-instantsearch": "^6.19.0",
+    "react-instantsearch-native": "^6.19.0",
     "react-native": "0.64.3",
     "react-native-background-fetch": "^4.0.4",
     "react-native-background-task": "^0.2.1",
