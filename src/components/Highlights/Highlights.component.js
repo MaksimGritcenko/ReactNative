@@ -17,12 +17,13 @@ const Highlight = (props) => {
                     backgroundColor: 'yellow',
                 };
 
-                return item.map(({ answer }) => {
-                    if (answer) {
+                return item
+                    .filter(({ answer }) => answer && typeof answer[language].value === 'string')
+                    .map(({ answer }) => {
                         const regex = /(<\/?)ais-highlight-0000000000(>)/g;
                         const answerVal = answer[language]
                             .value
-                            .replaceAll(regex, '');
+                            .replace(regex, '');
 
                         return (
                             <TouchableOpacity
@@ -35,7 +36,6 @@ const Highlight = (props) => {
                                 </Text>
                             </TouchableOpacity>
                         );
-                    }
                 })
             })}
         </View>
