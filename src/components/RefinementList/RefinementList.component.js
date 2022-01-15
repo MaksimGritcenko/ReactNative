@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { connectRefinementList } from 'react-instantsearch-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -80,4 +79,4 @@ RefinementList.propTypes = {
     refine: PropTypes.func.isRequired,
 };
 
-export default connectRefinementList(RefinementList);
+export default RefinementList;

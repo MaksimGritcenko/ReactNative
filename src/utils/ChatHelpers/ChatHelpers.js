@@ -1,3 +1,5 @@
+import { USER_CHAT_ID } from "../Constants";
+
 export const createChatMessage = (userChatId, text) => {
     const date = new Date();
 
@@ -7,7 +9,7 @@ export const createChatMessage = (userChatId, text) => {
         createdAt: date,
         user: {
           _id: userChatId,
-          name: userChatId === 1 ? 'user' : 'bot',
+          name: userChatId === USER_CHAT_ID ? 'user' : 'bot',
           avatar: null
         },
     }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { connectHighlight } from 'react-instantsearch-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Highlight = (props) => {
@@ -10,36 +9,18 @@ const Highlight = (props) => {
         language
     } = props;
 
+    const questionVal = hit.question[language];
+    const answerVal = hit.answer[language];
+
     return (
         <View>
-            {Object.entries(hit).map((item , index) => {
-                const style = {
-                    backgroundColor: 'yellow',
-                };
-
-                return item
-                    .filter(({ answer }) => answer && typeof answer[language].value === 'string')
-                    .map(({ answer }) => {
-                        const regex = /(<\/?)ais-highlight-0000000000(>)/g;
-                        const answerVal = answer[language]
-                            .value
-                            .replace(regex, '');
-
-                        return (
-                            <TouchableOpacity
-                              onPress={ () => onPress(answerVal) }
-                              key={index}
-                              style={style}
-                            >
-                                <Text>
-                                    { answerVal }
-                                </Text>
-                            </TouchableOpacity>
-                        );
-                })
-            })}
+            <TouchableOpacity onPress={ () => onPress(questionVal, answerVal) }>
+                <Text>
+                    { questionVal }
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 };
 
-export default connectHighlight(Highlight);
+export default Highlight;
