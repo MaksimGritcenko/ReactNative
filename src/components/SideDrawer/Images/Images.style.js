@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet, Platform } from "react-native";
 import { CONTENT_PADDING_TOP } from '../../../constants/Layout';
+import { darkBlue } from "../../../constants/Colors";
 
 const { width, height } = Dimensions.get('window');
 
@@ -9,7 +10,6 @@ export const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         alignSelf: "center",
-        backgroundColor: 'rgba(0,0,0,0.6)'
     },
     renderImageScrollViewWrapper: {
         marginHorizontal: '2%',
@@ -40,14 +40,16 @@ export const styles = StyleSheet.create({
     },
     modalContainer: {
         flex: 1,
-        backgroundColor: 'rgba(0,0,0, 0.5)'
+        backgroundColor: darkBlue,
+        borderWidth: 2,
+        paddingTop: Platform.OS === 'ios' ? 0 : 17,
     },
     modalCloseButton: {
         position: "absolute",
         right: 20,
-        top: Platform.OS === 'ios' ? 30 : 17,
+        top: Platform.OS === 'ios' ? 30 : 40,
         zIndex: 10,
-        backgroundColor: "#000"
+        backgroundColor: darkBlue
     },
     thumbnailImage: {
         width: 80,

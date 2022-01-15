@@ -145,7 +145,6 @@ export const ImagesComponent = ({ imageUriArray, deleteImage, language }) => {
                 { renderImagesBlock() }
             </View>
             <GestureRecognizer
-              style={{ flex: 1 }}
               onSwipeDown={ () => closeModal() }
             >
                 <Modal
@@ -153,6 +152,7 @@ export const ImagesComponent = ({ imageUriArray, deleteImage, language }) => {
                     transparent
                     visible={ isModalVisible }
                     onRequestClose={() => setIsModalVisible(false) }
+                    statusBarTranslucent={ true }
                 >
                     <View style={ styles.modalContainer }>
                         <TouchableOpacity style={ styles.modalCloseButton }>
