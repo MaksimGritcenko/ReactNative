@@ -294,7 +294,7 @@ export const DashboardComponent = (props) => {
         });
     }
 
-    const statusBarStyle = Platform.OS === 'ios' ? 'dark' : 'light';
+    const statusBarStyle = 'dark';
 
     return (
         <View style={{ flex: 1 }}>
