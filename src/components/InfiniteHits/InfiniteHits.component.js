@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import Highlight from '../Highlights/Highlights.container'
-import { connectInfiniteHits } from 'react-instantsearch-native';
 
 const styles = StyleSheet.create({
     separator: {
@@ -17,8 +16,14 @@ const styles = StyleSheet.create({
     },
 });
 
-const InfiniteHits = ({ hits, hasMore, refine, query }) => {
-    if (!hits.length || !hits[0]) {
+const InfiniteHits = ({
+    hits,
+    query
+}) => {
+    if (
+        !hits.length
+        || !hits[0]
+    ) {
         return null;
     }
 
@@ -27,7 +32,7 @@ const InfiniteHits = ({ hits, hasMore, refine, query }) => {
             data={ hits }
             keyExtractor={item => item.objectID}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
-            onEndReached={() => hasMore && refine()}
+            onEndReached={() => {}}
             renderItem={({ item }) => {
                 return(
                     <View style={styles.item}>
@@ -39,4 +44,4 @@ const InfiniteHits = ({ hits, hasMore, refine, query }) => {
     );
 }
 
-export default connectInfiniteHits(InfiniteHits);
+export default InfiniteHits;

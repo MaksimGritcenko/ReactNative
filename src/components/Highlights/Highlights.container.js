@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { connectHighlight } from "react-instantsearch-native";
 import { useNavigation } from "@react-navigation/native";
 import LV from '../../utils/Translations/lv.json';
 import { createChatMessage } from '../../utils/ChatHelpers';
@@ -25,10 +24,10 @@ const HighlightContainer = (props) => {
         return language === 'lv';
     }
 
-    function onPress(answer) {
+    function onPress(question, answer) {
         const screenName = getLanguage() ? LV.NavigationChatTitle : 'Chat';
 
-        pushChatMessage(createChatMessage(1, query));
+        pushChatMessage(createChatMessage(1, question));
         pushChatMessage(createChatMessage(2, answer));
         navigation.jumpTo(screenName);
     }
@@ -49,4 +48,4 @@ const HighlightContainer = (props) => {
     />;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(connectHighlight(HighlightContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(HighlightContainer);

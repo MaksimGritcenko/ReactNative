@@ -1,6 +1,7 @@
 import {
     PUSH_CHAT_MESSAGE,
     CLEAR_CHAT,
+    DELETE_MESSAGE,
     UPDATE_IS_SEARCHING,
 } from "./Chat.action";
 
@@ -15,6 +16,18 @@ export const clearChat = (state) => {
     return {
         ...state,
         chatMessages: []
+    }
+}
+
+export const deleteMessage = (state, action) => {
+    const { chatMessages: prevChatMessages } = state;
+    const { messageId } = action;
+
+    const chatMessages = prevChatMessages.filter(({ _id }) => _id !== messageId);
+
+    return {
+        ...state,
+        chatMessages
     }
 }
 
@@ -47,6 +60,9 @@ export const ChatReducer = (
 
         case CLEAR_CHAT:
             return clearChat();
+
+        case DELETE_MESSAGE:
+            return deleteMessage(state, action);
 
         case UPDATE_IS_SEARCHING:
             const { isSearching } = action;
