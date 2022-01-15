@@ -132,7 +132,7 @@ export const SettingsComponent = (props) => {
         </TouchableOpacity>
         <View style={ styles.Divider } />
         <TouchableOpacity
-          onPress={() => changeApplicationLanguage('eng')}
+          onPress={() => changeApplicationLanguage('en')}
           style={ styles.LanguageBoxButton }
           activeOpacity={ .9 }
         >

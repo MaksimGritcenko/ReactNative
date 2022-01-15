@@ -1,23 +1,14 @@
-export const getNextActiveQstId = (activeId, qstsArr) => {
-    return qstsArr.reduce((acc, { id }, i) => {
-        if (id === activeId) {
-            const nextQst = qstsArr[i + 1];
+export const createChatMessage = (userChatId, text) => {
+    const date = new Date();
 
-            if (nextQst) {
-                acc = nextQst.id;
-            }
-        }
-
-        return acc;
-    }, '');
+    return {
+        _id: date.getTime(),
+        text,
+        createdAt: date,
+        user: {
+          _id: userChatId,
+          name: userChatId === 1 ? 'user' : 'bot',
+          avatar: null
+        },
+    }
 }
-
-export const getIsAlreadyAsked = (prevFormulations, formulationQstId) => prevFormulations
-    .reduce((acc, { questionId }) => {
-        if (questionId === formulationQstId) {
-            acc = true;
-        }
-
-        return acc;
-    },
-false);
