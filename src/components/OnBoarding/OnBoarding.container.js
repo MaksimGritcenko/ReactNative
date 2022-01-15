@@ -40,7 +40,7 @@ export const OnBoardingContainer = (props) => {
             return;
         }
 
-        setPreferedLanguage('eng')
+        setPreferedLanguage('en')
     }
 
     const containerFunctions = {

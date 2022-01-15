@@ -22,11 +22,17 @@ export const OnBoarding = (props) => {
         onboardingContent
     } = props;
 
-    function getLanguage() {
-        return language === 'lv';
-    }
-
     function getPages() {
+        if (!Object.keys(onboardingContent).length) {
+            return [
+                {
+                    backgroundColor: darkBlue,
+                    image: null,
+                    subtitle: ''
+                }
+            ];
+        }
+
         return Object.entries(onboardingContent)
             .filter(([key]) => key.toLowerCase().includes('slide'))
             .map(([_, content]) => {

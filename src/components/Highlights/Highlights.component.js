@@ -1,10 +1,15 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import PropTypes from 'prop-types';
 import { connectHighlight } from 'react-instantsearch-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Highlight = (props) => {
-    const { hit } = props;
+    const {
+        hit,
+        onPress,
+        language
+    } = props;
+
     return (
         <View>
             {Object.entries(hit).map((item , index) => {
@@ -14,21 +19,27 @@ const Highlight = (props) => {
 
                 return item.map(({ answer }) => {
                     if (answer) {
+                        const regex = /(<\/?)ais-highlight-0000000000(>)/g;
+                        const answerVal = answer[language]
+                            .value
+                            .replaceAll(regex, '');
+
                         return (
-                            <Text key={index} style={style}>
-                                {answer.en.value}
-                            </Text>
+                            <TouchableOpacity
+                              onPress={ () => onPress(answerVal) }
+                              key={index}
+                              style={style}
+                            >
+                                <Text>
+                                    { answerVal }
+                                </Text>
+                            </TouchableOpacity>
                         );
                     }
                 })
             })}
         </View>
     );
-};
-
-Highlight.propTypes = {
-    hit: PropTypes.object.isRequired,
-    highlight: PropTypes.func.isRequired,
 };
 
 export default connectHighlight(Highlight);
