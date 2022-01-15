@@ -35,7 +35,7 @@ export const pushMessage = (state, action) => {
     const { chatMessages: prevChatMessages } = state;
     const { message } = action;
 
-    const chatMessages = prevChatMessages.length
+    const chatMessages = prevChatMessages && prevChatMessages.length
         ? [ message, ...prevChatMessages ]
         : [ message ];
 
