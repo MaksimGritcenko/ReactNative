@@ -65,11 +65,12 @@ export const EditNoteModalComponent = (props) => {
                 transparent
                 visible={ isEditModalVisible }
                 onRequestClose={() => onRequestClose()}
+                statusBarTranslucent={ true }
             >
                     <View style={ {
                       ...modalHeaderStyles,
                       backgroundColor: darkBlue,
-                      paddingTop: Platform.OS === 'ios' ? 35 : 15
+                      paddingTop: Platform.OS === 'ios' ? 35 : 40
                     } }>
                         <View style={ styles.headerRight }>
                             <TextInput

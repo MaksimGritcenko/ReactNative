@@ -108,10 +108,15 @@ export const NotesComponent = ( props ) => {
                   style={{ flex: 1 }}
                   onSwipeDown={ () => closeNotesModal() }
                 >
-                    <Modal animationType="slide" transparent  visible={ isModalVisible }>
+                    <Modal
+                        animationType="slide"
+                        transparent
+                        visible={ isModalVisible }
+                        statusBarTranslucent={ true }
+                    >
                         <View style={ {
                             ...styles.modalContainer,
-                            paddingTop: Platform.OS == 'ios' ? 21 : 0
+                            paddingTop: Platform.OS === 'ios' ? 21 : 40
                         } }>
                             <View style={{ ...styles.modalHeader, backgroundColor: '#123246' }} >
                                 <Text style={{ color: '#fff'}}>New Note</Text>

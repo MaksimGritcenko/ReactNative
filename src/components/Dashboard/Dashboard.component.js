@@ -21,7 +21,8 @@ import LV from '../../utils/Translations/lv.json';
 
 import {
     darkBlue,
-    skyBlue
+    skyBlue,
+    black
 } from "../../constants/Colors";
 import {StatusBar} from "expo-status-bar";
 
@@ -71,7 +72,7 @@ export const DashboardComponent = (props) => {
                     headerTransparent: true,
                     headerShown: true,
                     headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
+                    headerTintColor: black,
                     gestureEnabled: true,
                     drawerIcon: () => (<SimpleLineIcons
                         name="home"
@@ -95,7 +96,7 @@ export const DashboardComponent = (props) => {
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
+                    headerTintColor: black,
                     drawerIcon: () => (<Ionicons
                       name="chatbox-outline"
                       size={24}
@@ -120,7 +121,7 @@ export const DashboardComponent = (props) => {
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
+                    headerTintColor: black,
                     drawerIcon: () => (<Ionicons
                       name="md-images-outline"
                       size={24}
@@ -139,8 +140,9 @@ export const DashboardComponent = (props) => {
                           <AntDesign
                             style={{ marginRight: 20}}
                             onPress={ () => showAddImageModal() }
-                            name="pluscircleo"  size={24}
-                            color="#fff"
+                            name="pluscircleo"
+                            size={24}
+                            color={ black }
                           />
                         )
                     }
@@ -155,7 +157,7 @@ export const DashboardComponent = (props) => {
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
+                    headerTintColor: black,
                     drawerIcon: () => (<MaterialIcons
                       name="notes"
                       size={24}
@@ -173,7 +175,7 @@ export const DashboardComponent = (props) => {
                         onPress={ () => showNotesModal() }
                         name="new-message"
                         size={24}
-                        color="#fff"
+                        color={ black }
                       />
                     )
                 }
@@ -187,7 +189,7 @@ export const DashboardComponent = (props) => {
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
+                    headerTintColor: black,
                     drawerIcon: () => (<MaterialCommunityIcons
                       name="history"
                       size={24}
@@ -210,7 +212,7 @@ export const DashboardComponent = (props) => {
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
+                    headerTintColor: black,
                     drawerIcon: () => (<SimpleLineIcons
                       name="settings"
                       size={24}
@@ -233,7 +235,7 @@ export const DashboardComponent = (props) => {
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
+                    headerTintColor: black,
                     drawerIcon: () => (<Ionicons
                         name="ios-book-outline"
                         size={24}
@@ -256,7 +258,7 @@ export const DashboardComponent = (props) => {
                     lazy: false,
                     headerTransparent: true,
                     headerTitleAlign: 'center',
-                    headerTintColor: '#fff',
+                    headerTintColor: black,
                     drawerIcon: () => (<Ionicons
                         name="md-notifications-outline"
                         size={24}
@@ -305,7 +307,7 @@ export const DashboardComponent = (props) => {
                             backgroundColor: darkBlue,
                         },
                         drawerLabelStyle: {
-                            color: '#fff'
+                            color: black
                         }
                     }}
                 >

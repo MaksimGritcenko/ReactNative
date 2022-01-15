@@ -150,7 +150,7 @@ export const SettingsComponent = (props) => {
           style={ styles.FontSizeBoxButton }
           activeOpacity={ .9 }
         >
-          <Text style={{ ...styles.LanguageBoxButtonTitle, fontSize: setFontSize() }}>14</Text>
+          <Text style={{ ...styles.LanguageBoxButtonTitle, fontSize: setFontSize() }}>Small</Text>
         </TouchableOpacity>
         <View style={ styles.Divider } />
         <TouchableOpacity
@@ -158,7 +158,7 @@ export const SettingsComponent = (props) => {
           style={ styles.FontSizeBoxButton }
           activeOpacity={ .9 }
         >
-          <Text style={{ ...styles.LanguageBoxButtonTitle, fontSize: setFontSize() }}>16</Text>
+          <Text style={{ ...styles.LanguageBoxButtonTitle, fontSize: setFontSize() }}>Medium</Text>
         </TouchableOpacity>
         <View style={ styles.Divider } />
         <TouchableOpacity
@@ -166,7 +166,7 @@ export const SettingsComponent = (props) => {
           style={ styles.FontSizeBoxButton }
           activeOpacity={ .9 }
         >
-          <Text style={{ ...styles.LanguageBoxButtonTitle, fontSize: setFontSize() }}>18</Text>
+          <Text style={{ ...styles.LanguageBoxButtonTitle, fontSize: setFontSize() }}>Large</Text>
         </TouchableOpacity>
       </View>
     );
