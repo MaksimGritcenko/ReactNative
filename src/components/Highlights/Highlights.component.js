@@ -15,7 +15,7 @@ const Highlight = (props) => {
     return (
         <View>
             <TouchableOpacity onPress={ () => onPress(questionVal, answerVal) }>
-                <Text>
+                <Text style={{ fontWeight: 'bold'}}>
                     { questionVal }
                 </Text>
             </TouchableOpacity>

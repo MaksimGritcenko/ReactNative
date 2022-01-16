@@ -20,7 +20,7 @@ export const mapDispatchToProps = (dispatch) => ({
 });
 
 export const HomeContainer = (props) => {
-    const { opacity, language } = props;
+    const { language } = props;
 
     const [email, setEmail] = useState('');
 
@@ -46,7 +46,6 @@ export const HomeContainer = (props) => {
             { ...props }
             email={ email }
             logout={ signOut }
-            opacity={ opacity }
             language={ language }
         />
     )
