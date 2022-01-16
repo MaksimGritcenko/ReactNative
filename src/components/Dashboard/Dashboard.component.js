@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React  from "react";
 
 import {
-    Platform,
-    View
+    ImageBackground,
+    View,
 } from 'react-native';
 import HomeComponent from "../../routes/Home";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import SettingsComponent from "../SideDrawer/Settings";
 import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 import ChatComponent from "../SideDrawer/Chat";
 import { AntDesign } from '@expo/vector-icons';
@@ -24,7 +24,7 @@ import {
     skyBlue,
     black
 } from "../../constants/Colors";
-import {StatusBar} from "expo-status-bar";
+import { StatusBar } from "expo-status-bar";
 
 import {
     Entypo,
@@ -33,8 +33,19 @@ import {
     MaterialIcons,
     Ionicons,
 } from '@expo/vector-icons';
+import BGImg from "../../constants/images/bg.jpg";
+import {styles} from "../Main/Main.styles";
+
 
 const SideDrawer = createDrawerNavigator();
+
+const navTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: 'transparent',
+    },
+};
 
 export const DashboardComponent = (props) => {
     const {
@@ -45,10 +56,9 @@ export const DashboardComponent = (props) => {
         imageUriArray,
         admin,
     } = props;
-    const [opacity, setOpacity] = useState(0);
 
     function Home() {
-        return <HomeComponent language={ language } opacity={ opacity } />;
+        return <HomeComponent language={ language } />;
     }
 
     function getLanguage() {
@@ -297,25 +307,28 @@ export const DashboardComponent = (props) => {
     const statusBarStyle = 'dark';
 
     return (
-        <View style={{ flex: 1 }}>
-            <NavigationContainer
-                independent={true}
-            >
-                <SideDrawer.Navigator
-                    screenOptions={{
-                        drawerStyle: {
-                            backgroundColor: darkBlue,
-                        },
-                        drawerLabelStyle: {
-                            color: black
-                        }
-                    }}
+        <ImageBackground source={ BGImg } style={ styles.grassImage }>
+            <View style={{flex: 1}}>
+                <NavigationContainer
+                    independent={true}
+                    theme={ navTheme }
                 >
-                    { renderScreens() }
-                </SideDrawer.Navigator>
-            </NavigationContainer>
-            <StatusBar hidden={ false } style={ statusBarStyle } />
-        </View>
+                    <SideDrawer.Navigator
+                        screenOptions={{
+                            drawerStyle: {
+                                backgroundColor: darkBlue,
+                            },
+                            drawerLabelStyle: {
+                                color: black
+                            }
+                        }}
+                    >
+                        { renderScreens() }
+                    </SideDrawer.Navigator>
+                </NavigationContainer>
+                <StatusBar hidden={ false } style={ statusBarStyle } />
+            </View>
+        </ImageBackground>
     );
 };
 

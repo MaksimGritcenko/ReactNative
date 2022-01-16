@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import { Image, ImageBackground, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Image, SafeAreaView, TouchableOpacity } from 'react-native';
 import { styles } from "./Main.styles";
-import BGImg from '../../constants/images/bg.jpg';
 import { useNavigation } from '@react-navigation/native';
 import Logo from '../../constants/images/Logo.jpg';
 import LV from '../../utils/Translations/lv.json';
@@ -14,7 +13,7 @@ export const mapStateToProps = state => ({
 });
 
 export const MainComponent = (props) => {
-  const { children, language } = props;
+  const { language } = props;
   const navigation = useNavigation();
 
   function redirectToHome() {
@@ -29,9 +28,6 @@ export const MainComponent = (props) => {
           <TouchableOpacity activeOpacity={ .9 } onPress={ () => redirectToHome() } style={ styles.LogoWrapper } >
             <Image source={ Logo } style={ styles.Logo } />
           </TouchableOpacity>
-          <ImageBackground source={ BGImg } style={ styles.grassImage }>
-              { children }
-          </ImageBackground>
       </SafeAreaView>
   );
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-import PropTypes from 'prop-types';
 
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -56,11 +55,6 @@ const SearchBox = ({
             </TouchableOpacity>
         </View>
     )
-};
-
-SearchBox.propTypes = {
-    currentRefinement: PropTypes.string.isRequired,
-    refine: PropTypes.func.isRequired,
 };
 
 export default SearchBox;

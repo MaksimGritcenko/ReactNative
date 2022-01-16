@@ -11,9 +11,6 @@ const styles = StyleSheet.create({
         padding: 10,
         flexDirection: 'column',
     },
-    titleText: {
-        fontWeight: 'bold',
-    },
 });
 
 const InfiniteHits = ({

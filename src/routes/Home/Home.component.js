@@ -29,13 +29,13 @@ const HomeComponent = () => {
 
     return (
         <View style={{
-            borderWidth: 1,
-            paddingTop: 100
+            paddingTop: 100,
+            flex: 1
         }}>
             <SearchBox
-              query={ query }
-              setQuery={ setQuery }
-              onSearch={ onSearch }
+                query={ query }
+                setQuery={ setQuery }
+                onSearch={ onSearch }
             />
             <InfiniteHits query={ query } hits={ hits } />
         </View>
