@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {styles} from "./Highlights.styles";
 
 const Highlight = (props) => {
     const {
@@ -15,7 +16,7 @@ const Highlight = (props) => {
     return (
         <View>
             <TouchableOpacity onPress={ () => onPress(questionVal, answerVal) }>
-                <Text style={{ fontWeight: 'bold'}}>
+                <Text style={ styles.Item }>
                     { questionVal }
                 </Text>
             </TouchableOpacity>

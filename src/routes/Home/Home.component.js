@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import {Text, View} from 'react-native';
+import { View } from 'react-native';
 import algoliasearch from 'algoliasearch/lite';
 
 import SearchBox from "../../components/Searchbox/Searchbox.component";
 import InfiniteHits from "../../components/InfiniteHits/InfiniteHits.component";
+import {LogoComponent} from "../../components/Logo/Logo.component";
 
 const searchClient = algoliasearch(
     'B9DIM6R7DB',
