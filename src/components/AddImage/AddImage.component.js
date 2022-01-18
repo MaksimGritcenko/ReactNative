@@ -31,6 +31,7 @@ export const AddImageComponent = (props) => {
                 animationType="slide"
                 transparent={ false } visible={ isOpened }
                 onRequestClose={() => onRequestClose() }
+                statusBarTranslucent={ true }
             >
                 <View style={ { ...styles.container, backgroundColor: darkBlue } }>
                     { image && (

@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         position: 'relative',
-        paddingTop: Platform.OS === 'ios' ? 15 : 0
+        paddingTop: Platform.OS === 'ios' ? 15 : 30
     },
     addImageButton: {
         width: 100,
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     },
     saveButton: {
         position: "absolute",
-        top: Platform.OS === 'ios' ? 30 : 20,
+        top: Platform.OS === 'ios' ? 30 : 70,
         right: 25,
     }
 })

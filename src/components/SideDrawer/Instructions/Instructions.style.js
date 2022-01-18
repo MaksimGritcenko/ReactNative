@@ -6,10 +6,10 @@ export const styles = StyleSheet.create({
     InstructionsWrapper: {
         flex: 1,
         paddingTop: 10,
-        backgroundColor: darkOverlay
     },
     InnerInstructionsWrapper: {
-        marginTop: Platform.OS === 'ios' ? 30 : 90
+        marginTop: Platform.OS === 'ios' ? 30 : 140,
+        backgroundColor: '#fff'
     },
     Instructions: {
         padding: 30,

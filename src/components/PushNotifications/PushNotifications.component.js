@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
     KeyboardAvoidingView,
     Platform,
@@ -8,7 +8,6 @@ import {
     TouchableOpacity
 } from "react-native";
 
-import MainComponent from "../../components/Main/Main.component";
 import styles from "./PushNotifications.styles";
 import { darkBlue, placeholderTextColor, lightGray } from "../../constants/Colors";
 import { IOS_PLATFORM } from "./PushNotifications.config";
@@ -27,55 +26,53 @@ export const PushNotificationsComponent = ({ sendPushNotification, language }) =
     });
 
     return (
-        <MainComponent>
-            <View style={ styles.container }>
-                <KeyboardAvoidingView
-                    style={{ backgroundColor: 'transparent' }}
-                    behavior={ Platform.OS === IOS_PLATFORM ? "padding" : "height" }
-                >
-                    <View>
-                        <View style={{ alignItems: 'center'}} >
-                            <TextInput
-                                style={ styles.textInput }
-                                placeholder="Title"
-                                placeholderTextColor={ placeholderTextColor }
-                                onChangeText={text => setTitle(text) }
-                                value={ title }
-                            />
-                            <TextInput
-                                style={ [styles.textInput, { marginTop: 10 }] }
-                                placeholder="Text"
-                                placeholderTextColor={ placeholderTextColor }
-                                onChangeText={ text => setText(text)}
-                                value={ text }
-                            />
-                                <TouchableOpacity
-                                    style={ {
-                                        ...styles.button,
-                                        backgroundColor: isAbleToSend ? darkBlue : lightGray,
-                                    } }
-                                    activeOpacity={ .9 }
-                                    disabled={ !isAbleToSend }
-                                    onPress={ () => {
-                                        sendPushNotification(title, text);
-                                        setText('');
-                                        setTitle('');
+        <View style={ styles.container }>
+            <KeyboardAvoidingView
+                style={{ backgroundColor: 'transparent' }}
+                behavior={ Platform.OS === IOS_PLATFORM ? "padding" : "height" }
+            >
+                <View>
+                    <View style={{ alignItems: 'center'}} >
+                        <TextInput
+                            style={ styles.textInput }
+                            placeholder="Title"
+                            placeholderTextColor={ placeholderTextColor }
+                            onChangeText={text => setTitle(text) }
+                            value={ title }
+                        />
+                        <TextInput
+                            style={ [styles.textInput, { marginTop: 10 }] }
+                            placeholder="Text"
+                            placeholderTextColor={ placeholderTextColor }
+                            onChangeText={ text => setText(text)}
+                            value={ text }
+                        />
+                            <TouchableOpacity
+                                style={ {
+                                    ...styles.button,
+                                    backgroundColor: isAbleToSend ? darkBlue : lightGray,
+                                } }
+                                activeOpacity={ .9 }
+                                disabled={ !isAbleToSend }
+                                onPress={ () => {
+                                    sendPushNotification(title, text);
+                                    setText('');
+                                    setTitle('');
+                                } }
+                            >
+                                <Text
+                                  style={ {
+                                      ...styles.buttonContentText,
+                                      color: isAbleToSend ? lightGray : darkBlue
                                     } }
                                 >
-                                    <Text
-                                      style={ {
-                                          ...styles.buttonContentText,
-                                          color: isAbleToSend ? lightGray : darkBlue
-                                        } }
-                                    >
-                                        Send Notifications
-                                    </Text>
-                                </TouchableOpacity>
-                        </View>
+                                    Send Notifications
+                                </Text>
+                            </TouchableOpacity>
                     </View>
-                </KeyboardAvoidingView>
-            </View>
-        </MainComponent>
+                </View>
+            </KeyboardAvoidingView>
+        </View>
     );
 }
 

@@ -6,7 +6,6 @@ import {
 } from "react-native";
 import GestureRecognizer from 'react-native-swipe-gestures';
 
-import MainComponent from "../../Main/Main.component";
 import Carousel  from 'react-native-snap-carousel';
 import {AntDesign} from "@expo/vector-icons";
 import AddImage from "../../AddImage";
@@ -14,6 +13,7 @@ import { styles } from "./Images.style";
 
 import { getIsLV } from '../../../utils/Translations/Translations';
 import LV from '../../../utils/Translations/lv.json';
+import { LogoComponent } from "../../Logo/Logo.component";
 
 const { width } = Dimensions.get('window');
 
@@ -140,7 +140,8 @@ export const ImagesComponent = ({ imageUriArray, deleteImage, language }) => {
     }
 
     return (
-        <MainComponent>
+        <View>
+            <LogoComponent />
             <View style={ styles.container }>
                 { renderImagesBlock() }
             </View>
@@ -191,7 +192,7 @@ export const ImagesComponent = ({ imageUriArray, deleteImage, language }) => {
                 </Modal>
             </GestureRecognizer>
             <AddImage />
-        </MainComponent>
+        </View>
     );
 };
 

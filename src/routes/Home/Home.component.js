@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import {Text, View} from 'react-native';
 import algoliasearch from 'algoliasearch/lite';
 
 import SearchBox from "../../components/Searchbox/Searchbox.component";

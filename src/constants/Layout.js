@@ -11,4 +11,4 @@ export default {
   isSmallDevice: width < 375,
 };
 
-export const CONTENT_PADDING_TOP = Platform.OS === 'ios' ? 60 : 120;
+export const CONTENT_PADDING_TOP = Platform.OS === 'ios' ? 60 : 150;
