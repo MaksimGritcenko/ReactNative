@@ -11,14 +11,17 @@ export function InitialStack() {
     function getNavMap() {
         return [
             {
+                id: 1,
                 name: "Login",
                 component: LoginComponent
             },
             {
+                id: 2,
                 name: "Signup",
                 component: RegisterComponent
             },
             {
+                id: 3,
                 name: "Dashboard",
                 component: DashboardComponent
             }
@@ -26,7 +29,8 @@ export function InitialStack() {
     }
 
     function renderScreens() {
-        return getNavMap().map(({ name, component }) => <Stack.Screen
+        return getNavMap().map(({ id, name, component }) => <Stack.Screen
+            key={ id }
             name={ name }
             component={ component }
             options={{ headerShown: false }}

@@ -15,10 +15,16 @@ import {
     PASSWORD_ERROR_TITLE
 } from './Register.config';
 
+export const mapsStateToProps = (state) => ({
+    language: state.UserReducer.language
+});
+
 export const mapDispatchToProps = (dispatch) => ({
     setEmail: email => dispatch(setUserEmail(email))
 })
 export const RegisterContainer = (props) => {
+    const { language } = props;
+
     const [isLoading, setIsLoading] = useState(false);
 
     async function registrationClick(email, password, confirmPassword) {
@@ -73,13 +79,18 @@ export const RegisterContainer = (props) => {
 
     }
 
+    function getLanguage() {
+        return language === 'lv';
+    }
+
     return(
         <RegisterComponent
             registerUser={ registrationClick }
             { ...props }
             isLoading={ isLoading }
+            isLatvian={ getLanguage }
         />
     )
 }
 
-export default connect(null, mapDispatchToProps)(RegisterContainer);
+export default connect(mapsStateToProps, mapDispatchToProps)(RegisterContainer);

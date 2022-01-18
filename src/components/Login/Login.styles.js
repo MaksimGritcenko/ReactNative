@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 
 import {
-    placeholderTextColor
+    black,
+    white,
 } from "../../constants/Colors";
 
 const styles = StyleSheet.create({
@@ -10,18 +11,18 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     textInput: {
-        borderBottomWidth: 1,
         width: '100%',
         paddingLeft: 45,
-        paddingVertical: 10,
+        paddingVertical: 20,
         borderRadius: 10,
-        color: '#fff',
-        marginBottom: 30
+        color: black,
+        marginBottom: 30,
+        backgroundColor: white
     },
     button: {
-        backgroundColor: 'rgba(0,0,0,0.7)',
+        backgroundColor: 'rgba(0,0,0,1)',
         marginTop: 20,
-        paddingVertical: 20,
+        paddingVertical: 15,
         borderRadius: 50,
         shadowColor: '#000',
         shadowOpacity: 0.8,
@@ -40,21 +41,18 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 40,
         marginBottom: 20,
-        fontWeight: 'bold',
         width: '90%',
-        color: '#f5f1f5'
+        color: black
     },
     registerLink: {
-        color: placeholderTextColor,
+        color: white,
         marginTop: 20,
         textAlign: 'center',
-        textTransform: 'capitalize',
     },
     formWrapper: {
         width: '100%',
         height: '100%',
         alignItems: 'center',
-        backgroundColor: '#414555',
         justifyContent: 'space-evenly'
     },
     textInputWrapper: {
@@ -65,7 +63,8 @@ const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         left: 10,
-        top: 10
+        top: 22,
+        zIndex: 1
     },
     buttonContainer: {
         width: '75%'

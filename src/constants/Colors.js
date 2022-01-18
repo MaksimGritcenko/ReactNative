@@ -11,6 +11,7 @@ export const lightViolet = "#B7C3F3";
 export const darkOverlay = "rgba(0, 0, 0, 0.6)";
 export const placeholderTextColor = "rgba(255, 255, 255, .5)";
 export const black = "#000";
+export const white = "#fff";
 
 export default {
 	darkBlue,
@@ -22,5 +23,6 @@ export default {
 	lightViolet,
 	darkOverlay,
 	placeholderTextColor,
-	black
+	black,
+	white
 };
