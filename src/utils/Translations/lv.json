@@ -27,5 +27,14 @@
   "DeleteChatHistory": "Dzēst sarakstes vēsturi",
   "Change": "Mainīt",
   "EnterNewPassword": "Ievadiet jauno paroli",
-  "ConfirmPassword": "Atkārtojiet paroli"
+  "ConfirmPassword": "Atkārtojiet paroli",
+
+  "RegisterTitle": "Reģistrēties",
+  "LoginTitle": "Ielogoties",
+  "LoginButton": "Turpināt",
+  "TextInputEmail": "E-pasts",
+  "TextInputPassword": "Parole",
+  "TextInputPasswordRepeat": "Atkārtojiet paroli",
+  "RegisterLinkText": "Pirmo reizi? Spied lai reģistrētos",
+  "LoginLinkTitle": "Esi reģistrēts? Spied lai ielogotos"
 }

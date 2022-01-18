@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 import LoginComponent from "./Login.component";
 import { signInWithEmailAndPassword } from "../../utils/Query";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setUserEmail } from "store/User/User.action";
 
+export const mapsStateToProps = (state) => ({
+    language: state.UserReducer.language
+});
+
 export const mapDispatchToProps = (dispatch) => ({
     setEmail: email => dispatch(setUserEmail(email))
 });
 
 export const LoginContainer = (props) => {
+    const { language } = props;
+
     const [isLoading, setIsLoading] = useState(false);
 
     async function loginClick(email, password) {
@@ -36,13 +42,18 @@ export const LoginContainer = (props) => {
         navigation.navigate('Dashboard');
     }
 
+    function getLanguage() {
+        return language === 'lv';
+    }
+
     return (
         <LoginComponent
             { ...props }
             loginClick={ loginClick }
             isLoading={ isLoading }
+            isLatvian={ getLanguage }
         />
     );
 }
 
-export default connect(null, mapDispatchToProps)(LoginContainer);
+export default connect(mapsStateToProps, mapDispatchToProps)(LoginContainer);
