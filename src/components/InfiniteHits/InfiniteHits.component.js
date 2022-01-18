@@ -1,17 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import Highlight from '../Highlights/Highlights.container'
 
-const styles = StyleSheet.create({
-    separator: {
-        borderBottomWidth: 1,
-        borderColor: '#ddd',
-    },
-    item: {
-        padding: 10,
-        flexDirection: 'column',
-    },
-});
+import { styles } from "./InfiniteHints.styles";
 
 const InfiniteHits = ({
     hits,
@@ -28,7 +19,6 @@ const InfiniteHits = ({
         <FlatList
             data={ hits }
             keyExtractor={item => item.objectID}
-            ItemSeparatorComponent={() => <View style={styles.separator} />}
             onEndReached={() => {}}
             renderItem={({ item }) => {
                 return(
@@ -37,6 +27,7 @@ const InfiniteHits = ({
                     </View>
                 )
             }}
+            style={{ marginBottom: 20 }}
         />
     );
 }
