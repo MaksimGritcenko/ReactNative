@@ -1,11 +1,9 @@
 import { StyleSheet, Platform } from "react-native";
 import { darkBlue } from '../../../constants/Colors';
-import { CONTENT_PADDING_TOP } from '../../../constants/Layout';
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        paddingTop: CONTENT_PADDING_TOP
+        flex: 1
     },
     wrapper: {
         backgroundColor: 'transparent',

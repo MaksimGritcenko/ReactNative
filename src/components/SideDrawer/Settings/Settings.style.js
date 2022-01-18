@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 
 import { CONTENT_PADDING_TOP } from '../../../constants/Layout';
-import {black, darkOverlay} from '../../../constants/Colors';
+import {black, darkOverlay, white} from '../../../constants/Colors';
 
 export const styles = StyleSheet.create({
     Settings: {
         flex: 1,
-        paddingTop: CONTENT_PADDING_TOP
+        paddingTop: CONTENT_PADDING_TOP,
     },
     GeneralSettingsGroup: {
         flexDirection: 'row',
@@ -18,14 +18,14 @@ export const styles = StyleSheet.create({
         paddingVertical: 15
     },
     GeneralSettingsGroupTitle: {
-        color: black
+        color: white,
+        fontWeight: 'bold'
     },
     GeneralSettingsGroupValue: {
       color: '#fff'
     },
     Title: {
         color: '#fff',
-        fontSize: 16,
         textAlign: 'center',
         marginBottom: 15
     },

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Text, Switch, View, TouchableOpacity, TextInput } from 'react-native';
-import MainComponent from "../../Main/Main.component";
-
+import LogoComponent from "../../Logo/Logo.component";
 import { styles } from './Settings.style';
 import { getIsLV } from '../../../utils/Translations/Translations';
 import LV from '../../../utils/Translations/lv.json';
@@ -173,7 +172,8 @@ export const SettingsComponent = (props) => {
   }
 
   return (
-      <MainComponent>
+      <View>
+        <LogoComponent />
         { isChangeLanguageVisible &&  renderLanguageBox() }
         { isChangeFontSizeVisible &&  renderFontSizeBox() }
         { isChangePswVisible && renderChangePswInput() }
@@ -186,9 +186,9 @@ export const SettingsComponent = (props) => {
             >
               { getIsLV(language) ? LV.GeneralSettings : 'General Settings'}
             </Text>
-            { renderGroup() }
           </View>
-      </MainComponent>
+            { renderGroup() }
+      </View>
   );
 }
 

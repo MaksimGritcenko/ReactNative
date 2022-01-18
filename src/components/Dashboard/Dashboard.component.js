@@ -34,7 +34,6 @@ import {
     Ionicons,
 } from '@expo/vector-icons';
 import BGImg from "../../constants/images/bg.jpg";
-import {styles} from "../Main/Main.styles";
 
 
 const SideDrawer = createDrawerNavigator();
@@ -44,6 +43,7 @@ const navTheme = {
     colors: {
         ...DefaultTheme.colors,
         background: 'transparent',
+        zIndex: 1000
     },
 };
 
@@ -307,7 +307,7 @@ export const DashboardComponent = (props) => {
     const statusBarStyle = 'dark';
 
     return (
-        <ImageBackground source={ BGImg } style={ styles.grassImage }>
+        <ImageBackground source={ BGImg } style={ { flex: 1 } }>
             <View style={{flex: 1}}>
                 <NavigationContainer
                     independent={true}
