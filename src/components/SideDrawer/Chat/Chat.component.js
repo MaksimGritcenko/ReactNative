@@ -30,8 +30,8 @@ export const ChatComponent = (props) => {
         index.search(chatVal)
             .then(({ hits }) => {
                 setTimeout(() => {
-                    const answer = hits[0].answer;
-                    const answerValue = answer[language] || 'hello!';
+                    const answer = hits[0] ? hits[0].answer : null;
+                    const answerValue = (answer && answer[language]) || 'hello!';
 
                     pushChatMessage(createChatMessage(BOT_CHAT_ID, answerValue));
                     setIsBotTyping(false);

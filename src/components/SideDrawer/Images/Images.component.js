@@ -13,7 +13,7 @@ import { styles } from "./Images.style";
 
 import { getIsLV } from '../../../utils/Translations/Translations';
 import LV from '../../../utils/Translations/lv.json';
-import { LogoComponent } from "../../Logo/Logo.component";
+import LogoComponent from "../../Logo/Logo.component";
 
 const { width } = Dimensions.get('window');
 

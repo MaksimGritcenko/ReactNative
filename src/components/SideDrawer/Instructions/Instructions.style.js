@@ -1,6 +1,6 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { darkOverlay } from '../../../constants/Colors';
+import { CONTENT_MARGIN_TOP } from "../../../constants/Layout";
 
 export const styles = StyleSheet.create({
     InstructionsWrapper: {
@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
         paddingTop: 10,
     },
     InnerInstructionsWrapper: {
-        marginTop: Platform.OS === 'ios' ? 30 : 140,
+        marginTop: CONTENT_MARGIN_TOP,
         backgroundColor: '#fff'
     },
     Instructions: {

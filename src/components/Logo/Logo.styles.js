@@ -2,6 +2,7 @@ import { Platform, StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   backgroundWrapper: {
+    zIndex: 999,
     flex: 1,
   },
   LogoWrapper: {

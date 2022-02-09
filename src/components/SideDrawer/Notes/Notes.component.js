@@ -17,7 +17,7 @@ import Swipeout from 'react-native-swipeout';
 import { darkBlue, lightGray, placeholderTextColor } from '../../../constants/Colors';
 
 import moment from 'moment';
-import { LogoComponent } from "../../Logo/Logo.component";
+import LogoComponent from "../../Logo/Logo.component";
 
 export const NotesComponent = ( props ) => {
     const {

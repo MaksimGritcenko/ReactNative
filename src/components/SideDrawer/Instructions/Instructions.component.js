@@ -4,7 +4,7 @@ import { ScrollView, useWindowDimensions, View } from 'react-native';
 import RenderHtml from 'react-native-render-html';
 
 import { styles } from './Instructions.style';
-import { LogoComponent } from "../../Logo/Logo.component";
+import LogoComponent from "../../Logo/Logo.component";
 
 export const InstructionsComponent = ({ content }) => {
     const { width } = useWindowDimensions();

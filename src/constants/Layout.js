@@ -12,3 +12,4 @@ export default {
 };
 
 export const CONTENT_PADDING_TOP = Platform.OS === 'ios' ? 60 : 150;
+export const CONTENT_MARGIN_TOP = Platform.OS === 'ios' ? 130 : 150;
