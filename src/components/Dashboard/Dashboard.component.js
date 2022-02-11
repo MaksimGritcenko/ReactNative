@@ -190,29 +190,29 @@ export const DashboardComponent = (props) => {
                     )
                 }
             },
-            {
-                id: 5,
-                name: getLanguage() ? LV.NavigationChatHistoryTitle : "ChatHistory",
-                component: ChatHistoryComponent,
-                options: {
-                    headerTitle: '',
-                    lazy: false,
-                    headerTransparent: true,
-                    headerTitleAlign: 'center',
-                    headerTintColor: black,
-                    drawerIcon: () => (<MaterialCommunityIcons
-                      name="history"
-                      size={24}
-                      color="#fff"
-                    />),
-                    headerStyle: {
-                        backgroundColor: skyBlue,
-                        elevation: 0,
-                        shadowOffset: { width: 0, height: 0 }
-                    },
-                    drawerLabelStyle
-                }
-            },
+            // {
+            //     id: 5,
+            //     name: getLanguage() ? LV.NavigationChatHistoryTitle : "ChatHistory",
+            //     component: ChatHistoryComponent,
+            //     options: {
+            //         headerTitle: '',
+            //         lazy: false,
+            //         headerTransparent: true,
+            //         headerTitleAlign: 'center',
+            //         headerTintColor: black,
+            //         drawerIcon: () => (<MaterialCommunityIcons
+            //           name="history"
+            //           size={24}
+            //           color="#fff"
+            //         />),
+            //         headerStyle: {
+            //             backgroundColor: skyBlue,
+            //             elevation: 0,
+            //             shadowOffset: { width: 0, height: 0 }
+            //         },
+            //         drawerLabelStyle
+            //     }
+            // },
             {
                 id: 5,
                 name: getLanguage() ? LV.NavigationSettingsTitle : "Settings",

@@ -41,13 +41,14 @@ export const ChatComponent = (props) => {
     };
 
 	return (
-        <GiftedChat
+         <GiftedChat
             messages={chatMessages}
             onLongPress={ onLongPress }
             text={chatVal}
             isTyping={isBotTyping}
             onInputTextChanged={ setChatVal }
             onSend={ onSend }
+            listViewProps={{ keyboardShouldPersistTaps: 'never' }}
             user={{
                 _id: 1,
             }}
