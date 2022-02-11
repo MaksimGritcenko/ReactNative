@@ -9,7 +9,15 @@ export const styles = StyleSheet.create({
     },
     InnerInstructionsWrapper: {
         marginTop: CONTENT_MARGIN_TOP,
-        backgroundColor: '#fff'
+        marginHorizontal: 8,
+        marginBottom: 8,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.5,
+        shadowRadius: 2,
+        elevation: 20
     },
     Instructions: {
         padding: 30,
