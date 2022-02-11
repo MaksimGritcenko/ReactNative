@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { GiftedChat } from "react-native-gifted-chat";
+import { Platform, View } from "react-native";
+import { GiftedChat, Day } from "react-native-gifted-chat";
 import algoliasearch from 'algoliasearch/lite';
 
 import { USER_CHAT_ID, BOT_CHAT_ID } from "../../../utils/Constants";
@@ -40,7 +41,12 @@ export const ChatComponent = (props) => {
         );
     };
 
+    function renderDay(props) {
+        return <Day {...props} textStyle={{color: 'black', fontWeight: "bold", fontSize: 14}}/>;
+    }
+
 	return (
+        <View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? '2%' : '10%' }}>
          <GiftedChat
             messages={chatMessages}
             onLongPress={ onLongPress }
@@ -48,11 +54,16 @@ export const ChatComponent = (props) => {
             isTyping={isBotTyping}
             onInputTextChanged={ setChatVal }
             onSend={ onSend }
-            listViewProps={{ keyboardShouldPersistTaps: 'never' }}
+            renderDay={renderDay}
+            listViewProps={{
+                keyboardShouldPersistTaps: 'never',
+                style:{height: '10%'}
+            }}
             user={{
                 _id: 1,
             }}
         />
+        </View>
 	);
 };
 

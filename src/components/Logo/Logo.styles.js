@@ -3,7 +3,10 @@ import { Platform, StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   backgroundWrapper: {
     zIndex: 999,
-    flex: 1,
+    width: 100,
+    height: '20%',
+    marginHorizontal: 100,
+    alignSelf: 'center',
   },
   LogoWrapper: {
     zIndex: 2,

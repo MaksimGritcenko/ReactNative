@@ -139,13 +139,16 @@ export const ImagesComponent = ({ imageUriArray, deleteImage, language }) => {
         );
     }
 
-    return (
-        <View>
-            <LogoComponent />
+    function renderImagesWrapper() {
+        return (
             <View style={ styles.container }>
                 { renderImagesBlock() }
             </View>
-            <GestureRecognizer
+        );
+    }
+
+    function renderGestureWrapper() {
+        <GestureRecognizer
               onSwipeDown={ () => closeModal() }
             >
                 <Modal
@@ -191,6 +194,13 @@ export const ImagesComponent = ({ imageUriArray, deleteImage, language }) => {
                     </View>
                 </Modal>
             </GestureRecognizer>
+    }
+
+    return (
+        <View style={{ flex: 1 }}>
+            <LogoComponent />
+            { renderImagesWrapper() }
+            { renderGestureWrapper() }
             <AddImage />
         </View>
     );

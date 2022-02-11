@@ -7,7 +7,6 @@ import {
 import HomeComponent from "../../routes/Home";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import SettingsComponent from "../SideDrawer/Settings";
-import ChatHistoryComponent from "../SideDrawer/ChatHistory/ChatHistory.component";
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 
 import ChatComponent from "../SideDrawer/Chat";
@@ -29,7 +28,6 @@ import { StatusBar } from "expo-status-bar";
 import {
     Entypo,
     SimpleLineIcons,
-    MaterialCommunityIcons,
     MaterialIcons,
     Ionicons,
 } from '@expo/vector-icons';
@@ -313,6 +311,7 @@ export const DashboardComponent = (props) => {
                     independent={true}
                     theme={ navTheme }
                 >
+
                     <SideDrawer.Navigator
                         screenOptions={{
                             drawerStyle: {

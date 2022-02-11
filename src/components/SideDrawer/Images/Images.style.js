@@ -7,7 +7,7 @@ const { width, height } = Dimensions.get('window');
 export const styles = StyleSheet.create({
     container: {
         paddingTop: CONTENT_PADDING_TOP,
-        height: '100%',
+        height: '60%',
         width: '100%',
         alignSelf: "center",
     },

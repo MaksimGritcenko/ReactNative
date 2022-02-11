@@ -1,12 +1,10 @@
 import { StyleSheet } from "react-native";
 
 import { darkOverlay, white } from '../../../constants/Colors';
-import { CONTENT_MARGIN_TOP } from "../../../constants/Layout";
 
 export const styles = StyleSheet.create({
-    Settings: {
+    container: {
         flex: 1,
-        paddingTop: CONTENT_MARGIN_TOP,
     },
     GeneralSettingsGroup: {
         flexDirection: 'row',
