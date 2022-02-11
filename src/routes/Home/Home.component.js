@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import algoliasearch from 'algoliasearch/lite';
 
 import SearchBox from "../../components/Searchbox/Searchbox.component";
@@ -29,17 +29,19 @@ const HomeComponent = () => {
     }
 
     return (
-        <View style={{
-            paddingTop: 100,
-            flex: 1
-        }}>
-            <SearchBox
-                query={ query }
-                setQuery={ setQuery }
-                onSearch={ onSearch }
-            />
-            <InfiniteHits query={ query } hits={ hits } />
-        </View>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={{
+                paddingTop: 100,
+                flex: 1
+            }}>
+                <SearchBox
+                    query={ query }
+                    setQuery={ setQuery }
+                    onSearch={ onSearch }
+                />
+                <InfiniteHits query={ query } hits={ hits } />
+            </View>
+        </TouchableWithoutFeedback>
     );
 }
 
