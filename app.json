@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "pizdatijApp",
-    "slug": "pizdatijApp",
+    "name": "LordApp",
+    "slug": "lord-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/Logo.png",
@@ -12,8 +12,8 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "notification":{
-      "icon":"./src/assets/images/Logo.png"
+    "notification": {
+      "icon": "./src/assets/images/Logo.png"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,7 +25,10 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.akotikovs.pizdatijApp",
       "infoPlist": {
-        "UIBackgroundModes": ["location", "fetch"]
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
       }
     },
     "android": {
@@ -38,6 +41,7 @@
     },
     "web": {
       "favicon": "./src/assets/images/favicon-16x16.png"
-    }
+    },
+    "description": ""
   }
 }

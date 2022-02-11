@@ -19,7 +19,11 @@ export const InstructionsComponent = ({ content }) => {
                 <View style={ styles.InnerInstructionsWrapper }>
                     <ScrollView>
                         <View style={ styles.Instructions }>
-                            <RenderHtml source={ source } contentWidth={ width } baseStyle={{ color: '#000'}} />
+                            <RenderHtml source={ source } contentWidth={ width } baseStyle={{
+                                lineHeight: 27,
+                                fontSize: 17,
+                                color: '#000'
+                            }} />
                         </View>
                     </ScrollView>
                 </View>

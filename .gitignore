@@ -80,3 +80,7 @@ dist/
 android/
 ios/
 metro.config.js
+.expo-shared/assets.json
+.expo-shared/README.md
+.expo-shared/assets.json
+.expo-shared/assets.json
