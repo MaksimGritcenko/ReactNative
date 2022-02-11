@@ -95,16 +95,19 @@ export const NotesComponent = ( props ) => {
         return noteContent === '' || noteTitle === '';
     }
 
-    return (
-
-        <View style={ styles.container }>
-            <LogoComponent />
+    function renderNotes() {
+        return (
             <FlatList
                 data={ noteData }
                 showsVerticalScrollIndicator={ false }
                 renderItem={ renderItem }
                 keyExtractor={({id}) => id }
             />
+        );
+    }
+
+    function renderGestureWrapper() {
+        return (
             <GestureRecognizer
               style={{ flex: 1 }}
               onSwipeDown={ () => closeNotesModal() }
@@ -168,6 +171,14 @@ export const NotesComponent = ( props ) => {
                     </View>
                 </Modal>
             </GestureRecognizer>
+        );
+    }
+
+    return (
+        <View style={ styles.container }>
+            <LogoComponent />
+            { renderNotes() }
+            { renderGestureWrapper() }
             <EditNoteModal
                 title={ title }
                 content={ content }

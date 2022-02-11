@@ -172,21 +172,11 @@ export const SettingsComponent = (props) => {
   }
 
   return (
-      <View>
+      <View style={ styles.container } >
         <LogoComponent />
         { isChangeLanguageVisible &&  renderLanguageBox() }
         { isChangeFontSizeVisible &&  renderFontSizeBox() }
         { isChangePswVisible && renderChangePswInput() }
-          <View style={ styles.Settings }>
-            <Text
-              style={{
-                ...styles.Title,
-                fontSize: !isNaN(appFontSize * 1) ? appFontSize * 1 : 14
-              }}
-            >
-              { getIsLV(language) ? LV.GeneralSettings : 'General Settings'}
-            </Text>
-          </View>
             { renderGroup() }
       </View>
   );

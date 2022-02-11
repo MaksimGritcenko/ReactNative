@@ -3,7 +3,7 @@ import { darkBlue } from '../../../constants/Colors';
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     wrapper: {
         backgroundColor: 'transparent',
